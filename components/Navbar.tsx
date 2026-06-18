@@ -2,9 +2,8 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Moon, Sun } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import Image from "next/image";
-import { useTheme } from "@/lib/theme";
 
 const navLinks = [
   { label: "Packages", href: "#packages" },
@@ -17,7 +16,6 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
-  const { theme, toggle } = useTheme();
   const drawerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -26,7 +24,6 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Active section tracking
   useEffect(() => {
     const ids = navLinks.map((l) => l.href.slice(1));
     const observer = new IntersectionObserver(
@@ -49,7 +46,6 @@ export default function Navbar() {
     return () => { document.body.style.overflow = ""; };
   }, [menuOpen]);
 
-  // Focus trap
   useEffect(() => {
     if (!menuOpen) return;
     const drawer = drawerRef.current;
@@ -81,12 +77,10 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Full-width fixed wrapper — pointer-events-none so only the inner pill captures clicks */}
       <nav
         className="fixed top-0 left-0 right-0 z-50 flex justify-center pointer-events-none"
         aria-label="Main navigation"
       >
-        {/* Pill container */}
         <div
           className={`pointer-events-auto w-full transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] ${
             scrolled ? "mt-3 mx-4 max-w-3xl rounded-2xl border border-white/[0.08]" : ""
@@ -104,7 +98,7 @@ export default function Navbar() {
         >
           <div
             className={`flex items-center justify-between transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] ${
-              scrolled ? "h-[3.5rem] px-5" : "h-24 px-4 sm:px-8 lg:px-14"
+              scrolled ? "h-14 px-4" : "h-24 px-4 sm:px-8 lg:px-14"
             }`}
           >
             {/* Logo */}
@@ -115,7 +109,7 @@ export default function Navbar() {
             >
               <div
                 className={`relative flex-shrink-0 overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] ${
-                  scrolled ? "w-9 h-9" : "w-36 h-16"
+                  scrolled ? "w-10 h-10" : "w-36 h-16"
                 }`}
               >
                 <Image
@@ -128,7 +122,7 @@ export default function Navbar() {
               </div>
               <div
                 className={`flex flex-col leading-none gap-0.5 transition-all duration-300 overflow-hidden ${
-                  scrolled ? "opacity-0 max-w-0" : "opacity-100 max-w-xs"
+                  scrolled ? "opacity-0 w-0" : "opacity-100"
                 }`}
               >
                 <span className="font-heading font-extrabold text-3xl tracking-widest uppercase text-white whitespace-nowrap">
@@ -140,7 +134,7 @@ export default function Navbar() {
               </div>
             </a>
 
-            {/* Desktop nav links */}
+            {/* Desktop nav */}
             <ul className="hidden md:flex items-center gap-0.5" role="list">
               {navLinks.map((link) => {
                 const isActive = activeSection === link.href.slice(1);
@@ -168,18 +162,6 @@ export default function Navbar() {
 
             {/* Right controls */}
             <div className="flex items-center gap-2">
-              <button
-                onClick={toggle}
-                className="flex items-center justify-center w-8 h-8 rounded-lg text-white/40 hover:text-white/80 hover:bg-white/[0.07] transition-all duration-150 focus-visible:outline-2 focus-visible:outline-cyan-400"
-                aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-              >
-                {theme === "dark" ? (
-                  <Sun size={16} strokeWidth={1.75} aria-hidden />
-                ) : (
-                  <Moon size={16} strokeWidth={1.75} aria-hidden />
-                )}
-              </button>
-
               <button
                 onClick={() => handleNavClick("#contact")}
                 className="hidden sm:inline-flex items-center px-4 py-2 rounded-xl text-sm font-semibold text-white transition-all duration-150 active:scale-[0.97] focus-visible:outline-2 focus-visible:outline-cyan-400"
