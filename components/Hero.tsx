@@ -52,6 +52,69 @@ function GlowOrb({
   );
 }
 
+// Occasional shooting star — streaks diagonally then fades
+function ShootingStar({
+  top,
+  left,
+  delay,
+  repeatDelay,
+  travel,
+}: {
+  top: string;
+  left: string;
+  delay: number;
+  repeatDelay: number;
+  travel: number;
+}) {
+  return (
+    <motion.div
+      className="absolute -z-10"
+      style={{ top, left, willChange: "transform, opacity" }}
+      initial={{ opacity: 0, x: 0, y: 0 }}
+      animate={{
+        opacity: [0, 1, 1, 0],
+        x: [0, travel],
+        y: [0, travel * 0.42],
+      }}
+      transition={{
+        duration: 1.1,
+        delay,
+        repeat: Infinity,
+        repeatDelay,
+        ease: "easeOut",
+        times: [0, 0.1, 0.7, 1],
+      }}
+      aria-hidden="true"
+    >
+      {/* Trailing tail */}
+      <div
+        style={{
+          width: 140,
+          height: 1.5,
+          transform: "rotate(23deg)",
+          transformOrigin: "left center",
+          background:
+            "linear-gradient(90deg, transparent, hsl(199 100% 85% / 0.9))",
+          borderRadius: 9999,
+        }}
+      />
+      {/* Bright head */}
+      <div
+        className="absolute rounded-full"
+        style={{
+          top: -1.5,
+          left: 0,
+          width: 4,
+          height: 4,
+          background: "hsl(0 0% 100%)",
+          boxShadow:
+            "0 0 8px 2px hsl(199 100% 80% / 0.9), 0 0 16px 5px hsl(199 100% 70% / 0.5)",
+        }}
+      />
+    </motion.div>
+  );
+}
+
 // Twinkling sparkle point
 function Sparkle({ index }: { index: number }) {
   const x = (index * 19 + 7) % 93;
@@ -193,19 +256,11 @@ export default function Hero() {
         aria-hidden="true"
       />
 
-      {/* Diagonal light sweep — periodically crosses the hero */}
+      {/* Occasional shooting stars — staggered so they feel like a delight */}
       <div className="absolute inset-0 -z-10 overflow-hidden" aria-hidden="true">
-        <motion.div
-          className="absolute inset-y-0 w-[30vw]"
-          style={{
-            background:
-              "linear-gradient(110deg, transparent 0%, hsl(205 90% 72% / 0.07) 50%, transparent 100%)",
-            transform: "skewX(-14deg)",
-            willChange: "transform",
-          }}
-          animate={{ x: ["-50vw", "160vw"] }}
-          transition={{ duration: 22, repeat: Infinity, ease: "easeInOut", repeatDelay: 4 }}
-        />
+        <ShootingStar top="12%" left="8%" delay={2} repeatDelay={11} travel={520} />
+        <ShootingStar top="22%" left="55%" delay={7} repeatDelay={15} travel={460} />
+        <ShootingStar top="6%" left="35%" delay={13} repeatDelay={18} travel={600} />
       </div>
 
       {/* Sparkle field */}
