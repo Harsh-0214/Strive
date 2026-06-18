@@ -2,5 +2,5 @@ node_modules/
 .next/
 .env*
 *.log
-.claude/
+.claude/settings.local.json
 *.tsbuildinfo
