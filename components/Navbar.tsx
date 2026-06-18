@@ -93,7 +93,7 @@ export default function Navbar() {
         }`}
         aria-label="Main navigation"
       >
-        <div className="max-w-7xl mx-auto pl-4 sm:pl-5 lg:pl-8 pr-5 sm:pr-8 lg:pr-14">
+        <div className="w-full pl-4 pr-5 sm:pr-8 lg:pr-14">
           <div className="flex items-center justify-between h-24">
             {/* Wordmark */}
             <a
