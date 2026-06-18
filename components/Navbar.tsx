@@ -98,21 +98,21 @@ export default function Navbar() {
             {/* Wordmark */}
             <a
               href="#"
-              className="flex items-center gap-3 group"
+              className="flex items-center gap-4 group"
               aria-label="Strive — go to homepage"
             >
-              <div className="relative w-16 h-16 flex-shrink-0 overflow-hidden">
+              <div className="relative w-20 h-20 flex-shrink-0">
                 <Image
                   src="/Logo(s).png"
-                  alt=""
+                  alt="Strive logo"
                   fill
-                  className="object-cover object-top"
+                  className="object-contain"
                   priority
                 />
               </div>
-              <div className="flex flex-col leading-none gap-1.5">
+              <div className="flex flex-col leading-none gap-1">
                 <span
-                  className="font-heading font-extrabold text-2xl tracking-widest uppercase"
+                  className="font-heading font-extrabold text-3xl tracking-widest uppercase"
                   style={{
                     background: "linear-gradient(90deg, hsl(var(--primary)), hsl(var(--primary-light)))",
                     WebkitBackgroundClip: "text",
@@ -122,7 +122,7 @@ export default function Navbar() {
                 >
                   Strive
                 </span>
-                <span className="text-xs tracking-widest uppercase text-muted-foreground font-medium">
+                <span className="text-[11px] tracking-[0.2em] uppercase text-muted-foreground font-medium">
                   Web Design & Development
                 </span>
               </div>
