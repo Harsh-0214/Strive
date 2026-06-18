@@ -58,17 +58,7 @@ export default function Footer() {
                 <li key={href}>
                   <a
                     href={href}
-                    className="text-sm font-medium"
-                    style={{
-                      color: "rgba(255,255,255,0.5)",
-                      transition: "color 150ms ease",
-                    }}
-                    onMouseEnter={(e) => {
-                      (e.currentTarget as HTMLElement).style.color = "#FFFFFF";
-                    }}
-                    onMouseLeave={(e) => {
-                      (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.5)";
-                    }}
+                    className="text-sm font-medium text-white/50 hover:text-white transition-colors duration-150"
                   >
                     {label}
                   </a>
@@ -86,22 +76,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`Strive on ${label}`}
-                className="w-9 h-9 rounded-lg flex items-center justify-center"
-                style={{
-                  background: "rgba(255,255,255,0.06)",
-                  color: "rgba(255,255,255,0.5)",
-                  transition: "background 150ms ease, color 150ms ease",
-                }}
-                onMouseEnter={(e) => {
-                  const el = e.currentTarget as HTMLElement;
-                  el.style.background = "rgba(255,255,255,0.12)";
-                  el.style.color = "#FFFFFF";
-                }}
-                onMouseLeave={(e) => {
-                  const el = e.currentTarget as HTMLElement;
-                  el.style.background = "rgba(255,255,255,0.06)";
-                  el.style.color = "rgba(255,255,255,0.5)";
-                }}
+                className="w-9 h-9 rounded-lg flex items-center justify-center bg-white/[0.06] text-white/50 hover:bg-white/[0.12] hover:text-white transition-all duration-150"
               >
                 <Icon size={15} strokeWidth={1.75} aria-hidden="true" />
               </a>
@@ -111,27 +86,15 @@ export default function Footer() {
 
         {/* Copyright bar */}
         <div
-          className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs"
-          style={{
-            borderTop: "1px solid rgba(255,255,255,0.07)",
-            color: "rgba(255,255,255,0.3)",
-          }}
+          className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/30"
+          style={{ borderTop: "1px solid rgba(255,255,255,0.07)" }}
         >
           <p>&copy; {new Date().getFullYear()} Strive. All rights reserved.</p>
           <p>
             Crafted by{" "}
             <a
               href="#"
-              style={{
-                color: "rgba(255,255,255,0.5)",
-                transition: "color 150ms ease",
-              }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLElement).style.color = "#FFFFFF";
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.5)";
-              }}
+              className="text-white/50 hover:text-white transition-colors duration-150"
             >
               Strive
             </a>{" "}
