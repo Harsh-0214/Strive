@@ -79,8 +79,8 @@ export default function Hero() {
         className="absolute inset-0 -z-10"
         style={{
           background:
-            "linear-gradient(145deg, hsl(232 68% 10%) 0%, hsl(228 65% 22%) 35%, hsl(218 90% 40%) 65%, hsl(232 55% 18%) 100%)",
-          backgroundSize: "300% 300%",
+            "linear-gradient(145deg, hsl(221 90% 5%) 0%, hsl(221 80% 12%) 35%, hsl(218 75% 22%) 65%, hsl(221 70% 8%) 100%)",
+          backgroundSize: "200% 200%",
           animation: "gradient-shift 10s ease infinite",
         }}
         aria-hidden="true"
@@ -90,7 +90,7 @@ export default function Hero() {
         className="absolute inset-0 -z-10"
         style={{
           backgroundImage:
-            "radial-gradient(ellipse 60% 50% at 85% 80%, hsl(38 100% 54% / 0.18) 0%, transparent 70%), radial-gradient(ellipse 50% 60% at 15% 30%, hsl(212 100% 70% / 0.14) 0%, transparent 60%)",
+            "radial-gradient(ellipse 60% 50% at 85% 80%, hsl(38 100% 54% / 0.15) 0%, transparent 70%), radial-gradient(ellipse 55% 60% at 10% 25%, hsl(218 90% 58% / 0.12) 0%, transparent 60%)",
         }}
         aria-hidden="true"
       />
@@ -203,7 +203,7 @@ export default function Hero() {
             </a>
             <a
               href="#packages"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-white/10 text-white font-semibold text-base border border-white/20 hover:bg-white/18 active:scale-95 transition-all duration-200 backdrop-blur-sm focus-visible:outline-2 focus-visible:outline-white"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-white/10 text-white font-semibold text-base border border-white/25 hover:bg-white/18 active:scale-95 transition-all duration-200 backdrop-blur-sm focus-visible:outline-2 focus-visible:outline-white"
             >
               See Our Packages
             </a>

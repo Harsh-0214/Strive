@@ -273,7 +273,7 @@ export default function ContactForm() {
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.55, delay: 0.15, ease: "easeOut" }}
-          className="bg-card border border-border rounded-2xl shadow-sm p-6 sm:p-8 flex flex-col gap-5"
+          className="bg-card border border-border rounded-2xl shadow-lg p-6 sm:p-8 flex flex-col gap-5"
           aria-label="Contact form"
         >
           {/* Name row */}

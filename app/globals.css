@@ -4,31 +4,31 @@
 
 @layer base {
   :root {
-    /* ── Primary: vivid indigo-blue — modern, electric, premium ── */
-    --primary: 226 71% 52%;
-    --primary-light: 212 100% 65%;
-    --primary-dark: 232 68% 36%;
+    /* ── Primary: deep navy — confident, premium, modern ── */
+    --primary: 221 90% 18%;
+    --primary-light: 218 84% 35%;
+    --primary-dark: 221 90% 10%;
     --primary-foreground: 0 0% 100%;
 
-    /* ── Accent: deep golden amber — energy, warmth, action ── */
-    --accent: 38 100% 54%;
-    --accent-foreground: 0 0% 100%;
+    /* ── Accent: amber — energy, warmth, action ── */
+    --accent: 38 100% 52%;
+    --accent-foreground: 221 90% 8%;
 
-    /* ── Neutrals: cool-tinted for modern feel ── */
+    /* ── Neutrals ── */
     --background: 0 0% 100%;
-    --foreground: 226 25% 10%;
-    --muted: 220 22% 96%;
-    --muted-foreground: 220 12% 50%;
-    --border: 220 18% 90%;
+    --foreground: 221 40% 8%;
+    --muted: 218 25% 96%;
+    --muted-foreground: 218 16% 46%;
+    --border: 218 20% 90%;
     --card: 0 0% 100%;
-    --card-foreground: 226 25% 10%;
+    --card-foreground: 221 40% 8%;
 
-    /* ── Strive Care dark section ── */
-    --care-bg: 228 40% 8%;
-    --care-foreground: 218 30% 94%;
-    --care-muted: 220 16% 54%;
-    --care-card: 228 35% 13%;
-    --care-border: 228 24% 20%;
+    /* ── Strive Care dark navy section ── */
+    --care-bg: 221 70% 6%;
+    --care-foreground: 214 30% 92%;
+    --care-muted: 218 16% 56%;
+    --care-card: 221 55% 10%;
+    --care-border: 221 40% 16%;
 
     /* ── Semantic ── */
     --destructive: 0 84% 58%;
@@ -36,10 +36,10 @@
     --success: 152 68% 42%;
     --success-foreground: 0 0% 100%;
 
-    /* ── HopeBridge: warm cream break ── */
-    --hope-bg: 40 50% 96%;
-    --hope-text: 226 25% 10%;
-    --hope-subtext: 224 16% 38%;
+    /* ── HopeBridge: very slight blue-white break ── */
+    --hope-bg: 218 40% 97%;
+    --hope-text: 221 40% 8%;
+    --hope-subtext: 220 18% 40%;
 
     /* ── Radii ── */
     --radius-sm: 0.375rem;
@@ -49,37 +49,37 @@
     --radius-xl: 1.25rem;
   }
 
-  /* ── Dark mode: cool premium near-black (Linear / Vercel aesthetic) ── */
+  /* ── Dark mode: deep navy near-black (Linear / Vercel aesthetic) ── */
   [data-theme="dark"] {
-    --background: 228 18% 7%;
-    --foreground: 216 28% 93%;
-    --muted: 228 16% 12%;
-    --muted-foreground: 220 12% 58%;
-    --border: 228 14% 18%;
-    --card: 228 18% 10%;
-    --card-foreground: 216 28% 93%;
+    --background: 221 45% 5%;
+    --foreground: 214 25% 92%;
+    --muted: 221 35% 9%;
+    --muted-foreground: 218 14% 55%;
+    --border: 221 30% 14%;
+    --card: 221 40% 8%;
+    --card-foreground: 214 25% 92%;
 
-    /* Primary brightens in dark mode for readable contrast */
-    --primary: 226 85% 65%;
-    --primary-light: 212 100% 74%;
-    --primary-dark: 232 68% 46%;
-    --primary-foreground: 228 18% 7%;
+    /* Primary brightens in dark mode — vivid electric blue pops on dark bg */
+    --primary: 218 90% 58%;
+    --primary-light: 214 95% 72%;
+    --primary-dark: 221 85% 38%;
+    --primary-foreground: 221 45% 5%;
 
-    --accent: 38 100% 60%;
-    --accent-foreground: 228 18% 7%;
+    --accent: 38 100% 58%;
+    --accent-foreground: 221 45% 5%;
 
-    --care-bg: 228 22% 5%;
-    --care-card: 228 20% 9%;
-    --care-border: 228 16% 15%;
-    --care-foreground: 218 30% 94%;
-    --care-muted: 220 14% 56%;
+    --care-bg: 221 50% 4%;
+    --care-card: 221 45% 7%;
+    --care-border: 221 35% 12%;
+    --care-foreground: 214 25% 92%;
+    --care-muted: 218 14% 54%;
 
     --destructive: 0 84% 65%;
-    --success: 152 68% 50%;
+    --success: 152 68% 52%;
 
-    --hope-bg: 228 20% 12%;
-    --hope-text: 216 28% 93%;
-    --hope-subtext: 220 14% 64%;
+    --hope-bg: 221 40% 9%;
+    --hope-text: 214 25% 92%;
+    --hope-subtext: 218 16% 62%;
   }
 
   /* ── Theme transition — no flash when toggling ── */
@@ -152,14 +152,14 @@
   }
 
   .glass {
-    background: rgba(255, 255, 255, 0.82);
+    background: rgba(255, 255, 255, 0.90);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
-    border-bottom: 1px solid hsl(var(--border) / 0.5);
+    border-bottom: 1px solid hsl(var(--border));
   }
 
   [data-theme="dark"] .glass {
-    background: rgba(10, 12, 22, 0.82);
+    background: rgba(6, 13, 30, 0.90);
   }
 
   .section-padding {

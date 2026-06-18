@@ -54,7 +54,7 @@ const cardVariants = {
   },
 };
 
-function StarRating() {
+function StarRating({ featured }: { featured: boolean }) {
   return (
     <div className="flex gap-0.5" aria-label="5 out of 5 stars" role="img">
       {Array.from({ length: 5 }).map((_, i) => (
@@ -63,7 +63,7 @@ function StarRating() {
           size={15}
           strokeWidth={0}
           fill="currentColor"
-          className="text-accent"
+          className={featured ? "text-accent" : "text-accent"}
           aria-hidden="true"
         />
       ))}
@@ -119,41 +119,45 @@ export default function Testimonials() {
               variants={cardVariants}
               className={`relative rounded-2xl border flex flex-col overflow-hidden transition-all duration-300 hover:-translate-y-1.5 ${
                 featured
-                  ? "border-primary/30 shadow-lg shadow-primary/8 bg-card"
+                  ? "border-transparent shadow-2xl"
                   : "border-border shadow-sm bg-card hover:shadow-md"
               }`}
+              style={
+                featured
+                  ? {
+                      background:
+                        "linear-gradient(135deg, hsl(var(--primary-dark)), hsl(var(--primary)))",
+                    }
+                  : undefined
+              }
             >
               {/* Giant decorative quotation mark */}
               <span
                 className="absolute top-3 left-5 font-heading font-extrabold text-8xl leading-none select-none pointer-events-none"
-                style={{ color: `${bg}18` }}
+                style={{ color: featured ? "rgba(255,255,255,0.15)" : `${bg}18` }}
                 aria-hidden="true"
               >
                 &ldquo;
               </span>
 
-              {/* Featured top bar */}
-              {featured && (
-                <div
-                  className="h-1 w-full"
-                  style={{
-                    background:
-                      "linear-gradient(90deg, hsl(var(--primary)), hsl(var(--primary-light)))",
-                  }}
-                  aria-hidden="true"
-                />
-              )}
-
               <div className="relative p-7 flex flex-col gap-4 flex-1">
-                <StarRating />
+                <StarRating featured={featured} />
 
                 <blockquote className="flex-1">
-                  <p className="text-foreground leading-relaxed text-[0.9375rem] pt-1">
+                  <p
+                    className={`leading-relaxed text-[0.9375rem] pt-1 ${
+                      featured ? "text-white" : "text-foreground"
+                    }`}
+                  >
                     &ldquo;{quote}&rdquo;
                   </p>
                 </blockquote>
 
-                <footer className="flex items-center gap-3 pt-4 border-t border-border">
+                <footer
+                  className={`flex items-center gap-3 pt-4 border-t ${
+                    featured ? "border-white/15" : "border-border"
+                  }`}
+                >
                   <div
                     className="w-10 h-10 rounded-full flex items-center justify-center font-heading font-bold text-sm text-white shrink-0"
                     style={{ background: bg }}
@@ -162,10 +166,18 @@ export default function Testimonials() {
                     {initials}
                   </div>
                   <div>
-                    <p className="font-semibold text-sm text-foreground leading-tight">
+                    <p
+                      className={`font-semibold text-sm leading-tight ${
+                        featured ? "text-white/90" : "text-foreground"
+                      }`}
+                    >
                       {name} &mdash; {role}
                     </p>
-                    <p className="text-xs text-muted-foreground mt-0.5">
+                    <p
+                      className={`text-xs mt-0.5 ${
+                        featured ? "text-white/70" : "text-muted-foreground"
+                      }`}
+                    >
                       {business}, {location}
                     </p>
                   </div>

@@ -47,7 +47,7 @@ export default function HowItWorks() {
     <section
       id="how-it-works"
       ref={ref}
-      className="py-20 lg:py-28 bg-muted"
+      className="py-20 lg:py-28 bg-background"
       aria-labelledby="how-heading"
     >
       <div className="max-w-6xl mx-auto section-padding">
@@ -108,11 +108,17 @@ export default function HowItWorks() {
             >
               {/* Step circle */}
               <div className="relative mb-6">
-                <div className="w-20 h-20 rounded-full bg-card border border-border flex items-center justify-center shadow-md z-10 relative">
+                <div
+                  className="w-20 h-20 rounded-full flex items-center justify-center z-10 relative shadow-lg"
+                  style={{
+                    background:
+                      "linear-gradient(135deg, hsl(var(--primary-dark)), hsl(var(--primary-light)))",
+                  }}
+                >
                   <Icon
                     size={32}
                     strokeWidth={1.5}
-                    className="text-primary"
+                    className="text-primary-foreground"
                     aria-hidden="true"
                   />
                 </div>
@@ -121,10 +127,6 @@ export default function HowItWorks() {
                   {i + 1}
                 </span>
               </div>
-
-              <p className="font-heading font-extrabold text-5xl text-muted-foreground/20 mb-2 leading-none">
-                {number}
-              </p>
 
               <h3 className="font-heading font-bold text-xl text-foreground mb-3">
                 {title}

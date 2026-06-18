@@ -10,27 +10,27 @@ const cards = [
     Icon: Globe,
     title: "No website yet",
     body: "You're invisible to customers searching online. If they can't find you, they'll find someone else — every single time.",
-    accentClass: "from-blue-500/20 to-blue-600/10",
-    iconColor: "text-blue-500",
+    iconColor: "text-blue-600",
     iconBg: "bg-blue-500/10",
+    borderAccent: "border-l-4 border-l-blue-600",
   },
   {
     num: "02",
     Icon: AlertTriangle,
     title: "Outdated site",
     body: "First impressions matter. A bad one costs you. An old or broken website signals that your business isn't serious.",
-    accentClass: "from-amber-500/20 to-amber-600/10",
     iconColor: "text-accent",
     iconBg: "bg-accent/10",
+    borderAccent: "border-l-4 border-l-amber-500",
   },
   {
     num: "03",
     Icon: TrendingDown,
     title: "Losing customers",
     body: "Every day without a great site is money left behind. Your competitors aren't waiting — and neither are your potential customers.",
-    accentClass: "from-red-500/20 to-red-600/10",
     iconColor: "text-red-500",
     iconBg: "bg-red-500/10",
+    borderAccent: "border-l-4 border-l-red-500",
   },
 ];
 
@@ -55,7 +55,7 @@ export default function PainPoints() {
   return (
     <section
       ref={ref}
-      className="py-20 lg:py-28 bg-muted overflow-hidden"
+      className="py-20 lg:py-28 bg-background overflow-hidden"
       aria-labelledby="pain-heading"
     >
       <div className="max-w-6xl mx-auto section-padding">
@@ -83,19 +83,13 @@ export default function PainPoints() {
           className="grid grid-cols-1 md:grid-cols-3 gap-6"
           role="list"
         >
-          {cards.map(({ num, Icon, title, body, accentClass, iconColor, iconBg }) => (
+          {cards.map(({ num, Icon, title, body, iconColor, iconBg, borderAccent }) => (
             <motion.article
               key={title}
               variants={cardVariants}
               role="listitem"
-              className="group relative bg-card rounded-2xl border border-border shadow-sm hover:shadow-lg hover:-translate-y-1.5 transition-all duration-300 overflow-hidden cursor-default"
+              className={`group relative bg-card rounded-2xl border border-border shadow-sm hover:shadow-lg hover:-translate-y-1.5 transition-all duration-300 overflow-hidden cursor-default ${borderAccent}`}
             >
-              {/* Gradient corner accent */}
-              <div
-                className={`absolute top-0 right-0 w-32 h-32 rounded-bl-full bg-gradient-to-bl ${accentClass} pointer-events-none`}
-                aria-hidden="true"
-              />
-
               {/* Oversized decorative number */}
               <span
                 className="absolute bottom-3 right-4 font-heading font-extrabold text-8xl leading-none text-foreground/[0.07] select-none pointer-events-none"
@@ -104,7 +98,7 @@ export default function PainPoints() {
                 {num}
               </span>
 
-              <div className="relative p-8">
+              <div className="relative p-8 pt-7">
                 <div
                   className={`w-11 h-11 rounded-xl ${iconBg} flex items-center justify-center mb-5`}
                 >

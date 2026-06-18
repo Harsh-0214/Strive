@@ -121,58 +121,63 @@ export default function Packages() {
                 variants={cardVariants}
                 className={`relative rounded-2xl border flex flex-col overflow-hidden transition-all duration-300 hover:-translate-y-1 ${
                   popular
-                    ? "border-primary/60 shadow-2xl shadow-primary/20 ring-1 ring-primary/40 md:shadow-2xl md:shadow-primary/20"
-                    : "border-border shadow-sm hover:shadow-md"
-                } bg-card`}
-              style={
-                popular
-                  ? {
-                      boxShadow:
-                        "0 0 0 1px hsl(var(--primary) / 0.3), 0 20px 48px hsl(var(--primary) / 0.18)",
-                    }
-                  : undefined
-              }
+                    ? "border-transparent shadow-2xl"
+                    : "border-border shadow-sm hover:shadow-md bg-card"
+                }`}
+                style={
+                  popular
+                    ? {
+                        background:
+                          "linear-gradient(145deg, hsl(var(--primary-dark)), hsl(var(--primary-light)))",
+                      }
+                    : undefined
+                }
               >
-                {popular && (
-                  <div
-                    className="text-primary-foreground text-xs font-bold uppercase tracking-widest text-center py-2.5 px-4"
-                    style={{
-                      background:
-                        "linear-gradient(90deg, hsl(var(--primary)), hsl(var(--primary-light)))",
-                    }}
-                  >
-                    ✦ Most Popular
-                  </div>
-                )}
-
                 <div className="p-7 flex flex-col flex-1">
-                  {/* Icon + Name */}
+                  {/* Icon + Name + Most Popular badge */}
                   <div className="flex items-center gap-3 mb-4">
                     <div
                       className={`w-10 h-10 rounded-xl flex items-center justify-center ${
-                        popular ? "bg-primary/10" : "bg-muted"
+                        popular ? "bg-white/15" : "bg-muted"
                       }`}
                     >
                       <Icon
                         size={20}
                         strokeWidth={1.75}
-                        className={popular ? "text-primary" : "text-muted-foreground"}
+                        className={popular ? "text-white" : "text-muted-foreground"}
                         aria-hidden="true"
                       />
                     </div>
-                    <h3 className="font-heading font-bold text-xl text-foreground">
+                    <h3
+                      className={`font-heading font-bold text-xl ${
+                        popular ? "text-white" : "text-foreground"
+                      }`}
+                    >
                       {name}
                     </h3>
+                    {popular && (
+                      <span className="ml-auto text-xs font-bold uppercase tracking-widest px-2.5 py-1 rounded-full bg-white/15 text-white/90">
+                        Most Popular
+                      </span>
+                    )}
                   </div>
 
                   {/* Price */}
                   <div className="mb-2">
-                    <span className="font-heading font-extrabold text-3xl text-foreground">
+                    <span
+                      className={`font-heading font-extrabold text-3xl ${
+                        popular ? "text-white" : "text-foreground"
+                      }`}
+                    >
                       {range}
                     </span>
                   </div>
 
-                  <p className="text-muted-foreground text-sm mb-6 leading-relaxed">
+                  <p
+                    className={`text-sm mb-6 leading-relaxed ${
+                      popular ? "text-white/75" : "text-muted-foreground"
+                    }`}
+                  >
                     {description}
                   </p>
 
@@ -181,12 +186,14 @@ export default function Packages() {
                     {features.map((f) => (
                       <li
                         key={f}
-                        className="flex items-start gap-2.5 text-sm text-foreground"
+                        className={`flex items-start gap-2.5 text-sm ${
+                          popular ? "text-white/90" : "text-foreground"
+                        }`}
                       >
                         <Check
                           size={16}
                           strokeWidth={2.5}
-                          className="text-primary mt-0.5 shrink-0"
+                          className={popular ? "text-white/80 mt-0.5 shrink-0" : "text-primary mt-0.5 shrink-0"}
                           aria-hidden="true"
                         />
                         {f}
@@ -199,9 +206,18 @@ export default function Packages() {
                     href={ctaHref}
                     className={`inline-flex items-center justify-center gap-2 w-full px-5 py-3 rounded-xl font-semibold text-sm transition-all duration-200 active:scale-95 ${
                       popular
-                        ? "bg-primary text-primary-foreground hover:opacity-90 shadow-md shadow-primary/20"
+                        ? "text-white shadow-lg hover:opacity-90"
                         : "bg-muted text-foreground hover:bg-muted/70 border border-border"
                     }`}
+                    style={
+                      popular
+                        ? {
+                            background:
+                              "linear-gradient(135deg, hsl(33 98% 52%), hsl(25 95% 46%))",
+                            boxShadow: "0 4px 16px hsl(33 98% 54% / 0.35)",
+                          }
+                        : undefined
+                    }
                   >
                     {cta}
                     <ArrowRight size={16} aria-hidden="true" />
