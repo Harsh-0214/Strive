@@ -94,14 +94,14 @@ export default function Navbar() {
         aria-label="Main navigation"
       >
         <div className="max-w-7xl mx-auto section-padding">
-          <div className="flex items-center justify-between h-20">
+          <div className="flex items-center justify-between h-24">
             {/* Wordmark */}
             <a
               href="#"
               className="flex items-center gap-3 group"
               aria-label="Strive — go to homepage"
             >
-              <div className="relative w-14 h-14 flex-shrink-0 overflow-hidden">
+              <div className="relative w-16 h-16 flex-shrink-0 overflow-hidden">
                 <Image
                   src="/Logo(s).png"
                   alt=""
@@ -110,9 +110,9 @@ export default function Navbar() {
                   priority
                 />
               </div>
-              <div className="flex flex-col leading-none gap-1">
+              <div className="flex flex-col leading-none gap-1.5">
                 <span
-                  className="font-heading font-extrabold text-xl tracking-widest uppercase"
+                  className="font-heading font-extrabold text-2xl tracking-widest uppercase"
                   style={{
                     background: "linear-gradient(90deg, hsl(var(--primary)), hsl(var(--primary-light)))",
                     WebkitBackgroundClip: "text",
@@ -122,7 +122,7 @@ export default function Navbar() {
                 >
                   Strive
                 </span>
-                <span className="text-[10px] tracking-widest uppercase text-muted-foreground font-medium">
+                <span className="text-xs tracking-widest uppercase text-muted-foreground font-medium">
                   Web Design & Development
                 </span>
               </div>
@@ -200,7 +200,7 @@ export default function Navbar() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -12 }}
               transition={{ duration: 0.22, ease: "easeOut" }}
-              className="fixed top-20 left-0 right-0 z-50 bg-background border-b border-border shadow-lg"
+              className="fixed top-24 left-0 right-0 z-50 bg-background border-b border-border shadow-lg"
               role="dialog"
               aria-modal="true"
               aria-label="Mobile navigation menu"
