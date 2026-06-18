@@ -1,9 +1,7 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
-import { useState } from "react";
-import { ChevronDown } from "lucide-react";
 
 const faqs = [
   {
@@ -51,26 +49,41 @@ function AccordionItem({
   const id = `faq-${index}`;
 
   return (
-    <div className="border-b border-border last:border-0">
+    <div
+      style={{ borderBottom: "1px solid rgba(10,10,10,0.08)" }}
+      className="last:border-0"
+    >
       <h3>
         <button
           id={`${id}-trigger`}
           aria-expanded={open}
           aria-controls={`${id}-panel`}
           onClick={() => setOpen(!open)}
-          className="flex items-center justify-between w-full py-5 text-left gap-4 group focus-visible:outline-2 focus-visible:outline-primary rounded-sm"
+          className="flex items-center justify-between w-full py-5 text-left gap-4 group"
+          style={{ outline: "none" }}
         >
-          <span className={`font-heading font-semibold text-base sm:text-lg transition-colors duration-150 ${open ? "text-primary" : "text-foreground group-hover:text-primary"}`}>
+          <span
+            className="font-heading font-semibold text-base sm:text-lg"
+            style={{
+              color: open ? "#00B4D8" : "#0A0A0A",
+              transition: "color 150ms ease",
+            }}
+          >
             {question}
           </span>
-          <motion.div
-            animate={{ rotate: open ? 180 : 0 }}
-            transition={{ duration: 0.25, ease: "easeOut" }}
-            className="shrink-0 text-muted-foreground"
+          {/* +/- indicator */}
+          <span
+            className="flex-shrink-0 w-7 h-7 flex items-center justify-center rounded-full border text-base font-bold"
+            style={{
+              borderColor: open ? "#00B4D8" : "rgba(10,10,10,0.15)",
+              color: open ? "#00B4D8" : "#6B6B6B",
+              transition: "border-color 150ms ease, color 150ms ease",
+              lineHeight: 1,
+            }}
             aria-hidden="true"
           >
-            <ChevronDown size={20} />
-          </motion.div>
+            {open ? "−" : "+"}
+          </span>
         </button>
       </h3>
 
@@ -84,10 +97,13 @@ function AccordionItem({
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.28, ease: [0.25, 0.46, 0.45, 0.94] }}
+            transition={{ duration: 0.28, ease: [0.23, 1, 0.32, 1] }}
             className="overflow-hidden"
           >
-            <p className="pb-5 text-muted-foreground leading-relaxed">
+            <p
+              className="pb-5 leading-relaxed text-[0.9375rem]"
+              style={{ color: "#6B6B6B" }}
+            >
               {answer}
             </p>
           </motion.div>
@@ -115,33 +131,41 @@ export default function FAQ() {
     <section
       id="faq"
       ref={ref}
-      className="py-20 lg:py-28 bg-muted"
+      className="py-20 lg:py-28 bg-white"
       aria-labelledby="faq-heading"
     >
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
-      <div className="max-w-4xl mx-auto section-padding">
+      <div className="max-w-3xl mx-auto section-padding">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.55, ease: "easeOut" }}
+          transition={{ duration: 0.55, ease: [0.23, 1, 0.32, 1] }}
           className="text-center mb-14"
         >
+          <p
+            className="text-xs font-semibold uppercase tracking-widest mb-4"
+            style={{ color: "#6B6B6B" }}
+          >
+            FAQs
+          </p>
           <h2
             id="faq-heading"
-            className="font-heading font-extrabold text-3xl sm:text-4xl md:text-5xl text-foreground tracking-tight"
+            className="font-heading font-extrabold tracking-tight"
+            style={{ fontSize: "clamp(2rem, 5vw, 3.25rem)", color: "#0A0A0A" }}
           >
-            Got questions? We&apos;ve got answers.
+            Got questions?
+            <br />
+            We&rsquo;ve got answers.
           </h2>
         </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.55, delay: 0.15, ease: "easeOut" }}
-          className="bg-card rounded-2xl border border-border shadow-sm px-6 sm:px-8"
+          transition={{ duration: 0.55, delay: 0.12, ease: [0.23, 1, 0.32, 1] }}
         >
           {faqs.map((faq, i) => (
             <AccordionItem key={faq.question} {...faq} index={i} />

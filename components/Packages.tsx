@@ -1,14 +1,16 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { useRef, useCallback } from "react";
+import { motion, useInView, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { Check, Zap, Star, ShoppingBag, ArrowRight } from "lucide-react";
 
 const packages = [
   {
     icon: Zap,
     name: "Starter",
-    range: "$300–800",
+    range: "$300",
+    rangeSuffix: "– $800",
+    period: "one-time",
     description: "Everything you need to get found online.",
     popular: false,
     features: [
@@ -18,13 +20,15 @@ const packages = [
       "Fast load speed",
       "SSL included",
     ],
-    cta: "Get the Starter",
+    cta: "Get Started",
     ctaHref: "#contact",
   },
   {
     icon: Star,
     name: "Business",
-    range: "$1,500–3,500",
+    range: "$1,500",
+    rangeSuffix: "– $3,500",
+    period: "one-time",
     description: "A full online presence built to grow with you.",
     popular: true,
     features: [
@@ -35,13 +39,15 @@ const packages = [
       "Basic SEO setup",
       "Google Analytics",
     ],
-    cta: "Get the Business",
+    cta: "Get Started",
     ctaHref: "#contact",
   },
   {
     icon: ShoppingBag,
     name: "Premium",
-    range: "$4,000–10,000+",
+    range: "$4,000",
+    rangeSuffix: "+",
+    period: "one-time",
     description: "A complete e-commerce solution built to sell.",
     popular: false,
     features: [
@@ -52,7 +58,7 @@ const packages = [
       "Inventory management",
       "Custom integrations",
     ],
-    cta: "Get the Premium",
+    cta: "Get Started",
     ctaHref: "#contact",
   },
 ];
@@ -62,14 +68,114 @@ const containerVariants = {
   visible: { transition: { staggerChildren: 0.1 } },
 };
 
-const cardVariants = {
-  hidden: { opacity: 0, y: 36 },
-  visible: {
+const featureVariants = {
+  hidden: { opacity: 0, x: -10 },
+  visible: (i: number) => ({
     opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] },
-  },
+    x: 0,
+    transition: { duration: 0.4, delay: i * 0.05, ease: [0.23, 1, 0.32, 1] },
+  }),
 };
+
+function TiltCard({
+  children,
+  popular,
+  index,
+  inView,
+}: {
+  children: React.ReactNode;
+  popular: boolean;
+  index: number;
+  inView: boolean;
+}) {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const rotateX = useMotionValue(0);
+  const rotateY = useMotionValue(0);
+  const springRotateX = useSpring(rotateX, { stiffness: 200, damping: 20 });
+  const springRotateY = useSpring(rotateY, { stiffness: 200, damping: 20 });
+  const shadowSpring = useSpring(useMotionValue(0), { stiffness: 200, damping: 20 });
+
+  const handleMouseMove = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      const card = cardRef.current;
+      if (!card) return;
+      const rect = card.getBoundingClientRect();
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top + rect.height / 2;
+      const dx = (e.clientX - cx) / (rect.width / 2);
+      const dy = (e.clientY - cy) / (rect.height / 2);
+      rotateX.set(-dy * 8);
+      rotateY.set(dx * 8);
+    },
+    [rotateX, rotateY]
+  );
+
+  const handleMouseLeave = useCallback(() => {
+    rotateX.set(0);
+    rotateY.set(0);
+  }, [rotateX, rotateY]);
+
+  const cardVariant = {
+    hidden: { opacity: 0, y: 36, scale: 0.97 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: 0.55,
+        delay: index * 0.1,
+        ease: [0.23, 1, 0.32, 1],
+      },
+    },
+  };
+
+  return (
+    <motion.div
+      variants={cardVariant}
+      style={{
+        perspective: "1000px",
+        transformStyle: "preserve-3d",
+      }}
+    >
+      <motion.div
+        ref={cardRef}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        style={{
+          rotateX: springRotateX,
+          rotateY: springRotateY,
+          transformStyle: "preserve-3d",
+        }}
+        whileHover={{
+          boxShadow: popular
+            ? "0 32px 64px rgba(0,180,216,0.25), 0 8px 32px rgba(0,0,0,0.15)"
+            : "0 24px 48px rgba(0,0,0,0.12)",
+        }}
+        transition={{ duration: 0.2 }}
+        className={`relative rounded-2xl flex flex-col overflow-hidden cursor-default h-full ${
+          popular ? "" : "border border-[#E8E8E8] bg-white shadow-sm"
+        }`}
+      >
+        {popular ? (
+          /* Gradient border wrapper */
+          <div
+            className="absolute inset-0 rounded-2xl p-px"
+            style={{
+              background: "linear-gradient(135deg, #00B4D8, #0077B6, #00B4D8)",
+              zIndex: 0,
+            }}
+            aria-hidden="true"
+          >
+            <div className="absolute inset-px rounded-2xl bg-white" />
+          </div>
+        ) : null}
+        <div className="relative z-10 p-7 flex flex-col flex-1">
+          {children}
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+}
 
 export default function Packages() {
   const ref = useRef<HTMLElement>(null);
@@ -79,157 +185,163 @@ export default function Packages() {
     <section
       id="packages"
       ref={ref}
-      className="py-20 lg:py-28 bg-background"
+      className="py-20 lg:py-28 bg-white"
       aria-labelledby="packages-heading"
     >
       <div className="max-w-7xl mx-auto section-padding">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.55, ease: "easeOut" }}
-          className="text-center mb-14"
+          transition={{ duration: 0.55, ease: [0.23, 1, 0.32, 1] }}
+          className="text-center mb-16"
         >
+          <p
+            className="text-xs font-semibold uppercase tracking-widest mb-4"
+            style={{ color: "#00B4D8" }}
+          >
+            Pricing
+          </p>
           <h2
             id="packages-heading"
-            className="font-heading font-extrabold text-3xl sm:text-4xl md:text-5xl tracking-tight"
+            className="font-heading font-extrabold tracking-tight"
+            style={{
+              fontSize: "clamp(2rem, 5vw, 3.5rem)",
+              color: "#0A0A0A",
+            }}
           >
-            Pick the package that{" "}
-            <span
-              style={{
-                background:
-                  "linear-gradient(90deg, hsl(var(--primary)), hsl(var(--primary-light)))",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-              }}
-            >
-              fits where you&apos;re at
-            </span>
+            Simple, Transparent Pricing
           </h2>
+          <p className="mt-4 text-lg max-w-xl mx-auto" style={{ color: "#6B6B6B" }}>
+            Flat-rate packages. No hourly billing. No surprise invoices. Ever.
+          </p>
         </motion.div>
 
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
-          className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start"
+          className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch"
         >
           {packages.map(
-            ({ icon: Icon, name, range, description, popular, features, cta, ctaHref }) => (
-              <motion.article
-                key={name}
-                variants={cardVariants}
-                className={`relative rounded-2xl flex flex-col overflow-hidden transition-all duration-300 hover:-translate-y-1 ${
-                  popular
-                    ? "border-transparent shadow-2xl"
-                    : "bg-card border border-border shadow-sm hover:shadow-md"
-                }`}
-                style={
-                  popular
-                    ? {
-                        background:
-                          "linear-gradient(145deg, hsl(var(--primary-dark)), hsl(var(--primary-light)))",
-                      }
-                    : undefined
-                }
-              >
-                <div className="p-7 flex flex-col flex-1">
-                  {/* Icon + Name + Most Popular badge */}
-                  <div className="flex items-center gap-3 mb-4">
-                    <div
-                      className={`w-10 h-10 rounded-xl flex items-center justify-center ${
-                        popular ? "bg-white/15" : "bg-muted"
-                      }`}
-                    >
-                      <Icon
-                        size={20}
-                        strokeWidth={1.75}
-                        className={popular ? "text-white" : "text-muted-foreground"}
-                        aria-hidden="true"
-                      />
-                    </div>
-                    <h3
-                      className={`font-heading font-bold text-xl ${
-                        popular ? "text-white" : "text-foreground"
-                      }`}
-                    >
-                      {name}
-                    </h3>
-                    {popular && (
-                      <span className="ml-auto text-xs font-bold uppercase tracking-widest px-2.5 py-1 rounded-full bg-white/15 text-white/90">
-                        Most Popular
-                      </span>
-                    )}
+            (
+              { icon: Icon, name, range, rangeSuffix, period, description, popular, features, cta, ctaHref },
+              index
+            ) => (
+              <TiltCard key={name} popular={popular} index={index} inView={inView}>
+                {/* Icon + badge row */}
+                <div className="flex items-start justify-between mb-6">
+                  <div
+                    className="w-11 h-11 rounded-xl flex items-center justify-center"
+                    style={{ background: popular ? "hsl(199 100% 42% / 0.1)" : "#F5F5F5" }}
+                  >
+                    <Icon
+                      size={20}
+                      strokeWidth={1.75}
+                      style={{ color: popular ? "#00B4D8" : "#6B6B6B" }}
+                      aria-hidden="true"
+                    />
                   </div>
-
-                  {/* Price */}
-                  <div className="mb-2">
+                  {popular && (
                     <span
-                      className={`font-heading font-extrabold text-3xl ${
-                        popular ? "text-white" : "text-foreground"
-                      }`}
+                      className="text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full"
+                      style={{ background: "hsl(199 100% 42% / 0.1)", color: "#00B4D8" }}
+                    >
+                      Most Popular
+                    </span>
+                  )}
+                </div>
+
+                {/* Name */}
+                <h3
+                  className="font-heading font-bold text-xl mb-1"
+                  style={{ color: "#0A0A0A" }}
+                >
+                  {name}
+                </h3>
+
+                {/* Description */}
+                <p className="text-sm mb-6" style={{ color: "#6B6B6B" }}>
+                  {description}
+                </p>
+
+                {/* Price */}
+                <div className="mb-8">
+                  <div className="flex items-end gap-1">
+                    <span
+                      className="font-heading font-black"
+                      style={{
+                        fontSize: "clamp(2.5rem, 4vw, 3rem)",
+                        color: "#0A0A0A",
+                        lineHeight: 1,
+                      }}
                     >
                       {range}
                     </span>
+                    <span
+                      className="font-heading font-bold text-xl mb-1"
+                      style={{ color: "#6B6B6B" }}
+                    >
+                      {rangeSuffix}
+                    </span>
                   </div>
-
-                  <p
-                    className={`text-sm mb-6 leading-relaxed ${
-                      popular ? "text-white/75" : "text-muted-foreground"
-                    }`}
-                  >
-                    {description}
-                  </p>
-
-                  {/* Features */}
-                  <ul className="flex flex-col gap-2.5 mb-8 flex-1" role="list">
-                    {features.map((f) => (
-                      <li
-                        key={f}
-                        className={`flex items-start gap-2.5 text-sm ${
-                          popular ? "text-white/90" : "text-foreground"
-                        }`}
-                      >
-                        <Check
-                          size={16}
-                          strokeWidth={2.5}
-                          className={popular ? "text-white/80 mt-0.5 shrink-0" : "text-primary mt-0.5 shrink-0"}
-                          aria-hidden="true"
-                        />
-                        {f}
-                      </li>
-                    ))}
-                  </ul>
-
-                  {/* CTA */}
-                  <a
-                    href={ctaHref}
-                    className={`inline-flex items-center justify-center gap-2 w-full px-5 py-3 rounded-xl font-semibold text-sm transition-all duration-200 active:scale-95 ${
-                      popular
-                        ? "bg-white text-primary hover:bg-white/90 shadow-md"
-                        : "bg-muted text-foreground hover:bg-muted/70 border border-border"
-                    }`}
-                  >
-                    {cta}
-                    <ArrowRight size={16} aria-hidden="true" />
-                  </a>
+                  <span className="text-xs font-medium uppercase tracking-widest" style={{ color: "#6B6B6B" }}>
+                    {period}
+                  </span>
                 </div>
-              </motion.article>
+
+                {/* Features */}
+                <ul className="flex flex-col gap-3 mb-8 flex-1" role="list">
+                  {features.map((f, fi) => (
+                    <motion.li
+                      key={f}
+                      custom={fi}
+                      variants={featureVariants}
+                      initial="hidden"
+                      animate={inView ? "visible" : "hidden"}
+                      className="flex items-start gap-3 text-sm"
+                      style={{ color: "#0A0A0A" }}
+                    >
+                      <span
+                        className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
+                        style={{
+                          background: popular ? "#00B4D8" : "#E8C547",
+                        }}
+                        aria-hidden="true"
+                      >
+                        <Check size={11} strokeWidth={3} color="#fff" />
+                      </span>
+                      {f}
+                    </motion.li>
+                  ))}
+                </ul>
+
+                {/* CTA */}
+                <a
+                  href={ctaHref}
+                  className="inline-flex items-center justify-center gap-2 w-full px-5 py-3.5 rounded-xl font-semibold text-sm transition-colors duration-200"
+                  style={{
+                    background: popular ? "#00B4D8" : "#0A0A0A",
+                    color: "#FFFFFF",
+                    transform: "scale(1)",
+                    transition: "transform 160ms cubic-bezier(0.23,1,0.32,1), background 160ms ease",
+                  }}
+                  onMouseDown={(e) => {
+                    (e.currentTarget as HTMLElement).style.transform = "scale(0.97)";
+                  }}
+                  onMouseUp={(e) => {
+                    (e.currentTarget as HTMLElement).style.transform = "scale(1)";
+                  }}
+                  onMouseLeave={(e) => {
+                    (e.currentTarget as HTMLElement).style.transform = "scale(1)";
+                  }}
+                >
+                  {cta}
+                  <ArrowRight size={16} aria-hidden="true" />
+                </a>
+              </TiltCard>
             )
           )}
         </motion.div>
-
-        {/* Flat-rate reassurance */}
-        <motion.p
-          initial={{ opacity: 0, y: 12 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.45, ease: "easeOut" }}
-          className="text-center text-muted-foreground text-sm mt-10"
-        >
-          Every package is{" "}
-          <span className="font-semibold text-foreground">flat-rate</span>.
-          No hourly billing. No surprise invoices. No hidden fees. Ever.
-        </motion.p>
       </div>
     </section>
   );

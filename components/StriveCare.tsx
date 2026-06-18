@@ -17,7 +17,8 @@ const plans = [
     tier: "Starter Care",
     price: "$49",
     period: "/mo",
-    cta: "Start Starter Care",
+    cta: "Get Started",
+    accent: "#E8C547",
     features: [
       { icon: RefreshCw, text: "Content updates (48hr turnaround)" },
       { icon: Activity, text: "Uptime monitoring" },
@@ -28,8 +29,9 @@ const plans = [
     tier: "Business Care",
     price: "$99",
     period: "/mo",
-    cta: "Start Business Care",
+    cta: "Get Started",
     popular: true,
+    accent: "#00B4D8",
     features: [
       { icon: RefreshCw, text: "Content updates (24hr turnaround)" },
       { icon: Activity, text: "Uptime monitoring" },
@@ -42,7 +44,8 @@ const plans = [
     tier: "Premium Care",
     price: "$199",
     period: "/mo",
-    cta: "Start Premium Care",
+    cta: "Get Started",
+    accent: "#E8C547",
     features: [
       { icon: RefreshCw, text: "Content updates (same-day priority)" },
       { icon: Activity, text: "Uptime monitoring" },
@@ -59,11 +62,12 @@ const containerVariants = {
 };
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 32 },
+  hidden: { opacity: 0, y: 32, scale: 0.97 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] },
+    scale: 1,
+    transition: { duration: 0.5, ease: [0.23, 1, 0.32, 1] },
   },
 };
 
@@ -75,7 +79,8 @@ export default function StriveCare() {
     <section
       id="strive-care"
       ref={ref}
-      className="py-20 lg:py-28 bg-care-bg"
+      className="py-20 lg:py-28"
+      style={{ background: "#F5F0E8" }}
       aria-labelledby="care-heading"
     >
       <div className="max-w-7xl mx-auto section-padding">
@@ -83,91 +88,102 @@ export default function StriveCare() {
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.55, ease: "easeOut" }}
+          transition={{ duration: 0.55, ease: [0.23, 1, 0.32, 1] }}
           className="text-center mb-14"
         >
-          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent/20 text-accent text-sm font-semibold border border-accent/30 mb-5">
-            <span
-              className="w-2 h-2 rounded-full bg-accent animate-pulse-glow inline-block"
-              aria-hidden="true"
-            />
-            Monthly plans
-          </span>
+          <p
+            className="text-xs font-semibold uppercase tracking-widest mb-4"
+            style={{ color: "#6B6B6B" }}
+          >
+            Monthly Plans
+          </p>
           <h2
             id="care-heading"
-            className="font-heading font-extrabold text-3xl sm:text-4xl md:text-5xl text-care-foreground tracking-tight mb-4"
+            className="font-heading font-extrabold tracking-tight mb-4"
+            style={{
+              fontSize: "clamp(2rem, 5vw, 3.5rem)",
+              color: "#0A0A0A",
+            }}
           >
             Keep your site fresh with{" "}
-            <span
-              style={{
-                background: "linear-gradient(90deg, hsl(var(--accent)), hsl(var(--primary-light)))",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-              }}
-            >
-              Strive Care
-            </span>
+            <span style={{ color: "#00B4D8" }}>Strive Care</span>
           </h2>
-          <p className="max-w-2xl mx-auto text-care-muted text-lg leading-relaxed">
+          <p
+            className="max-w-2xl mx-auto text-lg leading-relaxed"
+            style={{ color: "#6B6B6B" }}
+          >
             A monthly plan that keeps your website updated, secure, and
-            performing — without the surprise invoices. Think of it as having
-            a web developer on your team, without the salary.
+            performing — without the surprise invoices.
           </p>
         </motion.div>
 
-        {/* Plan cards */}
+        {/* Cards */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
           className="grid grid-cols-1 md:grid-cols-3 gap-5"
         >
-          {plans.map(({ tier, price, period, cta, popular, features }) => (
+          {plans.map(({ tier, price, period, cta, popular, accent, features }) => (
             <motion.article
               key={tier}
               variants={cardVariants}
-              className={`relative bg-care-card border rounded-2xl p-7 flex flex-col gap-5 transition-colors duration-300 overflow-hidden ${
-                popular
-                  ? "border-primary/50 shadow-lg shadow-primary/10"
-                  : "border-care-border hover:border-primary/40"
-              }`}
-              style={{ boxShadow: '0 0 0 1px rgba(255,255,255,0.06)' }}
+              className="relative flex flex-col rounded-2xl p-7 overflow-hidden"
+              style={{
+                background: "#FFFFFF",
+                border: popular
+                  ? `1px solid ${accent}`
+                  : "1px solid rgba(10,10,10,0.10)",
+                boxShadow: popular
+                  ? "0 12px 40px rgba(0,180,216,0.12)"
+                  : "0 2px 12px rgba(0,0,0,0.04)",
+              }}
             >
-              {popular && (
-                <div
-                  className="absolute top-0 left-0 right-0 h-0.5"
-                  style={{
-                    background: "linear-gradient(90deg, hsl(var(--primary)), hsl(var(--primary-light)))",
-                  }}
-                  aria-hidden="true"
-                />
-              )}
+              {/* Colored accent bar */}
+              <div
+                className="absolute top-0 left-0 right-0 h-1 rounded-t-2xl"
+                style={{ background: accent }}
+                aria-hidden="true"
+              />
 
-              <div>
+              <div className="mt-2">
                 <div className="flex items-center justify-between mb-2">
-                  <h3 className="font-heading font-bold text-lg text-care-foreground">
+                  <h3
+                    className="font-heading font-bold text-lg"
+                    style={{ color: "#0A0A0A" }}
+                  >
                     {tier}
                   </h3>
                   {popular && (
-                    <span className="text-xs font-bold text-primary bg-primary/15 px-2.5 py-1 rounded-full border border-primary/25">
+                    <span
+                      className="text-xs font-bold uppercase tracking-widest px-2.5 py-1 rounded-full"
+                      style={{ background: "rgba(0,180,216,0.1)", color: "#00B4D8" }}
+                    >
                       Popular
                     </span>
                   )}
                 </div>
-                <div className="flex items-end gap-1">
-                  <span className="font-heading font-extrabold text-4xl text-care-foreground">
+                <div className="flex items-end gap-1 mb-6">
+                  <span
+                    className="font-heading font-extrabold"
+                    style={{ fontSize: "clamp(2rem, 4vw, 2.75rem)", color: "#0A0A0A", lineHeight: 1 }}
+                  >
                     {price}
                   </span>
-                  <span className="text-care-muted text-base mb-1">{period}</span>
+                  <span className="text-base mb-0.5" style={{ color: "#6B6B6B" }}>
+                    {period}
+                  </span>
                 </div>
               </div>
 
-              <ul className="flex flex-col gap-3 flex-1" role="list">
+              <ul className="flex flex-col gap-3 flex-1 mb-6" role="list">
                 {features.map(({ icon: Icon, text }) => (
-                  <li key={text} className="flex items-start gap-3 text-sm text-care-muted">
-                    <div className="w-7 h-7 rounded-lg bg-primary/12 flex items-center justify-center shrink-0 mt-0.5">
-                      <Icon size={14} strokeWidth={1.75} className="text-primary" aria-hidden="true" />
+                  <li key={text} className="flex items-start gap-3 text-sm" style={{ color: "#0A0A0A" }}>
+                    <div
+                      className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0 mt-0.5"
+                      style={{ background: `${accent}18` }}
+                    >
+                      <Icon size={13} strokeWidth={1.75} style={{ color: accent }} aria-hidden="true" />
                     </div>
                     <span className="leading-snug pt-1">{text}</span>
                   </li>
@@ -176,11 +192,21 @@ export default function StriveCare() {
 
               <a
                 href="#contact"
-                className={`inline-flex items-center justify-center gap-2 w-full px-5 py-3 rounded-xl font-semibold text-sm active:scale-95 transition-all duration-200 ${
-                  popular
-                    ? "bg-primary text-primary-foreground hover:opacity-90 shadow-md shadow-primary/20"
-                    : "bg-white/10 text-care-foreground border border-white/15 hover:bg-white/15 transition-colors"
-                }`}
+                className="inline-flex items-center justify-center gap-2 w-full px-5 py-3.5 rounded-xl font-semibold text-sm"
+                style={{
+                  background: popular ? "#00B4D8" : "#0A0A0A",
+                  color: "#FFFFFF",
+                  transition: "transform 160ms cubic-bezier(0.23,1,0.32,1)",
+                }}
+                onMouseDown={(e) => {
+                  (e.currentTarget as HTMLElement).style.transform = "scale(0.97)";
+                }}
+                onMouseUp={(e) => {
+                  (e.currentTarget as HTMLElement).style.transform = "scale(1)";
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLElement).style.transform = "scale(1)";
+                }}
               >
                 {cta}
                 <ArrowRight size={16} aria-hidden="true" />
@@ -193,11 +219,11 @@ export default function StriveCare() {
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.4, ease: "easeOut" }}
+          transition={{ duration: 0.5, delay: 0.4, ease: [0.23, 1, 0.32, 1] }}
           className="flex items-center justify-center gap-2 mt-8"
         >
-          <Check size={15} strokeWidth={2.5} className="text-success shrink-0" aria-hidden="true" />
-          <p className="text-care-muted text-sm">
+          <Check size={15} strokeWidth={2.5} style={{ color: "#00B4D8" }} aria-hidden="true" />
+          <p className="text-sm" style={{ color: "#6B6B6B" }}>
             No lock-in contracts. Cancel or pause anytime.
           </p>
         </motion.div>

@@ -1,8 +1,7 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
-import { ArrowUpRight, TrendingUp } from "lucide-react";
 
 const projects = [
   {
@@ -15,8 +14,9 @@ const projects = [
       { label: "Bookings", value: "+240%", sub: "first 30 days" },
       { label: "No-shows", value: "−60%", sub: "with reminders" },
     ],
-    accent: "hsl(330 60% 55%)",
-    accentBg: "hsl(330 60% 55% / 0.08)",
+    panelGradient: "linear-gradient(135deg, #e91e8c 0%, #ff6b9d 100%)",
+    panelBg: "hsl(330 60% 15%)",
+    letter: "B",
     tag: "Booking Site",
   },
   {
@@ -26,11 +26,12 @@ const projects = [
     description:
       "Lead-gen site with project gallery, quote request form, and Google reviews integration. Ranked page 1 within 6 weeks.",
     metrics: [
-      { label: "Leads / mo", value: "+185%", sub: "vs. no website" },
-      { label: "Avg job value", value: "+$800", sub: "higher quality leads" },
+      { label: "Leads/mo", value: "+185%", sub: "vs. no website" },
+      { label: "Avg job value", value: "+$800", sub: "higher quality" },
     ],
-    accent: "hsl(210 70% 50%)",
-    accentBg: "hsl(210 70% 50% / 0.08)",
+    panelGradient: "linear-gradient(135deg, #0070f3 0%, #00b4d8 100%)",
+    panelBg: "hsl(210 70% 12%)",
+    letter: "R",
     tag: "Lead Gen",
   },
   {
@@ -41,10 +42,11 @@ const projects = [
       "Menu site with online ordering, catering inquiry form, and loyalty badge. Replaced a slow Wix page in under 2 weeks.",
     metrics: [
       { label: "Online orders", value: "+310%", sub: "month over month" },
-      { label: "Table reservations", value: "+90%", sub: "via website" },
+      { label: "Reservations", value: "+90%", sub: "via website" },
     ],
-    accent: "hsl(28 90% 52%)",
-    accentBg: "hsl(28 90% 52% / 0.08)",
+    panelGradient: "linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)",
+    panelBg: "hsl(28 60% 12%)",
+    letter: "M",
     tag: "Restaurant",
   },
 ];
@@ -52,79 +54,131 @@ const projects = [
 export default function Portfolio() {
   const ref = useRef<HTMLElement>(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
-    <section ref={ref} id="portfolio" className="py-20 bg-muted/30">
+    <section
+      ref={ref}
+      id="portfolio"
+      className="py-20 lg:py-28"
+      style={{ background: "#0A0A0A" }}
+      aria-labelledby="portfolio-heading"
+    >
       <div className="max-w-7xl mx-auto section-padding">
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-14"
+          transition={{ duration: 0.55, ease: [0.23, 1, 0.32, 1] }}
+          className="mb-14"
         >
-          <span className="inline-block text-xs font-semibold tracking-widest uppercase text-[hsl(var(--accent))] mb-3">
+          <p
+            className="text-xs font-semibold uppercase tracking-widest mb-4"
+            style={{ color: "#00B4D8" }}
+          >
             Real Results
-          </span>
-          <h2 className="font-heading font-extrabold text-3xl sm:text-4xl text-foreground">
+          </p>
+          <h2
+            id="portfolio-heading"
+            className="font-heading font-extrabold tracking-tight"
+            style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)", color: "#FFFFFF" }}
+          >
             Work that moves the needle
           </h2>
-          <p className="mt-3 text-muted-foreground max-w-xl mx-auto">
+          <p className="mt-3 max-w-xl" style={{ color: "rgba(255,255,255,0.45)" }}>
             Every site we build is designed to convert visitors into customers — not just look good.
           </p>
         </motion.div>
 
-        <div className="grid gap-6 md:grid-cols-3">
+        {/* Case study cards */}
+        <div className="flex flex-col gap-4">
           {projects.map((project, i) => (
             <motion.article
               key={project.name}
-              initial={{ opacity: 0, y: 32 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="group relative flex flex-col rounded-2xl border border-border bg-card overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+              initial={{ opacity: 0, clipPath: "inset(0 0 100% 0)" }}
+              animate={inView ? { opacity: 1, clipPath: "inset(0 0 0% 0)" } : {}}
+              transition={{
+                duration: 0.7,
+                delay: i * 0.12,
+                ease: [0.23, 1, 0.32, 1],
+              }}
+              onMouseEnter={() => setHoveredIndex(i)}
+              onMouseLeave={() => setHoveredIndex(null)}
+              className="relative flex flex-col md:flex-row rounded-2xl overflow-hidden cursor-default"
+              style={{
+                background: "#111111",
+                border: "1px solid rgba(255,255,255,0.06)",
+                transition: "transform 240ms cubic-bezier(0.23,1,0.32,1), box-shadow 240ms ease",
+                transform: hoveredIndex === i ? "translateY(-4px)" : "translateY(0)",
+                boxShadow: hoveredIndex === i ? "0 24px 60px rgba(0,0,0,0.4)" : "0 2px 12px rgba(0,0,0,0.2)",
+              }}
             >
-              {/* Color bar */}
-              <div className="h-1.5 w-full" style={{ background: project.accent }} />
+              {/* Colored panel */}
+              <div
+                className="relative md:w-48 lg:w-64 flex-shrink-0 flex items-center justify-center py-12 md:py-0"
+                style={{
+                  background: project.panelGradient,
+                  transition: "width 300ms cubic-bezier(0.23,1,0.32,1)",
+                  minHeight: "160px",
+                }}
+              >
+                {/* Type label */}
+                <div className="text-center px-4">
+                  <span
+                    className="font-heading font-black"
+                    style={{ fontSize: "clamp(3rem, 6vw, 5rem)", color: "rgba(255,255,255,0.25)", lineHeight: 1 }}
+                    aria-hidden="true"
+                  >
+                    {project.letter}
+                  </span>
+                  <p
+                    className="mt-2 text-xs font-bold uppercase tracking-widest"
+                    style={{ color: "rgba(255,255,255,0.7)" }}
+                  >
+                    {project.tag}
+                  </p>
+                </div>
+              </div>
 
-              <div className="flex flex-col flex-1 p-6">
-                {/* Header */}
-                <div className="flex items-start justify-between mb-4">
+              {/* Content */}
+              <div className="flex flex-col flex-1 p-7 lg:p-9">
+                <div className="flex items-start justify-between mb-3">
                   <div>
-                    <span
-                      className="inline-block text-[11px] font-semibold tracking-widest uppercase px-2.5 py-1 rounded-full mb-2"
-                      style={{ background: project.accentBg, color: project.accent }}
+                    <h3
+                      className="font-heading font-bold"
+                      style={{ fontSize: "clamp(1.1rem, 2vw, 1.4rem)", color: "#FFFFFF" }}
                     >
-                      {project.tag}
-                    </span>
-                    <h3 className="font-heading font-bold text-lg text-foreground leading-tight">
                       {project.name}
                     </h3>
-                    <p className="text-xs text-muted-foreground mt-0.5">{project.location}</p>
+                    <p className="text-sm mt-0.5" style={{ color: "rgba(255,255,255,0.4)" }}>
+                      {project.category} · {project.location}
+                    </p>
                   </div>
-                  <span className="mt-1 text-muted-foreground group-hover:text-foreground transition-colors">
-                    <ArrowUpRight size={18} />
-                  </span>
                 </div>
 
-                {/* Description */}
-                <p className="text-sm text-muted-foreground leading-relaxed mb-5 flex-1">
+                <p
+                  className="text-sm leading-relaxed mb-6 max-w-2xl"
+                  style={{ color: "rgba(255,255,255,0.55)" }}
+                >
                   {project.description}
                 </p>
 
                 {/* Metrics */}
-                <div className="flex gap-4 pt-4 border-t border-border">
+                <div className="flex flex-wrap gap-6 mt-auto">
                   {project.metrics.map((m) => (
-                    <div key={m.label} className="flex-1">
-                      <div className="flex items-center gap-1 mb-0.5">
-                        <TrendingUp size={12} style={{ color: project.accent }} />
-                        <span
-                          className="font-heading font-extrabold text-xl"
-                          style={{ color: project.accent }}
-                        >
-                          {m.value}
-                        </span>
-                      </div>
-                      <p className="text-[11px] text-muted-foreground leading-tight">{m.label}</p>
-                      <p className="text-[10px] text-muted-foreground/70">{m.sub}</p>
+                    <div key={m.label}>
+                      <p
+                        className="font-heading font-black leading-none"
+                        style={{ fontSize: "clamp(1.5rem, 3vw, 2.25rem)", color: "#FFFFFF" }}
+                      >
+                        {m.value}
+                      </p>
+                      <p className="text-xs font-semibold mt-1" style={{ color: "rgba(255,255,255,0.35)" }}>
+                        {m.label}
+                      </p>
+                      <p className="text-xs" style={{ color: "rgba(255,255,255,0.25)" }}>
+                        {m.sub}
+                      </p>
                     </div>
                   ))}
                 </div>

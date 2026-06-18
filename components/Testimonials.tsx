@@ -2,7 +2,6 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { Star } from "lucide-react";
 
 const testimonials = [
   {
@@ -40,27 +39,35 @@ const testimonials = [
   },
 ];
 
-const cardVariants = {
-  hidden: { opacity: 0, y: 32 },
+const staggerVariants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.12 } },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 28, scale: 0.97 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] },
+    scale: 1,
+    transition: { duration: 0.55, ease: [0.23, 1, 0.32, 1] },
   },
 };
 
-function StarRating() {
+function Stars() {
   return (
-    <div className="flex gap-0.5" aria-label="5 out of 5 stars" role="img">
+    <div className="flex gap-1" aria-label="5 out of 5 stars" role="img">
       {Array.from({ length: 5 }).map((_, i) => (
-        <Star
+        <svg
           key={i}
-          size={15}
-          strokeWidth={0}
-          fill="currentColor"
-          className="text-accent"
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="#E8C547"
           aria-hidden="true"
-        />
+        >
+          <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" />
+        </svg>
       ))}
     </div>
   );
@@ -76,112 +83,148 @@ export default function Testimonials() {
   return (
     <section
       ref={ref}
-      className="py-20 lg:py-28 overflow-hidden bg-background"
+      className="py-20 lg:py-28 overflow-hidden"
+      style={{ background: "#F5F0E8" }}
       aria-labelledby="testimonials-heading"
     >
       <div className="max-w-7xl mx-auto section-padding">
+        {/* Giant decorative quote */}
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.4 }}
+          className="text-center mb-2"
+          aria-hidden="true"
+        >
+          <span
+            className="font-heading font-black leading-none select-none"
+            style={{
+              fontSize: "clamp(6rem, 15vw, 12rem)",
+              color: "rgba(10,10,10,0.06)",
+              lineHeight: 0.8,
+            }}
+          >
+            &ldquo;
+          </span>
+        </motion.div>
+
+        {/* Section heading */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.55, ease: "easeOut" }}
+          transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
           className="text-center mb-14"
         >
           <h2
             id="testimonials-heading"
-            className="font-heading font-extrabold text-3xl sm:text-4xl md:text-5xl text-foreground tracking-tight"
+            className="font-heading font-extrabold tracking-tight"
+            style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)", color: "#0A0A0A" }}
           >
             Small businesses.{" "}
-            <span
-              style={{
-                background:
-                  "linear-gradient(90deg, hsl(var(--primary)), hsl(var(--primary-light)))",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-              }}
-            >
-              Real results.
-            </span>
+            <span style={{ color: "#00B4D8" }}>Real results.</span>
           </h2>
         </motion.div>
 
         <motion.div
+          variants={staggerVariants}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
           className="flex flex-col gap-5"
         >
-          {/* Featured testimonial: full width */}
-          <motion.article
-            variants={cardVariants}
-            className="relative rounded-2xl border border-primary/30 overflow-hidden shadow-2xl"
-            style={{
-              background:
-                "linear-gradient(135deg, hsl(221 90% 10%), hsl(218 84% 22%))",
-            }}
-          >
-            <div className="relative p-8 md:p-10 md:flex md:items-center md:gap-10">
-              {/* Left: quote */}
-              <div className="flex-1">
-                <StarRating />
-                <blockquote className="mt-4">
-                  <p className="text-white text-xl md:text-2xl leading-relaxed font-medium">
-                    &ldquo;{featured.quote}&rdquo;
-                  </p>
-                </blockquote>
-              </div>
-
-              {/* Right: attribution */}
-              <div className="mt-6 md:mt-0 md:shrink-0 md:text-right flex md:flex-col items-center md:items-end gap-3">
+          {/* Featured quote — large centered */}
+          <motion.article variants={itemVariants}>
+            <div
+              className="rounded-2xl p-8 md:p-12 text-center"
+              style={{
+                background: "#FFFFFF",
+                border: "1px solid rgba(10,10,10,0.08)",
+                boxShadow: "0 4px 24px rgba(0,0,0,0.05)",
+              }}
+            >
+              <Stars />
+              <blockquote className="mt-6 mb-8">
+                <p
+                  className="font-heading font-bold italic leading-tight"
+                  style={{
+                    fontSize: "clamp(1.5rem, 3.5vw, 2.25rem)",
+                    color: "#0A0A0A",
+                  }}
+                >
+                  &ldquo;{featured.quote}&rdquo;
+                </p>
+              </blockquote>
+              <div
+                className="w-12 h-px mx-auto mb-5"
+                style={{ background: "rgba(10,10,10,0.15)" }}
+                aria-hidden="true"
+              />
+              <div className="flex items-center justify-center gap-3">
                 <div
-                  className="w-14 h-14 rounded-full flex items-center justify-center font-heading font-bold text-lg text-white shrink-0"
+                  className="w-11 h-11 rounded-full flex items-center justify-center font-heading font-bold text-sm text-white flex-shrink-0"
                   style={{ background: featured.bg }}
+                  aria-hidden="true"
                 >
                   {featured.initials}
                 </div>
-                <div>
-                  <p className="font-semibold text-white">
-                    {featured.name} &mdash; {featured.role}
+                <div className="text-left">
+                  <p
+                    className="font-semibold text-sm uppercase tracking-widest"
+                    style={{ color: "#0A0A0A" }}
+                  >
+                    {featured.name}
                   </p>
-                  <p className="text-sm text-white/60">
-                    {featured.business}, {featured.location}
+                  <p className="text-xs" style={{ color: "#6B6B6B" }}>
+                    {featured.role}, {featured.business}
                   </p>
                 </div>
               </div>
             </div>
           </motion.article>
 
-          {/* Two non-featured cards side by side */}
+          {/* Two smaller quotes */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {rest.map(({ quote, name, role, business, location, initials, bg }) => (
               <motion.article
                 key={name}
-                variants={cardVariants}
-                className="relative rounded-2xl hover:-translate-y-1.5 transition-all duration-300 overflow-hidden bg-card border border-border shadow-sm hover:shadow-md"
+                variants={itemVariants}
+                className="rounded-2xl p-7"
+                style={{
+                  background: "#FFFFFF",
+                  border: "1px solid rgba(10,10,10,0.08)",
+                }}
               >
-                <div className="relative p-7 flex flex-col gap-4">
-                  <StarRating />
-                  <blockquote className="flex-1">
-                    <p className="text-foreground leading-relaxed text-[0.9375rem]">
-                      &ldquo;{quote}&rdquo;
-                    </p>
-                  </blockquote>
-                  <footer className="flex items-center gap-3 pt-4 border-t border-border">
-                    <div
-                      className="w-10 h-10 rounded-full flex items-center justify-center font-heading font-bold text-sm text-white shrink-0"
-                      style={{ background: bg }}
+                <Stars />
+                <blockquote className="mt-4 mb-6">
+                  <p
+                    className="leading-relaxed"
+                    style={{ color: "#0A0A0A", fontSize: "1.0625rem" }}
+                  >
+                    &ldquo;{quote}&rdquo;
+                  </p>
+                </blockquote>
+                <footer
+                  className="flex items-center gap-3 pt-4"
+                  style={{ borderTop: "1px solid rgba(10,10,10,0.08)" }}
+                >
+                  <div
+                    className="w-9 h-9 rounded-full flex items-center justify-center font-heading font-bold text-xs text-white flex-shrink-0"
+                    style={{ background: bg }}
+                    aria-hidden="true"
+                  >
+                    {initials}
+                  </div>
+                  <div>
+                    <p
+                      className="font-semibold text-sm uppercase tracking-widest"
+                      style={{ color: "#0A0A0A" }}
                     >
-                      {initials}
-                    </div>
-                    <div>
-                      <p className="font-semibold text-sm text-foreground leading-tight">
-                        {name} &mdash; {role}
-                      </p>
-                      <p className="text-xs text-muted-foreground mt-0.5">
-                        {business}, {location}
-                      </p>
-                    </div>
-                  </footer>
-                </div>
+                      {name}
+                    </p>
+                    <p className="text-xs" style={{ color: "#6B6B6B" }}>
+                      {role}, {business}
+                    </p>
+                  </div>
+                </footer>
               </motion.article>
             ))}
           </div>
