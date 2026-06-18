@@ -52,28 +52,30 @@ function GlowOrb({
   );
 }
 
-// Tiny twinkling sparkle point
+// Twinkling sparkle point
 function Sparkle({ index }: { index: number }) {
   const x = (index * 19 + 7) % 93;
   const y = (index * 29 + 11) % 82;
   const delay = (index * 0.28) % 5;
   const duration = 2.4 + (index % 4) * 0.6;
-  const isCyan = index % 4 === 0;
+  const isCyan = index % 3 === 0;
+  // Vary sizes so some stars read as bright/close, others faint/distant
+  const size = 2.5 + (index % 4) * 1.25;
 
   return (
     <motion.div
       className="absolute rounded-full -z-10"
       style={{
-        width: 2,
-        height: 2,
+        width: size,
+        height: size,
         left: `${x}%`,
         top: `${y}%`,
-        background: isCyan ? "hsl(199 100% 80%)" : "hsl(0 0% 100%)",
+        background: isCyan ? "hsl(199 100% 85%)" : "hsl(0 0% 100%)",
         boxShadow: isCyan
-          ? "0 0 6px 2px hsl(199 100% 70% / 0.5)"
-          : "0 0 4px 1px hsl(0 0% 100% / 0.3)",
+          ? "0 0 10px 3px hsl(199 100% 72% / 0.8), 0 0 18px 6px hsl(199 100% 65% / 0.4)"
+          : "0 0 8px 2px hsl(0 0% 100% / 0.6), 0 0 14px 4px hsl(210 100% 90% / 0.3)",
       }}
-      animate={{ opacity: [0, 1, 0, 0.6, 0], scale: [0.5, 1.4, 0.5, 1.1, 0.5] }}
+      animate={{ opacity: [0.2, 1, 0.4, 0.9, 0.2], scale: [0.7, 1.5, 0.8, 1.3, 0.7] }}
       transition={{ duration, delay, repeat: Infinity, ease: "easeInOut" }}
       aria-hidden="true"
     />
@@ -202,13 +204,13 @@ export default function Hero() {
             willChange: "transform",
           }}
           animate={{ x: ["-50vw", "160vw"] }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", repeatDelay: 3 }}
+          transition={{ duration: 22, repeat: Infinity, ease: "easeInOut", repeatDelay: 4 }}
         />
       </div>
 
       {/* Sparkle field */}
       <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
-        {Array.from({ length: 28 }).map((_, i) => (
+        {Array.from({ length: 44 }).map((_, i) => (
           <Sparkle key={i} index={i} />
         ))}
       </div>
