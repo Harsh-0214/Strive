@@ -3,4 +3,5 @@ node_modules/
 .env*
 *.log
 .claude/settings.local.json
+.claude/worktrees/
 *.tsbuildinfo
