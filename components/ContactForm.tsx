@@ -225,7 +225,8 @@ export default function ContactForm() {
     <section
       id="contact"
       ref={ref}
-      className="py-20 lg:py-28 bg-background"
+      className="py-20 lg:py-28"
+      style={{ background: 'hsl(220 28% 6%)' }}
       aria-labelledby="contact-heading"
     >
       <div className="max-w-5xl mx-auto section-padding">
