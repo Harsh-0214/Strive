@@ -37,16 +37,25 @@ export default function Footer() {
           <div className="flex flex-col gap-4 max-w-xs">
             <a
               href="#"
-              className="flex items-center gap-2 group"
+              className="flex items-center gap-3 group"
               aria-label="Strive — go to top"
             >
-              <Image
-                src="/Logo(s).png"
-                alt="Strive"
-                width={120}
-                height={48}
-                className="object-contain h-10 w-auto"
-              />
+              <div className="relative w-14 h-14 flex-shrink-0 overflow-hidden">
+                <Image
+                  src="/Logo(s).png"
+                  alt=""
+                  fill
+                  className="object-cover object-top"
+                />
+              </div>
+              <div className="flex flex-col leading-none gap-1">
+                <span className="font-heading font-extrabold text-xl tracking-widest uppercase text-white">
+                  Strive
+                </span>
+                <span className="text-[10px] tracking-widest uppercase text-white/60 font-medium">
+                  Web Design & Development
+                </span>
+              </div>
             </a>
             <p className="text-sm text-white/75 leading-relaxed">
               We build the web presence your business deserves.
