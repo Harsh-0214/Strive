@@ -78,7 +78,7 @@ export default function StriveCare() {
       className="py-20 lg:py-28 bg-care-bg"
       aria-labelledby="care-heading"
     >
-      <div className="max-w-6xl mx-auto section-padding">
+      <div className="max-w-7xl mx-auto section-padding">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}

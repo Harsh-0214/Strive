@@ -98,7 +98,7 @@ function FieldWrapper({
     <div className="flex flex-col gap-1.5">
       <label
         htmlFor={htmlFor}
-        className="text-sm font-medium text-white"
+        className="text-sm font-medium text-foreground"
       >
         {label}
         {required && (
@@ -128,10 +128,10 @@ function FieldWrapper({
 }
 
 const inputClass = (error: FieldError) =>
-  `w-full px-4 py-3 rounded-xl border text-sm bg-white/5 text-white placeholder:text-white/30 transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-primary/50 ${
+  `w-full px-4 py-3 rounded-xl border text-sm bg-background text-foreground placeholder:text-muted-foreground transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-primary/50 ${
     error
       ? "border-destructive focus:ring-destructive/30"
-      : "border-white/15 focus:border-primary"
+      : "border-border focus:border-primary"
   }`;
 
 export default function ContactForm() {
@@ -189,11 +189,10 @@ export default function ContactForm() {
       <section
         id="contact"
         ref={ref}
-        className="py-20 lg:py-28"
-        style={{ background: 'hsl(220 28% 6%)' }}
+        className="py-20 lg:py-28 bg-background"
         aria-labelledby="contact-heading"
       >
-        <div className="max-w-2xl mx-auto section-padding text-center">
+        <div className="max-w-3xl mx-auto section-padding text-center">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -208,10 +207,10 @@ export default function ContactForm() {
                 aria-hidden="true"
               />
             </div>
-            <h2 className="font-heading font-extrabold text-3xl text-white">
+            <h2 className="font-heading font-extrabold text-3xl text-foreground">
               You&apos;re one step closer to growing online.
             </h2>
-            <p className="text-white/60 text-lg leading-relaxed">
+            <p className="text-muted-foreground text-lg leading-relaxed">
               We&apos;ll be in touch soon — usually within 24 hours. Keep an eye on your
               inbox.
             </p>
@@ -225,11 +224,10 @@ export default function ContactForm() {
     <section
       id="contact"
       ref={ref}
-      className="py-20 lg:py-28"
-      style={{ background: 'hsl(220 28% 6%)' }}
+      className="py-20 lg:py-28 bg-background"
       aria-labelledby="contact-heading"
     >
-      <div className="max-w-5xl mx-auto section-padding">
+      <div className="max-w-6xl mx-auto section-padding">
         {/* Heading: full width */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -239,11 +237,11 @@ export default function ContactForm() {
         >
           <h2
             id="contact-heading"
-            className="font-heading font-extrabold text-3xl sm:text-4xl md:text-5xl text-white tracking-tight mb-3"
+            className="font-heading font-extrabold text-3xl sm:text-4xl md:text-5xl text-foreground tracking-tight mb-3"
           >
             Let&apos;s build something great.
           </h2>
-          <p className="text-white/60 text-lg leading-relaxed">
+          <p className="text-muted-foreground text-lg leading-relaxed">
             Tell us about your business and we&apos;ll get back to you within 24 hours.
           </p>
         </motion.div>
@@ -260,15 +258,15 @@ export default function ContactForm() {
               className="flex flex-wrap items-center justify-center gap-3 mb-6"
               aria-label="Trust indicators"
             >
-              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 text-white/60 text-xs font-medium">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-muted text-muted-foreground text-xs font-medium">
                 <ShieldCheck size={13} strokeWidth={2} className="text-primary" aria-hidden="true" />
                 100% confidential
               </span>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 text-white/60 text-xs font-medium">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-muted text-muted-foreground text-xs font-medium">
                 <Zap size={13} strokeWidth={2} className="text-accent" aria-hidden="true" />
                 24hr response
               </span>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 text-white/60 text-xs font-medium">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-muted text-muted-foreground text-xs font-medium">
                 <CheckCircle2 size={13} strokeWidth={2} className="text-success" aria-hidden="true" />
                 No commitment
               </span>
@@ -280,8 +278,7 @@ export default function ContactForm() {
               initial={{ opacity: 0, y: 24 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.55, delay: 0.15, ease: "easeOut" }}
-              className="rounded-2xl p-6 sm:p-8 flex flex-col gap-5"
-              style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.09)', borderRadius: '1rem', boxShadow: '0 24px 80px rgba(0,0,0,0.4)' }}
+              className="bg-card border border-border rounded-2xl shadow-lg p-6 sm:p-8 flex flex-col gap-5"
               aria-label="Contact form"
             >
               {/* Name row */}
@@ -465,7 +462,7 @@ export default function ContactForm() {
                 )}
               </button>
 
-              <p className="text-xs text-center text-white/40">
+              <p className="text-xs text-center text-muted-foreground">
                 We respond within 24 hours. No spam, ever.
               </p>
             </motion.form>
@@ -478,10 +475,9 @@ export default function ContactForm() {
               initial={{ opacity: 0, y: 24 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.55, delay: 0.25, ease: "easeOut" }}
-              className="rounded-2xl p-6"
-              style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}
+              className="bg-card border border-border rounded-2xl p-6"
             >
-              <h3 className="font-heading font-bold text-lg text-white mb-4">
+              <h3 className="font-heading font-bold text-lg text-foreground mb-4">
                 What happens next?
               </h3>
               <ol className="flex flex-col gap-4" role="list">
@@ -494,7 +490,7 @@ export default function ContactForm() {
                     <span className="w-6 h-6 rounded-full bg-primary text-primary-foreground text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">
                       {step}
                     </span>
-                    <p className="text-sm text-white/60 leading-relaxed">{text}</p>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{text}</p>
                   </li>
                 ))}
               </ol>
@@ -505,7 +501,7 @@ export default function ContactForm() {
               initial={{ opacity: 0, y: 24 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.55, delay: 0.35, ease: "easeOut" }}
-              className="rounded-2xl border border-primary/25 bg-primary/10 p-6"
+              className="rounded-2xl border border-primary/20 bg-primary/5 p-6"
             >
               <div className="flex gap-0.5 mb-3" aria-label="5 stars">
                 {Array.from({ length: 5 }).map((_, i) => (
@@ -519,10 +515,10 @@ export default function ContactForm() {
                   />
                 ))}
               </div>
-              <p className="text-sm text-white/80 leading-relaxed mb-4">
+              <p className="text-sm text-foreground leading-relaxed mb-4">
                 &ldquo;Strive built us a booking site in two weeks. We doubled our appointments the next month.&rdquo;
               </p>
-              <p className="text-xs text-white/50 font-medium">
+              <p className="text-xs text-muted-foreground font-medium">
                 Maria T. &mdash; Blush Beauty Studio, Toronto
               </p>
             </motion.div>

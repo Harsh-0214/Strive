@@ -76,7 +76,7 @@ export default function Stats() {
         aria-hidden="true"
       />
 
-      <div className="max-w-5xl mx-auto section-padding">
+      <div className="max-w-6xl mx-auto section-padding">
         <dl className="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-4 text-center">
           {stats.map(({ value, suffix, label }, i) => (
             <div key={label} className="flex flex-col items-center gap-1">

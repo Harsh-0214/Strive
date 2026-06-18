@@ -79,8 +79,8 @@ export default function Hero() {
         className="absolute inset-0 -z-10"
         style={{
           background:
-            "linear-gradient(145deg, hsl(220 40% 3%) 0%, hsl(221 60% 8%) 30%, hsl(218 70% 18%) 60%, hsl(220 35% 5%) 100%)",
-          backgroundSize: "200% 200%",
+            "linear-gradient(145deg, hsl(220 60% 4%) 0%, hsl(240 70% 14%) 25%, hsl(210 90% 28%) 50%, hsl(250 65% 12%) 75%, hsl(220 50% 5%) 100%)",
+          backgroundSize: "300% 300%",
           animation: "gradient-shift 10s ease infinite",
         }}
         aria-hidden="true"
@@ -92,6 +92,20 @@ export default function Hero() {
           backgroundImage:
             "radial-gradient(ellipse 60% 50% at 85% 80%, hsl(199 100% 58% / 0.12) 0%, transparent 70%), radial-gradient(ellipse 55% 60% at 10% 25%, hsl(218 90% 58% / 0.12) 0%, transparent 60%)",
         }}
+        aria-hidden="true"
+      />
+      {/* Animated atmospheric spotlight */}
+      <motion.div
+        className="absolute inset-0 -z-10"
+        animate={{
+          background: [
+            "radial-gradient(ellipse 40% 50% at 20% 60%, hsl(218 90% 40% / 0.25) 0%, transparent 70%)",
+            "radial-gradient(ellipse 40% 50% at 80% 40%, hsl(218 90% 40% / 0.25) 0%, transparent 70%)",
+            "radial-gradient(ellipse 40% 50% at 50% 20%, hsl(218 90% 40% / 0.25) 0%, transparent 70%)",
+            "radial-gradient(ellipse 40% 50% at 20% 60%, hsl(218 90% 40% / 0.25) 0%, transparent 70%)",
+          ]
+        }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         aria-hidden="true"
       />
       {/* Grid texture overlay */}
@@ -112,7 +126,7 @@ export default function Hero() {
       </div>
 
       {/* Content */}
-      <div className="max-w-5xl mx-auto section-padding text-center">
+      <div className="max-w-6xl mx-auto section-padding text-center">
         <motion.div
           variants={containerVariants}
           initial="hidden"

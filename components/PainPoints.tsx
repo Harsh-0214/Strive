@@ -55,11 +55,10 @@ export default function PainPoints() {
   return (
     <section
       ref={ref}
-      className="py-20 lg:py-28 overflow-hidden"
-      style={{ background: 'hsl(220 24% 9%)' }}
+      className="py-20 lg:py-28 overflow-hidden bg-muted"
       aria-labelledby="pain-heading"
     >
-      <div className="max-w-6xl mx-auto section-padding">
+      <div className="max-w-7xl mx-auto section-padding">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -68,11 +67,11 @@ export default function PainPoints() {
         >
           <h2
             id="pain-heading"
-            className="font-heading font-extrabold text-3xl sm:text-4xl md:text-5xl text-white tracking-tight"
+            className="font-heading font-extrabold text-3xl sm:text-4xl md:text-5xl text-foreground tracking-tight"
           >
             Sound familiar?
           </h2>
-          <p className="mt-4 text-white/55 text-lg max-w-xl mx-auto">
+          <p className="mt-4 text-muted-foreground text-lg max-w-xl mx-auto">
             Most small businesses fall into one of these traps. All three are fixable.
           </p>
         </motion.div>
@@ -92,12 +91,11 @@ export default function PainPoints() {
                 key={title}
                 variants={cardVariants}
                 role="listitem"
-                className={`group relative rounded-2xl flex flex-col overflow-hidden cursor-default transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_20px_60px_rgba(0,0,0,0.5)] flex-1 md:flex-[2] ${borderAccent}`}
-                style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}
+                className={`group relative rounded-2xl flex flex-col overflow-hidden cursor-default transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lg flex-1 md:flex-[2] bg-card border border-border shadow-sm ${borderAccent}`}
               >
                 {/* Oversized decorative number */}
                 <span
-                  className="absolute bottom-3 right-4 font-heading font-extrabold text-8xl leading-none text-white/[0.06] select-none pointer-events-none"
+                  className="absolute bottom-3 right-4 font-heading font-extrabold text-8xl leading-none text-foreground/[0.07] select-none pointer-events-none"
                   aria-hidden="true"
                 >
                   {num}
@@ -114,10 +112,10 @@ export default function PainPoints() {
                       aria-hidden="true"
                     />
                   </div>
-                  <h3 className="font-heading font-bold text-xl text-white mb-3">
+                  <h3 className="font-heading font-bold text-xl text-foreground mb-3">
                     {title}
                   </h3>
-                  <p className="text-white/60 leading-relaxed text-[0.9375rem]">
+                  <p className="text-muted-foreground leading-relaxed text-[0.9375rem]">
                     {body}
                   </p>
                 </div>
@@ -132,12 +130,11 @@ export default function PainPoints() {
                 key={title}
                 variants={cardVariants}
                 role="listitem"
-                className={`group relative rounded-2xl flex flex-col overflow-hidden cursor-default transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_20px_60px_rgba(0,0,0,0.5)] flex-1 ${borderAccent}`}
-                style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}
+                className={`group relative rounded-2xl flex flex-col overflow-hidden cursor-default transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lg flex-1 bg-card border border-border shadow-sm ${borderAccent}`}
               >
                 {/* Oversized decorative number */}
                 <span
-                  className="absolute bottom-3 right-4 font-heading font-extrabold text-8xl leading-none text-white/[0.06] select-none pointer-events-none"
+                  className="absolute bottom-3 right-4 font-heading font-extrabold text-8xl leading-none text-foreground/[0.07] select-none pointer-events-none"
                   aria-hidden="true"
                 >
                   {num}
@@ -154,10 +151,10 @@ export default function PainPoints() {
                       aria-hidden="true"
                     />
                   </div>
-                  <h3 className="font-heading font-bold text-xl text-white mb-3">
+                  <h3 className="font-heading font-bold text-xl text-foreground mb-3">
                     {title}
                   </h3>
-                  <p className="text-white/60 leading-relaxed text-[0.9375rem]">
+                  <p className="text-muted-foreground leading-relaxed text-[0.9375rem]">
                     {body}
                   </p>
                 </div>

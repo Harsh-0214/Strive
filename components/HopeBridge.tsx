@@ -25,7 +25,7 @@ export default function HopeBridge() {
         aria-hidden="true"
       />
 
-      <div className="max-w-4xl mx-auto section-padding text-center relative">
+      <div className="max-w-5xl mx-auto section-padding text-center relative">
         {/* Icon */}
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}

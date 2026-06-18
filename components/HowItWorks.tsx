@@ -47,11 +47,10 @@ export default function HowItWorks() {
     <section
       id="how-it-works"
       ref={ref}
-      className="py-20 lg:py-28"
-      style={{ background: 'hsl(220 24% 9%)' }}
+      className="py-20 lg:py-28 bg-muted"
       aria-labelledby="how-heading"
     >
-      <div className="max-w-6xl mx-auto section-padding">
+      <div className="max-w-7xl mx-auto section-padding">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -60,7 +59,7 @@ export default function HowItWorks() {
         >
           <h2
             id="how-heading"
-            className="font-heading font-extrabold text-3xl sm:text-4xl md:text-5xl text-white tracking-tight"
+            className="font-heading font-extrabold text-3xl sm:text-4xl md:text-5xl text-foreground tracking-tight"
           >
             Getting online has{" "}
             <span
@@ -117,14 +116,14 @@ export default function HowItWorks() {
                     isLeft ? "md:text-right" : "md:text-left"
                   }`}
                 >
-                  <p className="font-heading font-extrabold text-7xl text-white/[0.06] leading-none mb-2">
+                  <p className="font-heading font-extrabold text-7xl text-foreground/[0.06] leading-none mb-2">
                     {number}
                   </p>
-                  <h3 className="font-heading font-bold text-2xl text-white mb-3">
+                  <h3 className="font-heading font-bold text-2xl text-foreground mb-3">
                     {title}
                   </h3>
                   <p
-                    className={`text-white/60 leading-relaxed max-w-sm mx-auto md:mx-0 ${
+                    className={`text-muted-foreground leading-relaxed max-w-sm mx-auto md:mx-0 ${
                       isLeft ? "md:ml-auto" : ""
                     }`}
                   >
