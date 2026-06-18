@@ -4,8 +4,6 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, ChevronDown } from "lucide-react";
 
-const SHARD_COUNT = 18;
-
 const businessTypes = [
   "restaurants",
   "salons",
@@ -15,37 +13,68 @@ const businessTypes = [
   "fitness coaches",
 ];
 
-// Angular metallic shard — echoes the faceted chevron bands of the logo
-function FloatingShard({ index }: { index: number }) {
-  const width = 16 + (index % 5) * 9;
-  const left = (index * 9 + 6) % 95;
-  const delay = (index * 0.46) % 6;
-  const duration = 12 + (index % 5) * 2.4;
-  const baseRotate = -25 + (index % 4) * 8;
-  const bright = index % 3 === 0;
+// Large blurred orb — the core of the aurora mesh effect
+function GlowOrb({
+  color,
+  size,
+  left,
+  top,
+  animX,
+  animY,
+  duration,
+  delay = 0,
+}: {
+  color: string;
+  size: number;
+  left: string;
+  top: string;
+  animX: number[];
+  animY: number[];
+  duration: number;
+  delay?: number;
+}) {
+  return (
+    <motion.div
+      className="absolute rounded-full -z-10"
+      style={{
+        width: size,
+        height: size,
+        left,
+        top,
+        background: `radial-gradient(circle, ${color}, transparent 70%)`,
+        filter: "blur(72px)",
+        willChange: "transform",
+      }}
+      animate={{ x: animX, y: animY }}
+      transition={{ duration, delay, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" }}
+      aria-hidden="true"
+    />
+  );
+}
+
+// Tiny twinkling sparkle point
+function Sparkle({ index }: { index: number }) {
+  const x = (index * 19 + 7) % 93;
+  const y = (index * 29 + 11) % 82;
+  const delay = (index * 0.28) % 5;
+  const duration = 2.4 + (index % 4) * 0.6;
+  const isCyan = index % 4 === 0;
 
   return (
     <motion.div
-      className="absolute"
+      className="absolute rounded-full -z-10"
       style={{
-        width,
-        height: width * 0.4,
-        left: `${left}%`,
-        bottom: "-48px",
-        borderRadius: 2,
-        willChange: "transform, opacity",
-        // Skewed parallelogram — the building block of the logo's "S"
-        clipPath: "polygon(28% 0, 100% 0, 72% 100%, 0 100%)",
-        background: bright
-          ? "linear-gradient(135deg, hsl(205 75% 80% / 0.55), hsl(212 60% 45% / 0.05))"
-          : "linear-gradient(135deg, hsl(210 55% 62% / 0.32), transparent)",
+        width: 2,
+        height: 2,
+        left: `${x}%`,
+        top: `${y}%`,
+        background: isCyan ? "hsl(199 100% 80%)" : "hsl(0 0% 100%)",
+        boxShadow: isCyan
+          ? "0 0 6px 2px hsl(199 100% 70% / 0.5)"
+          : "0 0 4px 1px hsl(0 0% 100% / 0.3)",
       }}
-      animate={{
-        y: [0, -820],
-        opacity: [0, 0.75, 0.75, 0],
-        rotate: [baseRotate, baseRotate + 14],
-      }}
-      transition={{ duration, delay, repeat: Infinity, ease: "linear" }}
+      animate={{ opacity: [0, 1, 0, 0.6, 0], scale: [0.5, 1.4, 0.5, 1.1, 0.5] }}
+      transition={{ duration, delay, repeat: Infinity, ease: "easeInOut" }}
       aria-hidden="true"
     />
   );
@@ -53,15 +82,15 @@ function FloatingShard({ index }: { index: number }) {
 
 const containerVariants = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.15 } },
+  visible: { transition: { staggerChildren: 0.14 } },
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 24 },
+  hidden: { opacity: 0, y: 28 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
   },
 };
 
@@ -77,128 +106,132 @@ export default function Hero() {
 
   return (
     <section
-      className="relative min-h-dvh flex flex-col items-center justify-center overflow-hidden pt-24"
+      className="relative min-h-dvh flex flex-col items-center justify-center overflow-hidden pt-24 pb-16"
       aria-labelledby="hero-heading"
     >
-      {/* ── Background: metallic faceted steel-blue, matched to the logo ── */}
+      {/* ── Aurora mesh background ── */}
 
-      {/* Base brushed-metal gradient */}
+      {/* Near-black base */}
       <div
         className="absolute inset-0 -z-10"
+        style={{ background: "hsl(220 70% 3%)" }}
+        aria-hidden="true"
+      />
+
+      {/* Orb A — electric blue, top-left, drifts right-down */}
+      <GlowOrb
+        color="hsl(218 90% 48% / 0.6)"
+        size={560}
+        left="-10%"
+        top="-8%"
+        animX={[0, 80, 30, 0]}
+        animY={[0, 60, 110, 0]}
+        duration={18}
+      />
+
+      {/* Orb B — vivid cyan, center-right, drifts left */}
+      <GlowOrb
+        color="hsl(199 100% 50% / 0.45)"
+        size={480}
+        left="55%"
+        top="20%"
+        animX={[0, -90, -40, 0]}
+        animY={[0, 50, -30, 0]}
+        duration={20}
+        delay={3}
+      />
+
+      {/* Orb C — indigo, bottom-center, slow pulse */}
+      <GlowOrb
+        color="hsl(240 70% 38% / 0.5)"
+        size={520}
+        left="25%"
+        top="55%"
+        animX={[0, 60, -30, 0]}
+        animY={[0, -40, 20, 0]}
+        duration={22}
+        delay={7}
+      />
+
+      {/* Orb D — smaller cyan accent, far right */}
+      <GlowOrb
+        color="hsl(195 100% 45% / 0.3)"
+        size={320}
+        left="80%"
+        top="60%"
+        animX={[0, -50, 20, 0]}
+        animY={[0, -60, 30, 0]}
+        duration={16}
+        delay={2}
+      />
+
+      {/* Top-center light cone / god ray */}
+      <div
+        className="absolute -z-10 top-0 left-1/2 -translate-x-1/2"
         style={{
+          width: "380px",
+          height: "55%",
           background:
-            "linear-gradient(150deg, hsl(220 65% 4%) 0%, hsl(218 55% 10%) 30%, hsl(208 62% 22%) 52%, hsl(222 60% 9%) 74%, hsl(221 65% 4%) 100%)",
-          backgroundSize: "220% 220%",
-          animation: "gradient-shift 14s ease infinite",
+            "radial-gradient(ellipse 50% 100% at 50% 0%, hsl(210 90% 58% / 0.22) 0%, transparent 72%)",
+          pointerEvents: "none",
         }}
         aria-hidden="true"
       />
 
-      {/* Faceted angular planes — sheen along the logo's chevron angle */}
+      {/* Thin central beam */}
       <div
-        className="absolute inset-0 -z-10"
+        className="absolute -z-10 top-0 left-1/2 -translate-x-1/2"
         style={{
-          backgroundImage:
-            "linear-gradient(115deg, transparent 0%, hsl(205 80% 60% / 0.07) 36%, transparent 42%, transparent 58%, hsl(210 70% 55% / 0.05) 64%, transparent 72%), linear-gradient(245deg, transparent 70%, hsl(199 90% 50% / 0.05) 88%, transparent 94%)",
+          width: "1px",
+          height: "45%",
+          background:
+            "linear-gradient(180deg, hsl(199 100% 75% / 0.5) 0%, transparent 100%)",
+          filter: "blur(1px)",
         }}
         aria-hidden="true"
       />
 
-      {/* Depth glows */}
-      <div
-        className="absolute inset-0 -z-10"
-        style={{
-          backgroundImage:
-            "radial-gradient(ellipse 55% 50% at 80% 78%, hsl(199 100% 58% / 0.14) 0%, transparent 65%), radial-gradient(ellipse 50% 55% at 12% 22%, hsl(212 90% 55% / 0.12) 0%, transparent 60%)",
-        }}
-        aria-hidden="true"
-      />
-
-      {/* Large chevron motif — echoes the layered "S" of the logo */}
-      <motion.div
-        className="absolute -z-10 right-[-6%] top-1/2 -translate-y-1/2 hidden md:block"
-        style={{ width: "52vw", maxWidth: 720, willChange: "transform" }}
-        animate={{ y: ["-52%", "-48%", "-52%"] }}
-        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-        aria-hidden="true"
-      >
-        <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-          {[0, 38, 76].map((offset, i) => (
-            <path
-              key={offset}
-              d={`M16 ${36 + offset} L100 ${78 + offset} L184 ${36 + offset}`}
-              stroke="hsl(205 85% 78%)"
-              strokeOpacity={0.07 - i * 0.015}
-              strokeWidth="11"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          ))}
-        </svg>
-      </motion.div>
-
-      {/* Diagonal metallic light sweep */}
-      <motion.div
-        className="absolute inset-0 -z-10 overflow-hidden"
-        aria-hidden="true"
-      >
+      {/* Diagonal light sweep — periodically crosses the hero */}
+      <div className="absolute inset-0 -z-10 overflow-hidden" aria-hidden="true">
         <motion.div
-          className="absolute inset-y-[-20%] w-1/3"
+          className="absolute inset-y-0 w-[30vw]"
           style={{
             background:
-              "linear-gradient(115deg, transparent, hsl(205 90% 78% / 0.10), transparent)",
-            transform: "skewX(-12deg)",
+              "linear-gradient(110deg, transparent 0%, hsl(205 90% 72% / 0.07) 50%, transparent 100%)",
+            transform: "skewX(-14deg)",
             willChange: "transform",
           }}
-          animate={{ x: ["-40vw", "140vw"] }}
-          transition={{
-            duration: 9,
-            repeat: Infinity,
-            ease: "easeInOut",
-            repeatDelay: 2.5,
-          }}
+          animate={{ x: ["-50vw", "160vw"] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", repeatDelay: 3 }}
         />
-      </motion.div>
+      </div>
 
-      {/* Floating metallic shards */}
-      <div className="absolute inset-0 -z-10 overflow-hidden" aria-hidden="true">
-        {Array.from({ length: SHARD_COUNT }).map((_, i) => (
-          <FloatingShard key={i} index={i} />
+      {/* Sparkle field */}
+      <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
+        {Array.from({ length: 28 }).map((_, i) => (
+          <Sparkle key={i} index={i} />
         ))}
       </div>
 
-      {/* Content */}
-      <div className="max-w-6xl mx-auto section-padding text-center">
+      {/* ── Content ── */}
+      <div className="relative z-10 w-full max-w-5xl mx-auto section-padding text-center">
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="flex flex-col items-center gap-6"
+          className="flex flex-col items-center gap-5"
         >
-          {/* Eyebrow pill */}
-          <motion.div variants={itemVariants}>
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/15 text-white/95 text-sm font-medium border border-white/15 backdrop-blur-md">
-              <span
-                className="w-2 h-2 rounded-full bg-accent animate-pulse-glow inline-block"
-                aria-hidden="true"
-              />
-              Web design for small businesses
-            </span>
-          </motion.div>
-
           {/* Headline */}
           <motion.h1
             id="hero-heading"
             variants={itemVariants}
-            className="font-heading font-extrabold text-4xl sm:text-6xl md:text-7xl lg:text-[5.5rem] leading-[1.08] tracking-tight text-white max-w-4xl"
+            className="font-heading font-extrabold text-[2.6rem] sm:text-6xl md:text-7xl lg:text-[5.25rem] leading-[1.06] tracking-tight text-white max-w-4xl"
           >
             Your competitors
             <br className="hidden sm:block" /> are{" "}
             <span
-              className="relative inline-block"
               style={{
-                background:
-                  "linear-gradient(90deg, hsl(0 0% 100%), hsl(214 100% 85%))",
+                background: "linear-gradient(92deg, hsl(199 100% 72%), hsl(212 100% 82%))",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
@@ -210,10 +243,10 @@ export default function Hero() {
             It&apos;s time you were too.
           </motion.h1>
 
-          {/* Animated subheadline with cycling type */}
+          {/* Subheadline with cycling type */}
           <motion.div
             variants={itemVariants}
-            className="max-w-2xl text-lg sm:text-xl md:text-2xl text-white/75 leading-relaxed"
+            className="max-w-2xl text-lg sm:text-xl text-white/65 leading-relaxed"
           >
             <p>
               Strive builds fast, beautiful websites for{" "}
@@ -229,8 +262,14 @@ export default function Hero() {
                     initial={{ opacity: 0, y: 14 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -14 }}
-                    transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                    className="font-semibold text-accent"
+                    transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+                    style={{
+                      background: "linear-gradient(90deg, hsl(199 100% 65%), hsl(212 90% 75%))",
+                      WebkitBackgroundClip: "text",
+                      WebkitTextFillColor: "transparent",
+                      backgroundClip: "text",
+                      fontWeight: 600,
+                    }}
                   >
                     {businessTypes[typeIndex]}
                   </motion.span>
@@ -243,20 +282,41 @@ export default function Hero() {
           {/* CTAs */}
           <motion.div
             variants={itemVariants}
-            className="flex flex-col sm:flex-row items-center gap-4 mt-1"
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-2 w-full"
           >
+            {/* Primary — glowing cyan gradient */}
             <a
               href="#contact"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold text-base text-foreground bg-white hover:bg-white/90 active:scale-95 transition-all duration-200 shadow-xl shadow-black/20 focus-visible:outline-2 focus-visible:outline-white"
+              className="group relative inline-flex items-center gap-2.5 px-8 py-4 rounded-xl font-bold text-base text-white transition-all duration-200 active:scale-95 focus-visible:outline-2 focus-visible:outline-white overflow-hidden"
+              style={{
+                background: "linear-gradient(135deg, hsl(199 100% 44%) 0%, hsl(212 90% 40%) 100%)",
+                boxShadow:
+                  "0 0 0 1px hsl(199 100% 60% / 0.35) inset, 0 8px 32px hsl(199 100% 44% / 0.45), 0 2px 8px hsl(212 90% 40% / 0.3)",
+              }}
             >
-              Get a Free Quote
-              <ArrowRight size={18} aria-hidden="true" />
+              {/* Shimmer on hover */}
+              <span
+                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                style={{
+                  background:
+                    "linear-gradient(135deg, hsl(199 100% 54%) 0%, hsl(212 90% 50%) 100%)",
+                }}
+                aria-hidden="true"
+              />
+              <span className="relative">Get a Free Quote</span>
+              <ArrowRight
+                size={18}
+                className="relative transition-transform duration-200 group-hover:translate-x-0.5"
+                aria-hidden="true"
+              />
             </a>
+
+            {/* Secondary — glass */}
             <a
               href="#packages"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-white/10 text-white font-semibold text-base border border-white/25 hover:bg-white/18 active:scale-95 transition-all duration-200 backdrop-blur-sm focus-visible:outline-2 focus-visible:outline-white"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold text-base text-white/90 border border-white/20 bg-white/[0.07] backdrop-blur-sm hover:bg-white/[0.13] hover:border-white/30 active:scale-95 transition-all duration-200 focus-visible:outline-2 focus-visible:outline-white"
             >
-              See Our Packages
+              View Packages
             </a>
           </motion.div>
 
@@ -265,19 +325,13 @@ export default function Hero() {
             variants={itemVariants}
             className="flex items-center gap-3 mt-1"
           >
-            {/* Stacked avatars */}
             <div className="flex -space-x-2" aria-hidden="true">
-              {["MT", "JR", "AK", "SC"].map((initials, i) => (
+              {(["MT", "JR", "AK", "SC"] as const).map((initials, i) => (
                 <div
                   key={initials}
-                  className="w-8 h-8 rounded-full border-2 border-white/20 flex items-center justify-center text-xs font-bold text-white"
+                  className="w-8 h-8 rounded-full border-2 border-white/15 flex items-center justify-center text-xs font-bold text-white"
                   style={{
-                    background: [
-                      "hsl(330 60% 55%)",
-                      "hsl(210 70% 50%)",
-                      "hsl(270 55% 55%)",
-                      "hsl(160 55% 45%)",
-                    ][i],
+                    background: (["hsl(330 60% 55%)", "hsl(210 70% 50%)", "hsl(270 55% 55%)", "hsl(160 55% 45%)"])[i],
                     zIndex: 4 - i,
                   }}
                 >
@@ -285,8 +339,8 @@ export default function Hero() {
                 </div>
               ))}
             </div>
-            <p className="text-white/60 text-sm">
-              <span className="text-white font-semibold">50+</span> small businesses launched across Canada
+            <p className="text-white/50 text-sm">
+              <span className="text-white/90 font-semibold">50+</span> small businesses launched across Canada
             </p>
           </motion.div>
         </motion.div>
@@ -294,18 +348,18 @@ export default function Hero() {
 
       {/* Scroll indicator */}
       <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/50 flex flex-col items-center gap-1"
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/35 flex flex-col items-center gap-1"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.6, duration: 0.6 }}
+        transition={{ delay: 1.8, duration: 0.6 }}
         aria-hidden="true"
       >
-        <span className="text-xs uppercase tracking-widest font-medium">Scroll</span>
+        <span className="text-[10px] uppercase tracking-[0.2em] font-medium">Scroll</span>
         <motion.div
           animate={{ y: [0, 6, 0] }}
           transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
         >
-          <ChevronDown size={18} />
+          <ChevronDown size={16} />
         </motion.div>
       </motion.div>
     </section>
