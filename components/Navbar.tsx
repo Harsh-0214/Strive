@@ -2,7 +2,8 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { TrendingUp, Menu, X, Moon, Sun } from "lucide-react";
+import { Menu, X, Moon, Sun } from "lucide-react";
+import Image from "next/image";
 import { useTheme } from "@/lib/theme";
 
 const navLinks = [
@@ -100,34 +101,14 @@ export default function Navbar() {
               className="flex items-center gap-2 group"
               aria-label="Strive — go to homepage"
             >
-              <motion.div
-                animate={{ y: [0, -2, 0] }}
-                transition={{
-                  duration: 3.5,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-                className="flex items-center justify-center w-8 h-8 rounded-lg bg-primary"
-                aria-hidden="true"
-              >
-                <TrendingUp
-                  size={18}
-                  strokeWidth={2.5}
-                  className="text-primary-foreground"
-                />
-              </motion.div>
-              <span
-                className="font-heading font-extrabold text-xl tracking-tight"
-                style={{
-                  background:
-                    "linear-gradient(90deg, hsl(var(--primary)), hsl(var(--primary-light)))",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
-                Strive
-              </span>
+              <Image
+                src="/Logo(s).png"
+                alt="Strive"
+                width={120}
+                height={48}
+                className="object-contain h-10 w-auto"
+                priority
+              />
             </a>
 
             {/* Desktop nav */}

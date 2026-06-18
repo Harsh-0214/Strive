@@ -1,4 +1,5 @@
-import { TrendingUp, Instagram, Facebook, Linkedin } from "lucide-react";
+import { Instagram, Facebook, Linkedin } from "lucide-react";
+import Image from "next/image";
 
 const footerLinks = [
   { label: "Packages", href: "#packages" },
@@ -39,25 +40,13 @@ export default function Footer() {
               className="flex items-center gap-2 group"
               aria-label="Strive — go to top"
             >
-              <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-primary">
-                <TrendingUp
-                  size={18}
-                  strokeWidth={2.5}
-                  className="text-primary-foreground"
-                  aria-hidden="true"
-                />
-              </div>
-              <span
-                className="font-heading font-extrabold text-xl tracking-tight"
-                style={{
-                  background: "linear-gradient(90deg, hsl(210 80% 75%), hsl(210 80% 90%))",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
-                Strive
-              </span>
+              <Image
+                src="/Logo(s).png"
+                alt="Strive"
+                width={120}
+                height={48}
+                className="object-contain h-10 w-auto"
+              />
             </a>
             <p className="text-sm text-white/75 leading-relaxed">
               We build the web presence your business deserves.
