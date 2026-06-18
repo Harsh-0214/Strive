@@ -100,7 +100,7 @@ export default function StriveCare() {
             Keep your site fresh with{" "}
             <span
               style={{
-                background: "linear-gradient(90deg, hsl(33 98% 64%), hsl(33 98% 52%))",
+                background: "linear-gradient(90deg, hsl(var(--accent)), hsl(var(--primary-light)))",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",

@@ -206,18 +206,9 @@ export default function Packages() {
                     href={ctaHref}
                     className={`inline-flex items-center justify-center gap-2 w-full px-5 py-3 rounded-xl font-semibold text-sm transition-all duration-200 active:scale-95 ${
                       popular
-                        ? "text-white shadow-lg hover:opacity-90"
+                        ? "bg-white text-primary hover:bg-white/90 shadow-md"
                         : "bg-muted text-foreground hover:bg-muted/70 border border-border"
                     }`}
-                    style={
-                      popular
-                        ? {
-                            background:
-                              "linear-gradient(135deg, hsl(33 98% 52%), hsl(25 95% 46%))",
-                            boxShadow: "0 4px 16px hsl(33 98% 54% / 0.35)",
-                          }
-                        : undefined
-                    }
                   >
                     {cta}
                     <ArrowRight size={16} aria-hidden="true" />

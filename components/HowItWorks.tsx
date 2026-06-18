@@ -76,67 +76,88 @@ export default function HowItWorks() {
           </h2>
         </motion.div>
 
-        <motion.ol
+        <motion.div
           variants={containerVariants}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
-          className="relative grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-6"
+          className="relative flex flex-col gap-16 md:gap-24"
+          aria-label="Steps to get started"
         >
-          {/* Connecting line (desktop) — animated fill on inView */}
+          {/* Vertical line (desktop only) */}
           <div
-            className="hidden md:block absolute top-10 h-px bg-border overflow-hidden"
-            style={{ left: "calc(16.67% + 40px)", right: "calc(16.67% + 40px)" }}
+            className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px -translate-x-1/2 overflow-hidden"
             aria-hidden="true"
           >
             <motion.div
-              className="h-full"
+              className="w-full"
               style={{
                 background:
-                  "linear-gradient(90deg, hsl(var(--primary)), hsl(var(--primary-light)))",
+                  "linear-gradient(180deg, hsl(var(--primary-dark)), hsl(var(--primary-light)))",
               }}
-              initial={{ width: "0%" }}
-              animate={inView ? { width: "100%" } : {}}
-              transition={{ duration: 0.9, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              initial={{ height: "0%" }}
+              animate={inView ? { height: "100%" } : {}}
+              transition={{ duration: 1.2, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
             />
           </div>
 
-          {steps.map(({ number, icon: Icon, title, body }, i) => (
-            <motion.li
-              key={number}
-              variants={itemVariants}
-              className="flex flex-col items-center text-center relative"
-            >
-              {/* Step circle */}
-              <div className="relative mb-6">
+          {steps.map(({ number, icon: Icon, title, body }, i) => {
+            const isLeft = i % 2 === 0;
+            return (
+              <motion.div
+                key={number}
+                variants={itemVariants}
+                className={`relative flex flex-col md:flex-row items-center gap-8 md:gap-16 ${
+                  isLeft ? "" : "md:flex-row-reverse"
+                }`}
+              >
+                {/* Content side */}
                 <div
-                  className="w-20 h-20 rounded-full flex items-center justify-center z-10 relative shadow-lg"
-                  style={{
-                    background:
-                      "linear-gradient(135deg, hsl(var(--primary-dark)), hsl(var(--primary-light)))",
-                  }}
+                  className={`flex-1 text-center ${
+                    isLeft ? "md:text-right" : "md:text-left"
+                  }`}
                 >
-                  <Icon
-                    size={32}
-                    strokeWidth={1.5}
-                    className="text-primary-foreground"
-                    aria-hidden="true"
-                  />
+                  <p className="font-heading font-extrabold text-7xl text-foreground/[0.06] leading-none mb-2">
+                    {number}
+                  </p>
+                  <h3 className="font-heading font-bold text-2xl text-foreground mb-3">
+                    {title}
+                  </h3>
+                  <p
+                    className={`text-muted-foreground leading-relaxed max-w-sm mx-auto md:mx-0 ${
+                      isLeft ? "md:ml-auto" : ""
+                    }`}
+                  >
+                    {body}
+                  </p>
                 </div>
-                {/* Step number badge */}
-                <span className="absolute -top-2 -right-2 w-7 h-7 rounded-full bg-primary text-primary-foreground text-xs font-bold flex items-center justify-center shadow-md">
-                  {i + 1}
-                </span>
-              </div>
 
-              <h3 className="font-heading font-bold text-xl text-foreground mb-3">
-                {title}
-              </h3>
-              <p className="text-muted-foreground leading-relaxed max-w-xs">
-                {body}
-              </p>
-            </motion.li>
-          ))}
-        </motion.ol>
+                {/* Center icon — sits on the vertical line */}
+                <div className="relative shrink-0 z-10">
+                  <div
+                    className="w-20 h-20 rounded-full flex items-center justify-center shadow-lg"
+                    style={{
+                      background:
+                        "linear-gradient(135deg, hsl(var(--primary-dark)), hsl(var(--primary-light)))",
+                    }}
+                  >
+                    <Icon
+                      size={32}
+                      strokeWidth={1.5}
+                      className="text-primary-foreground"
+                      aria-hidden="true"
+                    />
+                  </div>
+                  <span className="absolute -top-2 -right-2 w-7 h-7 rounded-full bg-primary text-primary-foreground text-xs font-bold flex items-center justify-center shadow-md">
+                    {i + 1}
+                  </span>
+                </div>
+
+                {/* Empty flex-1 for the other side */}
+                <div className="hidden md:block flex-1" />
+              </motion.div>
+            );
+          })}
+        </motion.div>
       </div>
     </section>
   );

@@ -32,7 +32,7 @@ function FloatingParticle({ index }: { index: number }) {
         willChange: "transform",
         background:
           index % 3 === 0
-            ? "hsl(33 98% 54% / 0.35)"
+            ? "hsl(199 100% 65% / 0.25)"
             : "hsl(0 0% 100% / 0.12)",
       }}
       animate={{
@@ -90,7 +90,7 @@ export default function Hero() {
         className="absolute inset-0 -z-10"
         style={{
           backgroundImage:
-            "radial-gradient(ellipse 60% 50% at 85% 80%, hsl(38 100% 54% / 0.15) 0%, transparent 70%), radial-gradient(ellipse 55% 60% at 10% 25%, hsl(218 90% 58% / 0.12) 0%, transparent 60%)",
+            "radial-gradient(ellipse 60% 50% at 85% 80%, hsl(199 100% 58% / 0.12) 0%, transparent 70%), radial-gradient(ellipse 55% 60% at 10% 25%, hsl(218 90% 58% / 0.12) 0%, transparent 60%)",
         }}
         aria-hidden="true"
       />
@@ -142,7 +142,7 @@ export default function Hero() {
               className="relative inline-block"
               style={{
                 background:
-                  "linear-gradient(90deg, hsl(33 98% 64%), hsl(33 98% 52%))",
+                  "linear-gradient(90deg, hsl(0 0% 100%), hsl(214 100% 85%))",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
@@ -191,12 +191,7 @@ export default function Hero() {
           >
             <a
               href="#contact"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold text-base text-white active:scale-95 transition-all duration-200 shadow-xl focus-visible:outline-2 focus-visible:outline-white"
-              style={{
-                background:
-                  "linear-gradient(135deg, hsl(33 98% 52%), hsl(25 95% 46%))",
-                boxShadow: "0 8px 32px hsl(33 98% 54% / 0.4)",
-              }}
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold text-base text-foreground bg-white hover:bg-white/90 active:scale-95 transition-all duration-200 shadow-xl shadow-black/20 focus-visible:outline-2 focus-visible:outline-white"
             >
               Get a Free Quote
               <ArrowRight size={18} aria-hidden="true" />

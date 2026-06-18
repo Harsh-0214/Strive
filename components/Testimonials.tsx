@@ -40,11 +40,6 @@ const testimonials = [
   },
 ];
 
-const containerVariants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.13 } },
-};
-
 const cardVariants = {
   hidden: { opacity: 0, y: 32 },
   visible: {
@@ -54,7 +49,7 @@ const cardVariants = {
   },
 };
 
-function StarRating({ featured }: { featured: boolean }) {
+function StarRating() {
   return (
     <div className="flex gap-0.5" aria-label="5 out of 5 stars" role="img">
       {Array.from({ length: 5 }).map((_, i) => (
@@ -63,7 +58,7 @@ function StarRating({ featured }: { featured: boolean }) {
           size={15}
           strokeWidth={0}
           fill="currentColor"
-          className={featured ? "text-accent" : "text-accent"}
+          className="text-accent"
           aria-hidden="true"
         />
       ))}
@@ -74,6 +69,9 @@ function StarRating({ featured }: { featured: boolean }) {
 export default function Testimonials() {
   const ref = useRef<HTMLElement>(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
+
+  const featured = testimonials[0];
+  const rest = testimonials.slice(1);
 
   return (
     <section
@@ -108,83 +106,85 @@ export default function Testimonials() {
         </motion.div>
 
         <motion.div
-          variants={containerVariants}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
-          className="grid grid-cols-1 md:grid-cols-3 gap-5"
+          className="flex flex-col gap-5"
         >
-          {testimonials.map(({ quote, name, role, business, location, initials, bg, featured }) => (
-            <motion.article
-              key={name}
-              variants={cardVariants}
-              className={`relative rounded-2xl border flex flex-col overflow-hidden transition-all duration-300 hover:-translate-y-1.5 ${
-                featured
-                  ? "border-transparent shadow-2xl"
-                  : "border-border shadow-sm bg-card hover:shadow-md"
-              }`}
-              style={
-                featured
-                  ? {
-                      background:
-                        "linear-gradient(135deg, hsl(var(--primary-dark)), hsl(var(--primary)))",
-                    }
-                  : undefined
-              }
-            >
-              {/* Giant decorative quotation mark */}
-              <span
-                className="absolute top-3 left-5 font-heading font-extrabold text-8xl leading-none select-none pointer-events-none"
-                style={{ color: featured ? "rgba(255,255,255,0.15)" : `${bg}18` }}
-                aria-hidden="true"
-              >
-                &ldquo;
-              </span>
-
-              <div className="relative p-7 flex flex-col gap-4 flex-1">
-                <StarRating featured={featured} />
-
-                <blockquote className="flex-1">
-                  <p
-                    className={`leading-relaxed text-[0.9375rem] pt-1 ${
-                      featured ? "text-white" : "text-foreground"
-                    }`}
-                  >
-                    &ldquo;{quote}&rdquo;
+          {/* Featured testimonial: full width */}
+          <motion.article
+            variants={cardVariants}
+            className="relative rounded-2xl border border-primary/30 overflow-hidden shadow-2xl"
+            style={{
+              background:
+                "linear-gradient(135deg, hsl(221 90% 10%), hsl(218 84% 22%))",
+            }}
+          >
+            <div className="relative p-8 md:p-10 md:flex md:items-center md:gap-10">
+              {/* Left: quote */}
+              <div className="flex-1">
+                <StarRating />
+                <blockquote className="mt-4">
+                  <p className="text-white text-xl md:text-2xl leading-relaxed font-medium">
+                    &ldquo;{featured.quote}&rdquo;
                   </p>
                 </blockquote>
-
-                <footer
-                  className={`flex items-center gap-3 pt-4 border-t ${
-                    featured ? "border-white/15" : "border-border"
-                  }`}
-                >
-                  <div
-                    className="w-10 h-10 rounded-full flex items-center justify-center font-heading font-bold text-sm text-white shrink-0"
-                    style={{ background: bg }}
-                    aria-hidden="true"
-                  >
-                    {initials}
-                  </div>
-                  <div>
-                    <p
-                      className={`font-semibold text-sm leading-tight ${
-                        featured ? "text-white/90" : "text-foreground"
-                      }`}
-                    >
-                      {name} &mdash; {role}
-                    </p>
-                    <p
-                      className={`text-xs mt-0.5 ${
-                        featured ? "text-white/70" : "text-muted-foreground"
-                      }`}
-                    >
-                      {business}, {location}
-                    </p>
-                  </div>
-                </footer>
               </div>
-            </motion.article>
-          ))}
+
+              {/* Right: attribution */}
+              <div className="mt-6 md:mt-0 md:shrink-0 md:text-right flex md:flex-col items-center md:items-end gap-3">
+                <div
+                  className="w-14 h-14 rounded-full flex items-center justify-center font-heading font-bold text-lg text-white shrink-0"
+                  style={{ background: featured.bg }}
+                >
+                  {featured.initials}
+                </div>
+                <div>
+                  <p className="font-semibold text-white">
+                    {featured.name} &mdash; {featured.role}
+                  </p>
+                  <p className="text-sm text-white/60">
+                    {featured.business}, {featured.location}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </motion.article>
+
+          {/* Two non-featured cards side by side */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            {rest.map(({ quote, name, role, business, location, initials, bg }) => (
+              <motion.article
+                key={name}
+                variants={cardVariants}
+                className="relative rounded-2xl border border-border shadow-sm bg-card hover:-translate-y-1.5 hover:shadow-md transition-all duration-300 overflow-hidden"
+              >
+                <div className="relative p-7 flex flex-col gap-4">
+                  <StarRating />
+                  <blockquote className="flex-1">
+                    <p className="text-foreground leading-relaxed text-[0.9375rem]">
+                      &ldquo;{quote}&rdquo;
+                    </p>
+                  </blockquote>
+                  <footer className="flex items-center gap-3 pt-4 border-t border-border">
+                    <div
+                      className="w-10 h-10 rounded-full flex items-center justify-center font-heading font-bold text-sm text-white shrink-0"
+                      style={{ background: bg }}
+                    >
+                      {initials}
+                    </div>
+                    <div>
+                      <p className="font-semibold text-sm text-foreground leading-tight">
+                        {name} &mdash; {role}
+                      </p>
+                      <p className="text-xs text-muted-foreground mt-0.5">
+                        {business}, {location}
+                      </p>
+                    </div>
+                  </footer>
+                </div>
+              </motion.article>
+            ))}
+          </div>
         </motion.div>
       </div>
     </section>

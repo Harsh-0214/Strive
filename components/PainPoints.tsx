@@ -19,9 +19,9 @@ const cards = [
     Icon: AlertTriangle,
     title: "Outdated site",
     body: "First impressions matter. A bad one costs you. An old or broken website signals that your business isn't serious.",
-    iconColor: "text-accent",
-    iconBg: "bg-accent/10",
-    borderAccent: "border-l-4 border-l-amber-500",
+    iconColor: "text-violet-500",
+    iconBg: "bg-violet-500/10",
+    borderAccent: "border-l-4 border-l-violet-500",
   },
   {
     num: "03",
@@ -80,44 +80,87 @@ export default function PainPoints() {
           variants={containerVariants}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
-          className="grid grid-cols-1 md:grid-cols-3 gap-6"
+          className="flex flex-col md:flex-row gap-6"
           role="list"
         >
-          {cards.map(({ num, Icon, title, body, iconColor, iconBg, borderAccent }) => (
-            <motion.article
-              key={title}
-              variants={cardVariants}
-              role="listitem"
-              className={`group relative bg-card rounded-2xl border border-border shadow-sm hover:shadow-lg hover:-translate-y-1.5 transition-all duration-300 overflow-hidden cursor-default ${borderAccent}`}
-            >
-              {/* Oversized decorative number */}
-              <span
-                className="absolute bottom-3 right-4 font-heading font-extrabold text-8xl leading-none text-foreground/[0.07] select-none pointer-events-none"
-                aria-hidden="true"
+          {/* First card: larger (flex-[2] = ~2/3 width) */}
+          {(() => {
+            const { num, Icon, title, body, iconColor, iconBg, borderAccent } = cards[0];
+            return (
+              <motion.article
+                key={title}
+                variants={cardVariants}
+                role="listitem"
+                className={`group relative bg-card rounded-2xl border border-border shadow-sm hover:shadow-lg hover:-translate-y-1.5 transition-all duration-300 overflow-hidden cursor-default flex-1 md:flex-[2] ${borderAccent}`}
               >
-                {num}
-              </span>
-
-              <div className="relative p-8 pt-7">
-                <div
-                  className={`w-11 h-11 rounded-xl ${iconBg} flex items-center justify-center mb-5`}
+                {/* Oversized decorative number */}
+                <span
+                  className="absolute bottom-3 right-4 font-heading font-extrabold text-8xl leading-none text-foreground/[0.07] select-none pointer-events-none"
+                  aria-hidden="true"
                 >
-                  <Icon
-                    size={22}
-                    strokeWidth={1.75}
-                    className={iconColor}
-                    aria-hidden="true"
-                  />
+                  {num}
+                </span>
+
+                <div className="relative p-8 pt-7">
+                  <div
+                    className={`w-11 h-11 rounded-xl ${iconBg} flex items-center justify-center mb-5`}
+                  >
+                    <Icon
+                      size={22}
+                      strokeWidth={1.75}
+                      className={iconColor}
+                      aria-hidden="true"
+                    />
+                  </div>
+                  <h3 className="font-heading font-bold text-xl text-foreground mb-3">
+                    {title}
+                  </h3>
+                  <p className="text-muted-foreground leading-relaxed text-[0.9375rem]">
+                    {body}
+                  </p>
                 </div>
-                <h3 className="font-heading font-bold text-xl text-foreground mb-3">
-                  {title}
-                </h3>
-                <p className="text-muted-foreground leading-relaxed text-[0.9375rem]">
-                  {body}
-                </p>
-              </div>
-            </motion.article>
-          ))}
+              </motion.article>
+            );
+          })()}
+
+          {/* Cards 2 and 3: stacked in a column (flex-1 = ~1/3 width) */}
+          <div className="flex flex-col gap-6 flex-1">
+            {cards.slice(1).map(({ num, Icon, title, body, iconColor, iconBg, borderAccent }) => (
+              <motion.article
+                key={title}
+                variants={cardVariants}
+                role="listitem"
+                className={`group relative bg-card rounded-2xl border border-border shadow-sm hover:shadow-lg hover:-translate-y-1.5 transition-all duration-300 overflow-hidden cursor-default flex-1 ${borderAccent}`}
+              >
+                {/* Oversized decorative number */}
+                <span
+                  className="absolute bottom-3 right-4 font-heading font-extrabold text-8xl leading-none text-foreground/[0.07] select-none pointer-events-none"
+                  aria-hidden="true"
+                >
+                  {num}
+                </span>
+
+                <div className="relative p-8 pt-7">
+                  <div
+                    className={`w-11 h-11 rounded-xl ${iconBg} flex items-center justify-center mb-5`}
+                  >
+                    <Icon
+                      size={22}
+                      strokeWidth={1.75}
+                      className={iconColor}
+                      aria-hidden="true"
+                    />
+                  </div>
+                  <h3 className="font-heading font-bold text-xl text-foreground mb-3">
+                    {title}
+                  </h3>
+                  <p className="text-muted-foreground leading-relaxed text-[0.9375rem]">
+                    {body}
+                  </p>
+                </div>
+              </motion.article>
+            ))}
+          </div>
         </motion.div>
       </div>
     </section>
