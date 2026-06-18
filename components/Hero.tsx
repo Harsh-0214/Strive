@@ -71,7 +71,7 @@ export default function Hero() {
 
   return (
     <section
-      className="relative min-h-dvh flex flex-col items-center justify-center overflow-hidden pt-16"
+      className="relative min-h-dvh flex flex-col items-center justify-center overflow-hidden pt-24"
       aria-labelledby="hero-heading"
     >
       {/* Background layers */}
@@ -79,7 +79,7 @@ export default function Hero() {
         className="absolute inset-0 -z-10"
         style={{
           background:
-            "linear-gradient(145deg, hsl(221 90% 5%) 0%, hsl(221 80% 12%) 35%, hsl(218 75% 22%) 65%, hsl(221 70% 8%) 100%)",
+            "linear-gradient(145deg, hsl(220 40% 3%) 0%, hsl(221 60% 8%) 30%, hsl(218 70% 18%) 60%, hsl(220 35% 5%) 100%)",
           backgroundSize: "200% 200%",
           animation: "gradient-shift 10s ease infinite",
         }}
@@ -134,7 +134,7 @@ export default function Hero() {
           <motion.h1
             id="hero-heading"
             variants={itemVariants}
-            className="font-heading font-extrabold text-4xl sm:text-5xl md:text-6xl lg:text-[4.5rem] leading-[1.08] tracking-tight text-white max-w-4xl"
+            className="font-heading font-extrabold text-4xl sm:text-6xl md:text-7xl lg:text-[5.5rem] leading-[1.08] tracking-tight text-white max-w-4xl"
           >
             Your competitors
             <br className="hidden sm:block" /> are{" "}
@@ -157,7 +157,7 @@ export default function Hero() {
           {/* Animated subheadline with cycling type */}
           <motion.div
             variants={itemVariants}
-            className="max-w-2xl text-lg sm:text-xl text-white/75 leading-relaxed"
+            className="max-w-2xl text-lg sm:text-xl md:text-2xl text-white/75 leading-relaxed"
           >
             <p>
               Strive builds fast, beautiful websites for{" "}

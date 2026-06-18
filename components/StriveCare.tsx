@@ -132,6 +132,7 @@ export default function StriveCare() {
                   ? "border-primary/50 shadow-lg shadow-primary/10"
                   : "border-care-border hover:border-primary/40"
               }`}
+              style={{ boxShadow: '0 0 0 1px rgba(255,255,255,0.06)' }}
             >
               {popular && (
                 <div

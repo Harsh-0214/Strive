@@ -11,7 +11,7 @@ export default function HopeBridge() {
   return (
     <section
       ref={ref}
-      className="relative py-24 lg:py-32 overflow-hidden"
+      className="relative py-32 lg:py-44 overflow-hidden"
       aria-labelledby="hope-heading"
       style={{ background: "hsl(var(--hope-bg))" }}
     >

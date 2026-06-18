@@ -37,7 +37,8 @@ export default function Results() {
   return (
     <section
       ref={ref}
-      className="py-20 lg:py-28 bg-background"
+      className="py-20 lg:py-28"
+      style={{ background: 'hsl(220 24% 9%)' }}
       aria-labelledby="results-heading"
     >
       <div className="max-w-4xl mx-auto section-padding">
@@ -50,7 +51,7 @@ export default function Results() {
         >
           <h2
             id="results-heading"
-            className="font-heading font-extrabold text-3xl sm:text-4xl md:text-5xl text-foreground tracking-tight"
+            className="font-heading font-extrabold text-3xl sm:text-4xl md:text-5xl text-white tracking-tight"
           >
             Here&apos;s what happens when{" "}
             <span
@@ -65,7 +66,7 @@ export default function Results() {
               you stop hiding.
             </span>
           </h2>
-          <p className="mt-4 text-muted-foreground text-lg max-w-xl mx-auto">
+          <p className="mt-4 text-white/55 text-lg max-w-xl mx-auto">
             Average results our clients see in the first 90 days after launching with Strive.
           </p>
         </motion.div>
@@ -82,7 +83,7 @@ export default function Results() {
             >
               {/* Label row */}
               <div className="flex items-center justify-between mb-1">
-                <span className="font-medium text-foreground text-sm sm:text-base">
+                <span className="font-medium text-white text-sm sm:text-base">
                   {label}
                 </span>
                 <span className="font-bold text-primary text-sm sm:text-base tabular-nums">
@@ -93,7 +94,7 @@ export default function Results() {
               {/* Bar track */}
               <div
                 className="w-full h-3 rounded-full overflow-hidden"
-                style={{ background: "hsl(var(--muted))" }}
+                style={{ background: "rgba(255,255,255,0.08)" }}
                 role="img"
                 aria-label={`${label}: ${percent}`}
               >
@@ -121,7 +122,7 @@ export default function Results() {
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ duration: 0.55, delay: 0.7, ease: "easeOut" }}
-          className="mt-10 text-center text-xs text-muted-foreground"
+          className="mt-10 text-center text-xs text-white/40"
         >
           * Based on average client data across all packages
         </motion.p>

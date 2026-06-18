@@ -39,7 +39,12 @@ export default function Marquee() {
 
   return (
     <div
-      className="relative py-5 overflow-hidden bg-background border-y border-border"
+      className="relative py-5 overflow-hidden"
+      style={{
+        background: 'hsl(220 28% 6%)',
+        borderTop: '1px solid rgba(255,255,255,0.07)',
+        borderBottom: '1px solid rgba(255,255,255,0.07)',
+      }}
       aria-label="Industries we serve"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
@@ -51,7 +56,7 @@ export default function Marquee() {
         className="absolute left-0 top-0 bottom-0 w-24 z-10 pointer-events-none"
         style={{
           background:
-            "linear-gradient(90deg, hsl(var(--background)) 0%, transparent 100%)",
+            "linear-gradient(90deg, hsl(220 28% 6%) 0%, transparent 100%)",
         }}
         aria-hidden="true"
       />
@@ -60,7 +65,7 @@ export default function Marquee() {
         className="absolute right-0 top-0 bottom-0 w-24 z-10 pointer-events-none"
         style={{
           background:
-            "linear-gradient(270deg, hsl(var(--background)) 0%, transparent 100%)",
+            "linear-gradient(270deg, hsl(220 28% 6%) 0%, transparent 100%)",
         }}
         aria-hidden="true"
       />
@@ -84,7 +89,7 @@ export default function Marquee() {
         {all.map(({ icon: Icon, label }, i) => (
           <div
             key={`${label}-${i}`}
-            className="flex items-center gap-2 px-4 py-2 rounded-full border border-border bg-muted text-muted-foreground whitespace-nowrap text-sm font-medium select-none"
+            className="flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 text-white/55 whitespace-nowrap text-sm font-medium select-none"
           >
             <Icon size={14} strokeWidth={1.75} aria-hidden="true" />
             {label}

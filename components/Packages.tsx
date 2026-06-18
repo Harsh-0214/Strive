@@ -79,7 +79,8 @@ export default function Packages() {
     <section
       id="packages"
       ref={ref}
-      className="py-20 lg:py-28 bg-background"
+      className="py-20 lg:py-28"
+      style={{ background: 'hsl(220 28% 6%)' }}
       aria-labelledby="packages-heading"
     >
       <div className="max-w-6xl mx-auto section-padding">
@@ -91,7 +92,7 @@ export default function Packages() {
         >
           <h2
             id="packages-heading"
-            className="font-heading font-extrabold text-3xl sm:text-4xl md:text-5xl text-foreground tracking-tight"
+            className="font-heading font-extrabold text-3xl sm:text-4xl md:text-5xl text-white tracking-tight"
           >
             Pick the package that{" "}
             <span
@@ -119,10 +120,10 @@ export default function Packages() {
               <motion.article
                 key={name}
                 variants={cardVariants}
-                className={`relative rounded-2xl border flex flex-col overflow-hidden transition-all duration-300 hover:-translate-y-1 ${
+                className={`relative rounded-2xl flex flex-col overflow-hidden transition-all duration-300 hover:-translate-y-1 ${
                   popular
                     ? "border-transparent shadow-2xl"
-                    : "border-border shadow-sm hover:shadow-md bg-card"
+                    : "hover:shadow-[0_24px_48px_rgba(0,0,0,0.4)]"
                 }`}
                 style={
                   popular
@@ -130,7 +131,10 @@ export default function Packages() {
                         background:
                           "linear-gradient(145deg, hsl(var(--primary-dark)), hsl(var(--primary-light)))",
                       }
-                    : undefined
+                    : {
+                        background: 'rgba(255,255,255,0.04)',
+                        border: '1px solid rgba(255,255,255,0.08)',
+                      }
                 }
               >
                 <div className="p-7 flex flex-col flex-1">
@@ -144,13 +148,13 @@ export default function Packages() {
                       <Icon
                         size={20}
                         strokeWidth={1.75}
-                        className={popular ? "text-white" : "text-muted-foreground"}
+                        className={popular ? "text-white" : "text-white/60"}
                         aria-hidden="true"
                       />
                     </div>
                     <h3
                       className={`font-heading font-bold text-xl ${
-                        popular ? "text-white" : "text-foreground"
+                        popular ? "text-white" : "text-white"
                       }`}
                     >
                       {name}
@@ -166,7 +170,7 @@ export default function Packages() {
                   <div className="mb-2">
                     <span
                       className={`font-heading font-extrabold text-3xl ${
-                        popular ? "text-white" : "text-foreground"
+                        popular ? "text-white" : "text-white"
                       }`}
                     >
                       {range}
@@ -175,7 +179,7 @@ export default function Packages() {
 
                   <p
                     className={`text-sm mb-6 leading-relaxed ${
-                      popular ? "text-white/75" : "text-muted-foreground"
+                      popular ? "text-white/75" : "text-white/60"
                     }`}
                   >
                     {description}
@@ -187,7 +191,7 @@ export default function Packages() {
                       <li
                         key={f}
                         className={`flex items-start gap-2.5 text-sm ${
-                          popular ? "text-white/90" : "text-foreground"
+                          popular ? "text-white/90" : "text-white"
                         }`}
                       >
                         <Check
@@ -207,7 +211,7 @@ export default function Packages() {
                     className={`inline-flex items-center justify-center gap-2 w-full px-5 py-3 rounded-xl font-semibold text-sm transition-all duration-200 active:scale-95 ${
                       popular
                         ? "bg-white text-primary hover:bg-white/90 shadow-md"
-                        : "bg-muted text-foreground hover:bg-muted/70 border border-border"
+                        : "bg-white/10 text-white border border-white/15 hover:bg-white/15"
                     }`}
                   >
                     {cta}
@@ -224,10 +228,10 @@ export default function Packages() {
           initial={{ opacity: 0, y: 12 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.45, ease: "easeOut" }}
-          className="text-center text-muted-foreground text-sm mt-10"
+          className="text-center text-white/50 text-sm mt-10"
         >
           Every package is{" "}
-          <span className="font-semibold text-foreground">flat-rate</span>.
+          <span className="font-semibold text-white">flat-rate</span>.
           No hourly billing. No surprise invoices. No hidden fees. Ever.
         </motion.p>
       </div>

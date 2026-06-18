@@ -51,7 +51,7 @@ function AccordionItem({
   const id = `faq-${index}`;
 
   return (
-    <div className="border-b border-border last:border-0">
+    <div className="last:border-0" style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
       <h3>
         <button
           id={`${id}-trigger`}
@@ -60,13 +60,13 @@ function AccordionItem({
           onClick={() => setOpen(!open)}
           className="flex items-center justify-between w-full py-5 text-left gap-4 group focus-visible:outline-2 focus-visible:outline-primary rounded-sm"
         >
-          <span className={`font-heading font-semibold text-base sm:text-lg transition-colors duration-150 ${open ? "text-primary" : "text-foreground group-hover:text-primary"}`}>
+          <span className={`font-heading font-semibold text-base sm:text-lg transition-colors duration-150 ${open ? "text-primary" : "text-white group-hover:text-primary"}`}>
             {question}
           </span>
           <motion.div
             animate={{ rotate: open ? 180 : 0 }}
             transition={{ duration: 0.25, ease: "easeOut" }}
-            className="shrink-0 text-muted-foreground"
+            className="shrink-0 text-white/40"
             aria-hidden="true"
           >
             <ChevronDown size={20} />
@@ -87,7 +87,7 @@ function AccordionItem({
             transition={{ duration: 0.28, ease: [0.25, 0.46, 0.45, 0.94] }}
             className="overflow-hidden"
           >
-            <p className="pb-5 text-muted-foreground leading-relaxed">
+            <p className="pb-5 text-white/60 leading-relaxed">
               {answer}
             </p>
           </motion.div>
@@ -115,7 +115,8 @@ export default function FAQ() {
     <section
       id="faq"
       ref={ref}
-      className="py-20 lg:py-28 bg-muted"
+      className="py-20 lg:py-28"
+      style={{ background: 'hsl(220 28% 6%)' }}
       aria-labelledby="faq-heading"
     >
       <script
@@ -131,7 +132,7 @@ export default function FAQ() {
         >
           <h2
             id="faq-heading"
-            className="font-heading font-extrabold text-3xl sm:text-4xl md:text-5xl text-foreground tracking-tight"
+            className="font-heading font-extrabold text-3xl sm:text-4xl md:text-5xl text-white tracking-tight"
           >
             Got questions? We&apos;ve got answers.
           </h2>
@@ -141,7 +142,8 @@ export default function FAQ() {
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.55, delay: 0.15, ease: "easeOut" }}
-          className="bg-card rounded-2xl border border-border shadow-sm px-6 sm:px-8"
+          className="rounded-2xl px-6 sm:px-8"
+          style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '1rem' }}
         >
           {faqs.map((faq, i) => (
             <AccordionItem key={faq.question} {...faq} index={i} />

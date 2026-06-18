@@ -76,7 +76,8 @@ export default function Testimonials() {
   return (
     <section
       ref={ref}
-      className="py-20 lg:py-28 bg-background overflow-hidden"
+      className="py-20 lg:py-28 overflow-hidden"
+      style={{ background: 'hsl(220 28% 6%)' }}
       aria-labelledby="testimonials-heading"
     >
       <div className="max-w-6xl mx-auto section-padding">
@@ -88,7 +89,7 @@ export default function Testimonials() {
         >
           <h2
             id="testimonials-heading"
-            className="font-heading font-extrabold text-3xl sm:text-4xl md:text-5xl text-foreground tracking-tight"
+            className="font-heading font-extrabold text-3xl sm:text-4xl md:text-5xl text-white tracking-tight"
           >
             Small businesses.{" "}
             <span
@@ -156,16 +157,17 @@ export default function Testimonials() {
               <motion.article
                 key={name}
                 variants={cardVariants}
-                className="relative rounded-2xl border border-border shadow-sm bg-card hover:-translate-y-1.5 hover:shadow-md transition-all duration-300 overflow-hidden"
+                className="relative rounded-2xl hover:-translate-y-1.5 transition-all duration-300 overflow-hidden"
+                style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}
               >
                 <div className="relative p-7 flex flex-col gap-4">
                   <StarRating />
                   <blockquote className="flex-1">
-                    <p className="text-foreground leading-relaxed text-[0.9375rem]">
+                    <p className="text-white leading-relaxed text-[0.9375rem]">
                       &ldquo;{quote}&rdquo;
                     </p>
                   </blockquote>
-                  <footer className="flex items-center gap-3 pt-4 border-t border-border">
+                  <footer className="flex items-center gap-3 pt-4" style={{ borderTop: '1px solid rgba(255,255,255,0.10)' }}>
                     <div
                       className="w-10 h-10 rounded-full flex items-center justify-center font-heading font-bold text-sm text-white shrink-0"
                       style={{ background: bg }}
@@ -173,10 +175,10 @@ export default function Testimonials() {
                       {initials}
                     </div>
                     <div>
-                      <p className="font-semibold text-sm text-foreground leading-tight">
+                      <p className="font-semibold text-sm text-white leading-tight">
                         {name} &mdash; {role}
                       </p>
-                      <p className="text-xs text-muted-foreground mt-0.5">
+                      <p className="text-xs text-white/60 mt-0.5">
                         {business}, {location}
                       </p>
                     </div>
