@@ -6,10 +6,13 @@ import Marquee from "@/components/Marquee";
 import PainPoints from "@/components/PainPoints";
 import HopeBridge from "@/components/HopeBridge";
 import Packages from "@/components/Packages";
+import ComparisonTable from "@/components/ComparisonTable";
 import StriveCare from "@/components/StriveCare";
 import HowItWorks from "@/components/HowItWorks";
+import Portfolio from "@/components/Portfolio";
 import Testimonials from "@/components/Testimonials";
 import Results from "@/components/Results";
+import GuaranteeStrip from "@/components/GuaranteeStrip";
 import FAQ from "@/components/FAQ";
 import Footer from "@/components/Footer";
 import ScrollProgress from "@/components/ScrollProgress";
@@ -31,10 +34,13 @@ export default function Home() {
         <PainPoints />
         <HopeBridge />
         <Packages />
+        <ComparisonTable />
         <StriveCare />
         <HowItWorks />
+        <Portfolio />
         <Testimonials />
         <Results />
+        <GuaranteeStrip />
         <FAQ />
         <ContactForm />
       </main>
