@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, ChevronDown } from "lucide-react";
 
-const PARTICLE_COUNT = 16;
+const SHARD_COUNT = 18;
 
 const businessTypes = [
   "restaurants",
@@ -15,29 +15,35 @@ const businessTypes = [
   "fitness coaches",
 ];
 
-function FloatingParticle({ index }: { index: number }) {
-  const size = 3 + (index % 6) * 2.5;
-  const left = (index * 7 + 13) % 95;
-  const delay = (index * 0.38) % 5;
-  const duration = 7 + (index % 5) * 2;
+// Angular metallic shard — echoes the faceted chevron bands of the logo
+function FloatingShard({ index }: { index: number }) {
+  const width = 16 + (index % 5) * 9;
+  const left = (index * 9 + 6) % 95;
+  const delay = (index * 0.46) % 6;
+  const duration = 12 + (index % 5) * 2.4;
+  const baseRotate = -25 + (index % 4) * 8;
+  const bright = index % 3 === 0;
 
   return (
     <motion.div
-      className="absolute rounded-full"
+      className="absolute"
       style={{
-        width: size,
-        height: size,
+        width,
+        height: width * 0.4,
         left: `${left}%`,
-        bottom: "-20px",
-        willChange: "transform",
-        background:
-          index % 3 === 0
-            ? "hsl(199 100% 65% / 0.25)"
-            : "hsl(0 0% 100% / 0.12)",
+        bottom: "-48px",
+        borderRadius: 2,
+        willChange: "transform, opacity",
+        // Skewed parallelogram — the building block of the logo's "S"
+        clipPath: "polygon(28% 0, 100% 0, 72% 100%, 0 100%)",
+        background: bright
+          ? "linear-gradient(135deg, hsl(205 75% 80% / 0.55), hsl(212 60% 45% / 0.05))"
+          : "linear-gradient(135deg, hsl(210 55% 62% / 0.32), transparent)",
       }}
       animate={{
-        y: [0, -900],
-        opacity: [0, 0.8, 0.8, 0],
+        y: [0, -820],
+        opacity: [0, 0.75, 0.75, 0],
+        rotate: [baseRotate, baseRotate + 14],
       }}
       transition={{ duration, delay, repeat: Infinity, ease: "linear" }}
       aria-hidden="true"
@@ -74,54 +80,90 @@ export default function Hero() {
       className="relative min-h-dvh flex flex-col items-center justify-center overflow-hidden pt-24"
       aria-labelledby="hero-heading"
     >
-      {/* Background layers */}
+      {/* ── Background: metallic faceted steel-blue, matched to the logo ── */}
+
+      {/* Base brushed-metal gradient */}
       <div
         className="absolute inset-0 -z-10"
         style={{
           background:
-            "linear-gradient(145deg, hsl(220 60% 4%) 0%, hsl(240 70% 14%) 25%, hsl(210 90% 28%) 50%, hsl(250 65% 12%) 75%, hsl(220 50% 5%) 100%)",
-          backgroundSize: "300% 300%",
-          animation: "gradient-shift 10s ease infinite",
+            "linear-gradient(150deg, hsl(220 65% 4%) 0%, hsl(218 55% 10%) 30%, hsl(208 62% 22%) 52%, hsl(222 60% 9%) 74%, hsl(221 65% 4%) 100%)",
+          backgroundSize: "220% 220%",
+          animation: "gradient-shift 14s ease infinite",
         }}
         aria-hidden="true"
       />
-      {/* Accent radial glow — bottom right */}
+
+      {/* Faceted angular planes — sheen along the logo's chevron angle */}
       <div
         className="absolute inset-0 -z-10"
         style={{
           backgroundImage:
-            "radial-gradient(ellipse 60% 50% at 85% 80%, hsl(199 100% 58% / 0.12) 0%, transparent 70%), radial-gradient(ellipse 55% 60% at 10% 25%, hsl(218 90% 58% / 0.12) 0%, transparent 60%)",
+            "linear-gradient(115deg, transparent 0%, hsl(205 80% 60% / 0.07) 36%, transparent 42%, transparent 58%, hsl(210 70% 55% / 0.05) 64%, transparent 72%), linear-gradient(245deg, transparent 70%, hsl(199 90% 50% / 0.05) 88%, transparent 94%)",
         }}
         aria-hidden="true"
       />
-      {/* Animated atmospheric spotlight */}
+
+      {/* Depth glows */}
+      <div
+        className="absolute inset-0 -z-10"
+        style={{
+          backgroundImage:
+            "radial-gradient(ellipse 55% 50% at 80% 78%, hsl(199 100% 58% / 0.14) 0%, transparent 65%), radial-gradient(ellipse 50% 55% at 12% 22%, hsl(212 90% 55% / 0.12) 0%, transparent 60%)",
+        }}
+        aria-hidden="true"
+      />
+
+      {/* Large chevron motif — echoes the layered "S" of the logo */}
       <motion.div
-        className="absolute inset-0 -z-10"
-        animate={{
-          background: [
-            "radial-gradient(ellipse 40% 50% at 20% 60%, hsl(218 90% 40% / 0.25) 0%, transparent 70%)",
-            "radial-gradient(ellipse 40% 50% at 80% 40%, hsl(218 90% 40% / 0.25) 0%, transparent 70%)",
-            "radial-gradient(ellipse 40% 50% at 50% 20%, hsl(218 90% 40% / 0.25) 0%, transparent 70%)",
-            "radial-gradient(ellipse 40% 50% at 20% 60%, hsl(218 90% 40% / 0.25) 0%, transparent 70%)",
-          ]
-        }}
-        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute -z-10 right-[-6%] top-1/2 -translate-y-1/2 hidden md:block"
+        style={{ width: "52vw", maxWidth: 720, willChange: "transform" }}
+        animate={{ y: ["-52%", "-48%", "-52%"] }}
+        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
         aria-hidden="true"
-      />
-      {/* Grid texture overlay */}
-      <div
-        className="absolute inset-0 -z-10 opacity-[0.04]"
-        style={{
-          backgroundImage:
-            "linear-gradient(hsl(0 0% 100%) 1px, transparent 1px), linear-gradient(90deg, hsl(0 0% 100%) 1px, transparent 1px)",
-          backgroundSize: "48px 48px",
-        }}
+      >
+        <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+          {[0, 38, 76].map((offset, i) => (
+            <path
+              key={offset}
+              d={`M16 ${36 + offset} L100 ${78 + offset} L184 ${36 + offset}`}
+              stroke="hsl(205 85% 78%)"
+              strokeOpacity={0.07 - i * 0.015}
+              strokeWidth="11"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          ))}
+        </svg>
+      </motion.div>
+
+      {/* Diagonal metallic light sweep */}
+      <motion.div
+        className="absolute inset-0 -z-10 overflow-hidden"
         aria-hidden="true"
-      />
-      {/* Particles */}
+      >
+        <motion.div
+          className="absolute inset-y-[-20%] w-1/3"
+          style={{
+            background:
+              "linear-gradient(115deg, transparent, hsl(205 90% 78% / 0.10), transparent)",
+            transform: "skewX(-12deg)",
+            willChange: "transform",
+          }}
+          animate={{ x: ["-40vw", "140vw"] }}
+          transition={{
+            duration: 9,
+            repeat: Infinity,
+            ease: "easeInOut",
+            repeatDelay: 2.5,
+          }}
+        />
+      </motion.div>
+
+      {/* Floating metallic shards */}
       <div className="absolute inset-0 -z-10 overflow-hidden" aria-hidden="true">
-        {Array.from({ length: PARTICLE_COUNT }).map((_, i) => (
-          <FloatingParticle key={i} index={i} />
+        {Array.from({ length: SHARD_COUNT }).map((_, i) => (
+          <FloatingShard key={i} index={i} />
         ))}
       </div>
 
