@@ -1,40 +1,44 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, ChevronDown } from "lucide-react";
 
-const PARTICLE_COUNT = 20;
+const PARTICLE_COUNT = 22;
 
-function FloatingParticle({
-  index,
-}: {
-  index: number;
-}) {
-  const size = 4 + (index % 5) * 3;
+const businessTypes = [
+  "restaurants",
+  "salons",
+  "contractors",
+  "clothing brands",
+  "photographers",
+  "fitness coaches",
+];
+
+function FloatingParticle({ index }: { index: number }) {
+  const size = 3 + (index % 6) * 2.5;
   const left = (index * 7 + 13) % 95;
-  const delay = (index * 0.4) % 4;
-  const duration = 6 + (index % 4) * 2;
+  const delay = (index * 0.38) % 5;
+  const duration = 7 + (index % 5) * 2;
 
   return (
     <motion.div
-      className="absolute rounded-full bg-primary-foreground/10"
+      className="absolute rounded-full"
       style={{
         width: size,
         height: size,
         left: `${left}%`,
         bottom: "-20px",
+        background:
+          index % 3 === 0
+            ? "hsl(33 98% 54% / 0.35)"
+            : "hsl(0 0% 100% / 0.12)",
       }}
       animate={{
-        y: [0, -(typeof window !== "undefined" ? window.innerHeight + 40 : 800)],
-        opacity: [0, 0.6, 0.6, 0],
+        y: [0, -900],
+        opacity: [0, 0.8, 0.8, 0],
       }}
-      transition={{
-        duration,
-        delay,
-        repeat: Infinity,
-        ease: "linear",
-      }}
+      transition={{ duration, delay, repeat: Infinity, ease: "linear" }}
       aria-hidden="true"
     />
   );
@@ -42,51 +46,64 @@ function FloatingParticle({
 
 const containerVariants = {
   hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.18,
-    },
-  },
+  visible: { transition: { staggerChildren: 0.15 } },
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 28 },
+  hidden: { opacity: 0, y: 24 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] },
+    transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] },
   },
 };
 
 export default function Hero() {
+  const [typeIndex, setTypeIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTypeIndex((i) => (i + 1) % businessTypes.length);
+    }, 2200);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section
       className="relative min-h-dvh flex flex-col items-center justify-center overflow-hidden pt-16"
       aria-labelledby="hero-heading"
     >
-      {/* Animated gradient background */}
+      {/* Background layers */}
       <div
         className="absolute inset-0 -z-10"
         style={{
           background:
-            "linear-gradient(135deg, hsl(220 85% 20%) 0%, hsl(220 85% 35%) 40%, hsl(217 91% 50%) 70%, hsl(33 98% 50% / 0.3) 100%)",
+            "linear-gradient(145deg, hsl(224 75% 14%) 0%, hsl(220 85% 28%) 35%, hsl(215 90% 42%) 65%, hsl(220 70% 25%) 100%)",
           backgroundSize: "300% 300%",
-          animation: "gradient-shift 8s ease infinite",
+          animation: "gradient-shift 10s ease infinite",
         }}
         aria-hidden="true"
       />
-
-      {/* Mesh overlay */}
+      {/* Accent radial glow — bottom right */}
       <div
-        className="absolute inset-0 -z-10 opacity-30"
+        className="absolute inset-0 -z-10"
         style={{
           backgroundImage:
-            "radial-gradient(ellipse at 20% 50%, hsl(var(--accent) / 0.3) 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, hsl(220 85% 60% / 0.4) 0%, transparent 50%)",
+            "radial-gradient(ellipse 60% 50% at 85% 80%, hsl(33 98% 54% / 0.22) 0%, transparent 70%), radial-gradient(ellipse 50% 60% at 15% 30%, hsl(210 100% 70% / 0.15) 0%, transparent 60%)",
         }}
         aria-hidden="true"
       />
-
-      {/* Floating particles */}
+      {/* Grid texture overlay */}
+      <div
+        className="absolute inset-0 -z-10 opacity-[0.04]"
+        style={{
+          backgroundImage:
+            "linear-gradient(hsl(0 0% 100%) 1px, transparent 1px), linear-gradient(90deg, hsl(0 0% 100%) 1px, transparent 1px)",
+          backgroundSize: "48px 48px",
+        }}
+        aria-hidden="true"
+      />
+      {/* Particles */}
       <div className="absolute inset-0 -z-10 overflow-hidden" aria-hidden="true">
         {Array.from({ length: PARTICLE_COUNT }).map((_, i) => (
           <FloatingParticle key={i} index={i} />
@@ -94,17 +111,20 @@ export default function Hero() {
       </div>
 
       {/* Content */}
-      <div className="max-w-5xl mx-auto section-padding text-center text-primary-foreground">
+      <div className="max-w-5xl mx-auto section-padding text-center">
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
           className="flex flex-col items-center gap-6"
         >
-          {/* Badge */}
+          {/* Eyebrow pill */}
           <motion.div variants={itemVariants}>
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/15 text-white/90 text-sm font-medium border border-white/20 backdrop-blur-sm">
-              <span className="w-2 h-2 rounded-full bg-accent animate-pulse-glow inline-block" />
+            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 text-white/85 text-sm font-medium border border-white/15 backdrop-blur-md">
+              <span
+                className="w-2 h-2 rounded-full bg-accent animate-pulse-glow inline-block"
+                aria-hidden="true"
+              />
               Web design for small businesses
             </span>
           </motion.div>
@@ -113,60 +133,127 @@ export default function Hero() {
           <motion.h1
             id="hero-heading"
             variants={itemVariants}
-            className="font-heading font-extrabold text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight tracking-tight text-white"
+            className="font-heading font-extrabold text-4xl sm:text-5xl md:text-6xl lg:text-[4.5rem] leading-[1.08] tracking-tight text-white max-w-4xl"
           >
-            Your competitors are online.
+            Your competitors
+            <br className="hidden sm:block" /> are{" "}
+            <span
+              className="relative inline-block"
+              style={{
+                background:
+                  "linear-gradient(90deg, hsl(33 98% 64%), hsl(33 98% 52%))",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}
+            >
+              online.
+            </span>
             <br />
-            <span className="text-accent">It&apos;s time you were too.</span>
+            It&apos;s time you were too.
           </motion.h1>
 
-          {/* Subheadline */}
-          <motion.p
+          {/* Animated subheadline with cycling type */}
+          <motion.div
             variants={itemVariants}
-            className="max-w-2xl text-lg sm:text-xl text-white/80 leading-relaxed"
+            className="max-w-2xl text-lg sm:text-xl text-white/75 leading-relaxed"
           >
-            Strive builds fast, beautiful websites for small businesses — so
-            you can focus on what you do best.
-          </motion.p>
+            <p>
+              Strive builds fast, beautiful websites for{" "}
+              <span
+                className="inline-flex overflow-hidden"
+                style={{ minWidth: "11rem", verticalAlign: "bottom" }}
+                aria-live="polite"
+                aria-atomic="true"
+              >
+                <AnimatePresence mode="wait">
+                  <motion.span
+                    key={typeIndex}
+                    initial={{ opacity: 0, y: 14 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -14 }}
+                    transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                    className="font-semibold text-accent"
+                  >
+                    {businessTypes[typeIndex]}
+                  </motion.span>
+                </AnimatePresence>
+              </span>{" "}
+              — so you can focus on what you do best.
+            </p>
+          </motion.div>
 
           {/* CTAs */}
           <motion.div
             variants={itemVariants}
-            className="flex flex-col sm:flex-row items-center gap-4 mt-2"
+            className="flex flex-col sm:flex-row items-center gap-4 mt-1"
           >
             <a
               href="#contact"
-              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-accent text-white font-semibold text-base hover:opacity-90 active:scale-95 transition-all duration-200 shadow-lg shadow-accent/30"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold text-base text-white active:scale-95 transition-all duration-200 shadow-xl"
+              style={{
+                background:
+                  "linear-gradient(135deg, hsl(33 98% 52%), hsl(25 95% 46%))",
+                boxShadow: "0 8px 32px hsl(33 98% 54% / 0.4)",
+              }}
             >
               Get a Free Quote
-              <ArrowRight size={18} />
+              <ArrowRight size={18} aria-hidden="true" />
             </a>
             <a
               href="#packages"
-              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-white/15 text-white font-semibold text-base border border-white/30 hover:bg-white/25 active:scale-95 transition-all duration-200 backdrop-blur-sm"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-white/10 text-white font-semibold text-base border border-white/20 hover:bg-white/18 active:scale-95 transition-all duration-200 backdrop-blur-sm"
             >
               See Our Packages
             </a>
+          </motion.div>
+
+          {/* Social proof */}
+          <motion.div
+            variants={itemVariants}
+            className="flex items-center gap-3 mt-1"
+          >
+            {/* Stacked avatars */}
+            <div className="flex -space-x-2" aria-hidden="true">
+              {["MT", "JR", "AK", "SC"].map((initials, i) => (
+                <div
+                  key={initials}
+                  className="w-8 h-8 rounded-full border-2 border-white/20 flex items-center justify-center text-xs font-bold text-white"
+                  style={{
+                    background: [
+                      "hsl(330 60% 55%)",
+                      "hsl(210 70% 50%)",
+                      "hsl(270 55% 55%)",
+                      "hsl(160 55% 45%)",
+                    ][i],
+                    zIndex: 4 - i,
+                  }}
+                >
+                  {initials}
+                </div>
+              ))}
+            </div>
+            <p className="text-white/60 text-sm">
+              <span className="text-white font-semibold">50+</span> small businesses launched across Canada
+            </p>
           </motion.div>
         </motion.div>
       </div>
 
       {/* Scroll indicator */}
       <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/60 flex flex-col items-center gap-1"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/50 flex flex-col items-center gap-1"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.4, duration: 0.6 }}
+        transition={{ delay: 1.6, duration: 0.6 }}
         aria-hidden="true"
       >
-        <span className="text-xs uppercase tracking-widest font-medium">
-          Scroll
-        </span>
+        <span className="text-xs uppercase tracking-widest font-medium">Scroll</span>
         <motion.div
           animate={{ y: [0, 6, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+          transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
         >
-          <ChevronDown size={20} />
+          <ChevronDown size={18} />
         </motion.div>
       </motion.div>
     </section>

@@ -61,7 +61,18 @@ export default function HowItWorks() {
             id="how-heading"
             className="font-heading font-extrabold text-3xl sm:text-4xl md:text-5xl text-foreground tracking-tight"
           >
-            Getting online has never been easier
+            Getting online has{" "}
+            <span
+              style={{
+                background:
+                  "linear-gradient(90deg, hsl(var(--primary)), hsl(var(--primary-light)))",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}
+            >
+              never been easier
+            </span>
           </h2>
         </motion.div>
 
@@ -71,12 +82,23 @@ export default function HowItWorks() {
           animate={inView ? "visible" : "hidden"}
           className="relative grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-6"
         >
-          {/* Connecting line (desktop) */}
+          {/* Connecting line (desktop) — animated fill on inView */}
           <div
-            className="hidden md:block absolute top-10 left-1/6 right-1/6 h-px bg-border"
-            style={{ left: "calc(16.67% + 20px)", right: "calc(16.67% + 20px)" }}
+            className="hidden md:block absolute top-10 h-px bg-border overflow-hidden"
+            style={{ left: "calc(16.67% + 40px)", right: "calc(16.67% + 40px)" }}
             aria-hidden="true"
-          />
+          >
+            <motion.div
+              className="h-full"
+              style={{
+                background:
+                  "linear-gradient(90deg, hsl(var(--primary)), hsl(var(--primary-light)))",
+              }}
+              initial={{ width: "0%" }}
+              animate={inView ? { width: "100%" } : {}}
+              transition={{ duration: 1.2, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            />
+          </div>
 
           {steps.map(({ number, icon: Icon, title, body }, i) => (
             <motion.li

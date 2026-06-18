@@ -88,7 +88,17 @@ export default function StriveCare() {
             id="care-heading"
             className="font-heading font-extrabold text-3xl sm:text-4xl md:text-5xl text-care-foreground tracking-tight mb-4"
           >
-            Keep your site fresh with Strive Care
+            Keep your site fresh with{" "}
+            <span
+              style={{
+                background: "linear-gradient(90deg, hsl(33 98% 64%), hsl(33 98% 52%))",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}
+            >
+              Strive Care
+            </span>
           </h2>
           <p className="max-w-2xl mx-auto text-care-muted text-lg leading-relaxed">
             A monthly plan that keeps your website updated, secure, and

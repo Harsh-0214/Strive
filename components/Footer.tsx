@@ -47,7 +47,15 @@ export default function Footer() {
                   aria-hidden="true"
                 />
               </div>
-              <span className="font-heading font-extrabold text-xl text-white tracking-tight">
+              <span
+                className="font-heading font-extrabold text-xl tracking-tight"
+                style={{
+                  background: "linear-gradient(90deg, hsl(210 80% 75%), hsl(210 80% 90%))",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }}
+              >
                 Strive
               </span>
             </a>

@@ -72,7 +72,16 @@ export default function Navbar() {
                   className="text-primary-foreground"
                 />
               </motion.div>
-              <span className="font-heading font-800 text-xl tracking-tight text-foreground">
+              <span
+                className="font-heading font-extrabold text-xl tracking-tight"
+                style={{
+                  background:
+                    "linear-gradient(90deg, hsl(var(--primary)), hsl(var(--primary-light)))",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }}
+              >
                 Strive
               </span>
             </a>

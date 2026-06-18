@@ -93,7 +93,18 @@ export default function Packages() {
             id="packages-heading"
             className="font-heading font-extrabold text-3xl sm:text-4xl md:text-5xl text-foreground tracking-tight"
           >
-            Pick the package that fits where you&apos;re at
+            Pick the package that{" "}
+            <span
+              style={{
+                background:
+                  "linear-gradient(90deg, hsl(var(--primary)), hsl(var(--primary-light)))",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}
+            >
+              fits where you&apos;re at
+            </span>
           </h2>
         </motion.div>
 
@@ -108,15 +119,29 @@ export default function Packages() {
               <motion.article
                 key={name}
                 variants={cardVariants}
-                className={`relative rounded-2xl border flex flex-col overflow-hidden ${
+                className={`relative rounded-2xl border flex flex-col overflow-hidden transition-all duration-300 hover:-translate-y-1 ${
                   popular
-                    ? "border-primary shadow-xl shadow-primary/10 ring-2 ring-primary scale-105 md:scale-105"
-                    : "border-border shadow-sm"
+                    ? "border-primary/60 shadow-2xl shadow-primary/20 ring-1 ring-primary/40 md:-mt-3 md:mb-3"
+                    : "border-border shadow-sm hover:shadow-md"
                 } bg-card`}
+              style={
+                popular
+                  ? {
+                      boxShadow:
+                        "0 0 0 1px hsl(var(--primary) / 0.3), 0 20px 48px hsl(var(--primary) / 0.18)",
+                    }
+                  : undefined
+              }
               >
                 {popular && (
-                  <div className="bg-primary text-primary-foreground text-xs font-bold uppercase tracking-widest text-center py-2.5 px-4">
-                    Most Popular
+                  <div
+                    className="text-primary-foreground text-xs font-bold uppercase tracking-widest text-center py-2.5 px-4"
+                    style={{
+                      background:
+                        "linear-gradient(90deg, hsl(var(--primary)), hsl(var(--primary-light)))",
+                    }}
+                  >
+                    ✦ Most Popular
                   </div>
                 )}
 

@@ -13,7 +13,8 @@ const testimonials = [
     business: "Blush Beauty Studio",
     location: "Toronto, ON",
     initials: "MT",
-    color: "bg-pink-100 text-pink-700",
+    bg: "hsl(330 60% 55%)",
+    featured: true,
   },
   {
     quote:
@@ -23,7 +24,8 @@ const testimonials = [
     business: "RidgeTop Contracting",
     location: "Brampton, ON",
     initials: "JR",
-    color: "bg-blue-100 text-blue-700",
+    bg: "hsl(210 70% 50%)",
+    featured: false,
   },
   {
     quote:
@@ -33,13 +35,14 @@ const testimonials = [
     business: "Kova Clothing",
     location: "Canada",
     initials: "AK",
-    color: "bg-purple-100 text-purple-700",
+    bg: "hsl(270 55% 55%)",
+    featured: false,
   },
 ];
 
 const containerVariants = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.12 } },
+  visible: { transition: { staggerChildren: 0.13 } },
 };
 
 const cardVariants = {
@@ -47,7 +50,7 @@ const cardVariants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] },
+    transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] },
   },
 };
 
@@ -57,7 +60,7 @@ function StarRating() {
       {Array.from({ length: 5 }).map((_, i) => (
         <Star
           key={i}
-          size={16}
+          size={15}
           strokeWidth={0}
           fill="currentColor"
           className="text-accent"
@@ -75,7 +78,7 @@ export default function Testimonials() {
   return (
     <section
       ref={ref}
-      className="py-20 lg:py-28 bg-background"
+      className="py-20 lg:py-28 bg-background overflow-hidden"
       aria-labelledby="testimonials-heading"
     >
       <div className="max-w-6xl mx-auto section-padding">
@@ -89,7 +92,18 @@ export default function Testimonials() {
             id="testimonials-heading"
             className="font-heading font-extrabold text-3xl sm:text-4xl md:text-5xl text-foreground tracking-tight"
           >
-            Small businesses. Real results.
+            Small businesses.{" "}
+            <span
+              style={{
+                background:
+                  "linear-gradient(90deg, hsl(var(--primary)), hsl(var(--primary-light)))",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}
+            >
+              Real results.
+            </span>
           </h2>
         </motion.div>
 
@@ -97,42 +111,68 @@ export default function Testimonials() {
           variants={containerVariants}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
-          className="grid grid-cols-1 md:grid-cols-3 gap-6"
+          className="grid grid-cols-1 md:grid-cols-3 gap-5"
         >
-          {testimonials.map(
-            ({ quote, name, role, business, location, initials, color }) => (
-              <motion.article
-                key={name}
-                variants={cardVariants}
-                className="bg-card border border-border rounded-2xl p-7 flex flex-col gap-5 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300"
+          {testimonials.map(({ quote, name, role, business, location, initials, bg, featured }) => (
+            <motion.article
+              key={name}
+              variants={cardVariants}
+              className={`relative rounded-2xl border flex flex-col overflow-hidden transition-all duration-300 hover:-translate-y-1.5 ${
+                featured
+                  ? "border-primary/30 shadow-lg shadow-primary/8 bg-card"
+                  : "border-border shadow-sm bg-card hover:shadow-md"
+              }`}
+            >
+              {/* Giant decorative quotation mark */}
+              <span
+                className="absolute top-3 left-5 font-heading font-extrabold text-8xl leading-none select-none pointer-events-none"
+                style={{ color: `${bg}18` }}
+                aria-hidden="true"
               >
+                &ldquo;
+              </span>
+
+              {/* Featured top bar */}
+              {featured && (
+                <div
+                  className="h-1 w-full"
+                  style={{
+                    background:
+                      "linear-gradient(90deg, hsl(var(--primary)), hsl(var(--primary-light)))",
+                  }}
+                  aria-hidden="true"
+                />
+              )}
+
+              <div className="relative p-7 flex flex-col gap-4 flex-1">
                 <StarRating />
 
-                <blockquote>
-                  <p className="text-foreground leading-relaxed text-base">
+                <blockquote className="flex-1">
+                  <p className="text-foreground leading-relaxed text-[0.9375rem] pt-1">
                     &ldquo;{quote}&rdquo;
                   </p>
                 </blockquote>
 
-                <footer className="flex items-center gap-3 mt-auto pt-2 border-t border-border">
+                <footer className="flex items-center gap-3 pt-4 border-t border-border">
                   <div
-                    className={`w-10 h-10 rounded-full flex items-center justify-center font-heading font-bold text-sm shrink-0 ${color}`}
+                    className="w-10 h-10 rounded-full flex items-center justify-center font-heading font-bold text-sm text-white shrink-0"
+                    style={{ background: bg }}
                     aria-hidden="true"
                   >
                     {initials}
                   </div>
                   <div>
-                    <p className="font-semibold text-sm text-foreground">
+                    <p className="font-semibold text-sm text-foreground leading-tight">
                       {name} &mdash; {role}
                     </p>
-                    <p className="text-xs text-muted-foreground">
+                    <p className="text-xs text-muted-foreground mt-0.5">
                       {business}, {location}
                     </p>
                   </div>
                 </footer>
-              </motion.article>
-            )
-          )}
+              </div>
+            </motion.article>
+          ))}
         </motion.div>
       </div>
     </section>
