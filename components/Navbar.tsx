@@ -93,7 +93,7 @@ export default function Navbar() {
         }`}
         aria-label="Main navigation"
       >
-        <div className="max-w-7xl mx-auto section-padding">
+        <div className="max-w-7xl mx-auto pl-4 sm:pl-5 lg:pl-8 pr-5 sm:pr-8 lg:pr-14">
           <div className="flex items-center justify-between h-24">
             {/* Wordmark */}
             <a
@@ -101,28 +101,20 @@ export default function Navbar() {
               className="flex items-center gap-4 group"
               aria-label="Strive — go to homepage"
             >
-              <div className="relative w-20 h-20 flex-shrink-0">
+              <div className="relative w-40 h-20 flex-shrink-0 overflow-hidden">
                 <Image
                   src="/Logo(s).png"
                   alt="Strive logo"
                   fill
-                  className="object-contain"
+                  className="object-cover object-top"
                   priority
                 />
               </div>
               <div className="flex flex-col leading-none gap-1">
-                <span
-                  className="font-heading font-extrabold text-3xl tracking-widest uppercase"
-                  style={{
-                    background: "linear-gradient(90deg, hsl(var(--primary)), hsl(var(--primary-light)))",
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                    backgroundClip: "text",
-                  }}
-                >
+                <span className="font-heading font-extrabold text-3xl tracking-widest uppercase text-white">
                   Strive
                 </span>
-                <span className="text-[11px] tracking-[0.2em] uppercase text-muted-foreground font-medium">
+                <span className="text-[11px] tracking-[0.2em] uppercase text-white/60 font-medium">
                   Web Design & Development
                 </span>
               </div>
