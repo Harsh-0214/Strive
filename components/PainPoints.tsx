@@ -2,50 +2,36 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { Globe, AlertTriangle, TrendingDown } from "lucide-react";
 
-const cards = [
+const problems = [
   {
-    num: "01",
-    Icon: Globe,
-    title: "No website yet",
-    body: "You're invisible to customers searching online. If they can't find you, they'll find someone else — every single time.",
-    iconColor: "text-blue-600",
-    iconBg: "bg-blue-500/10",
-    borderAccent: "border-l-4 border-l-blue-600",
+    number: "01",
+    title: "No website at all.",
+    body: "You don't exist to anyone searching online. If they can't find you, they find your competitors — every single time.",
   },
   {
-    num: "02",
-    Icon: AlertTriangle,
-    title: "Outdated site",
-    body: "First impressions matter. A bad one costs you. An old or broken website signals that your business isn't serious.",
-    iconColor: "text-violet-500",
-    iconBg: "bg-violet-500/10",
-    borderAccent: "border-l-4 border-l-violet-500",
+    number: "02",
+    title: "Outdated, broken site.",
+    body: "Worse than having none. It destroys trust instantly. Visitors leave in seconds and never come back.",
   },
   {
-    num: "03",
-    Icon: TrendingDown,
-    title: "Losing customers",
-    body: "Every day without a great site is money left behind. Your competitors aren't waiting — and neither are your potential customers.",
-    iconColor: "text-red-500",
-    iconBg: "bg-red-500/10",
-    borderAccent: "border-l-4 border-l-red-500",
+    number: "03",
+    title: "Losing customers every day.",
+    body: "Every day without a professional site costs real money. Your competitors aren't waiting — and neither are your customers.",
   },
 ];
 
-const containerVariants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.14 } },
-};
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 36 },
-  visible: {
+const rowVariants = {
+  hidden: { opacity: 0, x: -40 },
+  visible: (i: number) => ({
     opacity: 1,
-    y: 0,
-    transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] },
-  },
+    x: 0,
+    transition: {
+      duration: 0.6,
+      delay: i * 0.12,
+      ease: [0.23, 1, 0.32, 1],
+    },
+  }),
 };
 
 export default function PainPoints() {
@@ -55,113 +41,118 @@ export default function PainPoints() {
   return (
     <section
       ref={ref}
-      className="py-20 lg:py-28 overflow-hidden bg-muted"
+      className="relative py-20 lg:py-32 overflow-hidden"
+      style={{ background: "#F5F0E8" }}
       aria-labelledby="pain-heading"
     >
-      <div className="max-w-7xl mx-auto section-padding">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
+      <div className="max-w-6xl mx-auto section-padding">
+        {/* Label */}
+        <motion.p
+          initial={{ opacity: 0, y: 12 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.55, ease: "easeOut" }}
-          className="text-center mb-14"
+          transition={{ duration: 0.45, ease: [0.23, 1, 0.32, 1] }}
+          className="text-xs font-semibold uppercase tracking-widest mb-6"
+          style={{ color: "#6B6B6B" }}
         >
-          <h2
-            id="pain-heading"
-            className="font-heading font-extrabold text-3xl sm:text-4xl md:text-5xl text-foreground tracking-tight"
-          >
-            Sound familiar?
-          </h2>
-          <p className="mt-4 text-muted-foreground text-lg max-w-xl mx-auto">
-            Most small businesses fall into one of these traps. All three are fixable.
-          </p>
-        </motion.div>
+          The Problem
+        </motion.p>
 
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
-          className="flex flex-col md:flex-row gap-6"
-          role="list"
+        {/* Big headline */}
+        <motion.h2
+          id="pain-heading"
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.06, ease: [0.23, 1, 0.32, 1] }}
+          className="font-heading font-extrabold leading-none tracking-tight mb-16 lg:mb-20"
+          style={{
+            fontSize: "clamp(2.5rem, 7vw, 6rem)",
+            color: "#0A0A0A",
+            fontWeight: 800,
+          }}
         >
-          {/* First card: larger (flex-[2] = ~2/3 width) */}
-          {(() => {
-            const { num, Icon, title, body, iconColor, iconBg, borderAccent } = cards[0];
-            return (
-              <motion.article
-                key={title}
-                variants={cardVariants}
-                role="listitem"
-                className={`group relative rounded-2xl flex flex-col overflow-hidden cursor-default transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lg flex-1 md:flex-[2] bg-card border border-border shadow-sm ${borderAccent}`}
-              >
-                {/* Oversized decorative number */}
+          You&rsquo;re invisible.
+          <br />
+          <span style={{ color: "#6B6B6B" }}>Your competitors aren&rsquo;t.</span>
+        </motion.h2>
+
+        {/* Problem rows */}
+        <div className="flex flex-col" role="list">
+          {problems.map((problem, i) => (
+            <motion.div
+              key={problem.number}
+              custom={i}
+              variants={rowVariants}
+              initial="hidden"
+              animate={inView ? "visible" : "hidden"}
+              role="listitem"
+              className="group"
+            >
+              <div className="flex items-start gap-6 lg:gap-12 py-8 lg:py-10">
+                {/* Number */}
                 <span
-                  className="absolute bottom-3 right-4 font-heading font-extrabold text-8xl leading-none text-foreground/[0.07] select-none pointer-events-none"
+                  className="font-heading font-black leading-none flex-shrink-0 select-none"
+                  style={{
+                    fontSize: "clamp(3rem, 6vw, 5rem)",
+                    color: "rgba(10,10,10,0.10)",
+                  }}
                   aria-hidden="true"
                 >
-                  {num}
+                  {problem.number}
                 </span>
 
-                <div className="relative p-8 pt-7">
-                  <div
-                    className={`w-11 h-11 rounded-xl ${iconBg} flex items-center justify-center mb-5`}
-                  >
-                    <Icon
-                      size={22}
-                      strokeWidth={1.75}
-                      className={iconColor}
+                {/* Em dash + content */}
+                <div className="flex-1 pt-1 lg:pt-2">
+                  <div className="flex items-center gap-4 mb-3">
+                    <span
+                      className="hidden lg:block w-12 h-px flex-shrink-0"
+                      style={{ background: "rgba(10,10,10,0.2)" }}
                       aria-hidden="true"
                     />
+                    <h3
+                      className="font-heading font-bold"
+                      style={{
+                        fontSize: "clamp(1.1rem, 2.5vw, 1.6rem)",
+                        color: "#0A0A0A",
+                      }}
+                    >
+                      {problem.title}
+                    </h3>
                   </div>
-                  <h3 className="font-heading font-bold text-xl text-foreground mb-3">
-                    {title}
-                  </h3>
-                  <p className="text-muted-foreground leading-relaxed text-[0.9375rem]">
-                    {body}
+                  <p
+                    className="leading-relaxed max-w-xl"
+                    style={{
+                      fontSize: "clamp(0.9rem, 1.5vw, 1.05rem)",
+                      color: "#6B6B6B",
+                    }}
+                  >
+                    {problem.body}
                   </p>
                 </div>
-              </motion.article>
-            );
-          })()}
-
-          {/* Cards 2 and 3: stacked in a column (flex-1 = ~1/3 width) */}
-          <div className="flex flex-col gap-6 flex-1">
-            {cards.slice(1).map(({ num, Icon, title, body, iconColor, iconBg, borderAccent }) => (
-              <motion.article
-                key={title}
-                variants={cardVariants}
-                role="listitem"
-                className={`group relative rounded-2xl flex flex-col overflow-hidden cursor-default transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lg flex-1 bg-card border border-border shadow-sm ${borderAccent}`}
-              >
-                {/* Oversized decorative number */}
-                <span
-                  className="absolute bottom-3 right-4 font-heading font-extrabold text-8xl leading-none text-foreground/[0.07] select-none pointer-events-none"
+              </div>
+              {i < problems.length - 1 && (
+                <div
+                  className="w-full h-px"
+                  style={{ background: "rgba(10,10,10,0.10)" }}
                   aria-hidden="true"
-                >
-                  {num}
-                </span>
+                />
+              )}
+            </motion.div>
+          ))}
+        </div>
 
-                <div className="relative p-8 pt-7">
-                  <div
-                    className={`w-11 h-11 rounded-xl ${iconBg} flex items-center justify-center mb-5`}
-                  >
-                    <Icon
-                      size={22}
-                      strokeWidth={1.75}
-                      className={iconColor}
-                      aria-hidden="true"
-                    />
-                  </div>
-                  <h3 className="font-heading font-bold text-xl text-foreground mb-3">
-                    {title}
-                  </h3>
-                  <p className="text-muted-foreground leading-relaxed text-[0.9375rem]">
-                    {body}
-                  </p>
-                </div>
-              </motion.article>
-            ))}
-          </div>
-        </motion.div>
+        {/* Closing line */}
+        <motion.p
+          initial={{ opacity: 0, y: 16 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.5, ease: [0.23, 1, 0.32, 1] }}
+          className="text-center font-heading font-bold italic mt-16"
+          style={{
+            fontSize: "clamp(1.25rem, 3vw, 2rem)",
+            color: "#0A0A0A",
+          }}
+        >
+          That&rsquo;s where Strive comes in.
+        </motion.p>
       </div>
     </section>
   );

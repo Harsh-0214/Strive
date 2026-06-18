@@ -8,36 +8,25 @@ const steps = [
   {
     number: "01",
     icon: MessageSquare,
-    title: "Tell us about your business",
-    body: "Fill out a quick form or hop on a call. We learn about your goals, your customers, and what makes you great.",
+    title: "Consultation & Discovery",
+    body: "Tell us about your business, goals, and vision. We'll map out exactly what you need — no fluff, no jargon, just clarity.",
+    detail: "~30 min call",
   },
   {
     number: "02",
     icon: Palette,
-    title: "We design and build your site",
-    body: "Our team handles everything — design, development, copy, and testing. You review and we refine until it's perfect.",
+    title: "Design & Build",
+    body: "Our team handles everything — design, development, copy, and testing. You review and we refine until every pixel is right.",
+    detail: "1–4 weeks",
   },
   {
     number: "03",
     icon: Rocket,
-    title: "You launch and start growing",
+    title: "Launch & Grow",
     body: "We push your site live, walk you through everything, and hand you the keys. Then the growth starts.",
+    detail: "Day 1 live",
   },
 ];
-
-const containerVariants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.15 } },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 32 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] },
-  },
-};
 
 export default function HowItWorks() {
   const ref = useRef<HTMLElement>(null);
@@ -47,117 +36,129 @@ export default function HowItWorks() {
     <section
       id="how-it-works"
       ref={ref}
-      className="py-20 lg:py-28 bg-muted"
+      className="py-20 lg:py-32 bg-white"
       aria-labelledby="how-heading"
     >
-      <div className="max-w-7xl mx-auto section-padding">
+      <div className="max-w-6xl mx-auto section-padding">
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.55, ease: "easeOut" }}
-          className="text-center mb-16"
+          transition={{ duration: 0.55, ease: [0.23, 1, 0.32, 1] }}
+          className="mb-16 lg:mb-24"
         >
+          <p
+            className="text-xs font-semibold uppercase tracking-widest mb-4"
+            style={{ color: "#6B6B6B" }}
+          >
+            The Process
+          </p>
           <h2
             id="how-heading"
-            className="font-heading font-extrabold text-3xl sm:text-4xl md:text-5xl text-foreground tracking-tight"
+            className="font-heading font-extrabold tracking-tight"
+            style={{
+              fontSize: "clamp(2rem, 5vw, 3.5rem)",
+              color: "#0A0A0A",
+            }}
           >
-            Getting online has{" "}
-            <span
-              style={{
-                background:
-                  "linear-gradient(90deg, hsl(var(--primary)), hsl(var(--primary-light)))",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-              }}
-            >
-              never been easier
-            </span>
+            Getting online has never been easier
           </h2>
         </motion.div>
 
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
-          className="relative flex flex-col gap-16 md:gap-24"
-          aria-label="Steps to get started"
-        >
-          {/* Vertical line (desktop only) */}
-          <div
-            className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px -translate-x-1/2 overflow-hidden"
-            aria-hidden="true"
-          >
+        {/* Steps */}
+        <div className="flex flex-col" aria-label="Steps to get started">
+          {steps.map(({ number, icon: Icon, title, body, detail }, i) => (
             <motion.div
-              className="w-full"
-              style={{
-                background:
-                  "linear-gradient(180deg, hsl(var(--primary-dark)), hsl(var(--primary-light)))",
+              key={number}
+              initial={{ opacity: 0, y: 36 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{
+                duration: 0.6,
+                delay: i * 0.15,
+                ease: [0.23, 1, 0.32, 1],
               }}
-              initial={{ height: "0%" }}
-              animate={inView ? { height: "100%" } : {}}
-              transition={{ duration: 1.2, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            />
-          </div>
-
-          {steps.map(({ number, icon: Icon, title, body }, i) => {
-            const isLeft = i % 2 === 0;
-            return (
-              <motion.div
-                key={number}
-                variants={itemVariants}
-                className={`relative flex flex-col md:flex-row items-center gap-8 md:gap-16 ${
-                  isLeft ? "" : "md:flex-row-reverse"
-                }`}
-              >
-                {/* Content side */}
-                <div
-                  className={`flex-1 text-center ${
-                    isLeft ? "md:text-right" : "md:text-left"
-                  }`}
-                >
-                  <p className="font-heading font-extrabold text-7xl text-foreground/[0.06] leading-none mb-2">
+            >
+              <div className="flex flex-col lg:flex-row items-start lg:items-center gap-6 lg:gap-12 py-10 lg:py-14">
+                {/* Big number */}
+                <div className="flex-shrink-0 relative">
+                  <span
+                    className="font-heading font-black leading-none select-none"
+                    style={{
+                      fontSize: "clamp(5rem, 10vw, 8rem)",
+                      color: "#F0F0F0",
+                      lineHeight: 1,
+                    }}
+                    aria-hidden="true"
+                  >
                     {number}
-                  </p>
-                  <h3 className="font-heading font-bold text-2xl text-foreground mb-3">
-                    {title}
-                  </h3>
+                  </span>
+                  {/* Step number overlay */}
+                  <span
+                    className="absolute top-1/2 left-1/2 font-heading font-black text-lg"
+                    style={{
+                      transform: "translate(-50%, -50%)",
+                      color: "#0A0A0A",
+                    }}
+                    aria-hidden="true"
+                  >
+                    {i + 1}
+                  </span>
+                </div>
+
+                {/* Content */}
+                <div className="flex-1">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div
+                      className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
+                      style={{ background: "#F5F0E8" }}
+                    >
+                      <Icon
+                        size={18}
+                        strokeWidth={1.75}
+                        style={{ color: "#00B4D8" }}
+                        aria-hidden="true"
+                      />
+                    </div>
+                    <h3
+                      className="font-heading font-bold"
+                      style={{ fontSize: "clamp(1.25rem, 2.5vw, 1.75rem)", color: "#0A0A0A" }}
+                    >
+                      {title}
+                    </h3>
+                  </div>
                   <p
-                    className={`text-muted-foreground leading-relaxed max-w-sm mx-auto md:mx-0 ${
-                      isLeft ? "md:ml-auto" : ""
-                    }`}
+                    className="leading-relaxed max-w-xl"
+                    style={{ color: "#6B6B6B", fontSize: "1.0625rem" }}
                   >
                     {body}
                   </p>
                 </div>
 
-                {/* Center icon — sits on the vertical line */}
-                <div className="relative shrink-0 z-10">
-                  <div
-                    className="w-20 h-20 rounded-full flex items-center justify-center shadow-lg"
+                {/* Right: detail label */}
+                <div className="lg:flex-shrink-0 lg:text-right">
+                  <span
+                    className="inline-block px-4 py-2 rounded-full text-sm font-semibold"
                     style={{
-                      background:
-                        "linear-gradient(135deg, hsl(var(--primary-dark)), hsl(var(--primary-light)))",
+                      background: i === 0 ? "rgba(0,180,216,0.08)" : i === 1 ? "rgba(232,197,71,0.12)" : "rgba(10,10,10,0.06)",
+                      color: i === 0 ? "#00B4D8" : i === 1 ? "#B89100" : "#0A0A0A",
                     }}
                   >
-                    <Icon
-                      size={32}
-                      strokeWidth={1.5}
-                      className="text-primary-foreground"
-                      aria-hidden="true"
-                    />
-                  </div>
-                  <span className="absolute -top-2 -right-2 w-7 h-7 rounded-full bg-primary text-primary-foreground text-xs font-bold flex items-center justify-center shadow-md">
-                    {i + 1}
+                    {detail}
                   </span>
                 </div>
+              </div>
 
-                {/* Empty flex-1 for the other side */}
-                <div className="hidden md:block flex-1" />
-              </motion.div>
-            );
-          })}
-        </motion.div>
+              {/* Horizontal rule between steps */}
+              {i < steps.length - 1 && (
+                <div
+                  className="w-full h-px"
+                  style={{ background: "rgba(10,10,10,0.08)" }}
+                  aria-hidden="true"
+                />
+              )}
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );

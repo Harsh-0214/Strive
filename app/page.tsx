@@ -4,7 +4,6 @@ import Hero from "@/components/Hero";
 import Stats from "@/components/Stats";
 import Marquee from "@/components/Marquee";
 import PainPoints from "@/components/PainPoints";
-import HopeBridge from "@/components/HopeBridge";
 import Packages from "@/components/Packages";
 import ComparisonTable from "@/components/ComparisonTable";
 import StriveCare from "@/components/StriveCare";
@@ -32,7 +31,6 @@ export default function Home() {
         <Stats />
         <Marquee />
         <PainPoints />
-        <HopeBridge />
         <Packages />
         <ComparisonTable />
         <StriveCare />

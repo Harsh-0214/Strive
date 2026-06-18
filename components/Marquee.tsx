@@ -39,7 +39,8 @@ export default function Marquee() {
 
   return (
     <div
-      className="relative py-5 overflow-hidden bg-background border-y border-border"
+      className="relative py-5 overflow-hidden"
+      style={{ background: "#0d1117" }}
       aria-label="Industries we serve"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
@@ -50,8 +51,7 @@ export default function Marquee() {
       <div
         className="absolute left-0 top-0 bottom-0 w-24 z-10 pointer-events-none"
         style={{
-          background:
-            "linear-gradient(90deg, hsl(var(--background)) 0%, transparent 100%)",
+          background: "linear-gradient(90deg, #0d1117 0%, transparent 100%)",
         }}
         aria-hidden="true"
       />
@@ -59,13 +59,12 @@ export default function Marquee() {
       <div
         className="absolute right-0 top-0 bottom-0 w-24 z-10 pointer-events-none"
         style={{
-          background:
-            "linear-gradient(270deg, hsl(var(--background)) 0%, transparent 100%)",
+          background: "linear-gradient(270deg, #0d1117 0%, transparent 100%)",
         }}
         aria-hidden="true"
       />
 
-      {/* Visually hidden static list for screen readers */}
+      {/* Screen reader list */}
       <ul className="sr-only" aria-label="Industries we serve">
         {items.map(({ label }) => (
           <li key={label}>{label}</li>
@@ -73,9 +72,9 @@ export default function Marquee() {
       </ul>
 
       <div
-        className="flex gap-6 w-max"
+        className="flex gap-4 w-max"
         style={{
-          animation: "marquee 32s linear infinite",
+          animation: "marquee 26s linear infinite",
           animationPlayState: paused ? "paused" : "running",
           willChange: "transform",
         }}
@@ -84,9 +83,18 @@ export default function Marquee() {
         {all.map(({ icon: Icon, label }, i) => (
           <div
             key={`${label}-${i}`}
-            className="flex items-center gap-2 px-4 py-2 rounded-full border border-border bg-muted text-muted-foreground whitespace-nowrap text-sm font-medium select-none"
+            className="flex items-center gap-2.5 px-4 py-2 rounded-full whitespace-nowrap text-sm font-medium select-none"
+            style={{
+              border: "1px solid rgba(255,255,255,0.10)",
+              color: "rgba(255,255,255,0.50)",
+            }}
           >
-            <Icon size={14} strokeWidth={1.75} aria-hidden="true" />
+            <span
+              className="w-1.5 h-1.5 rounded-full flex-shrink-0"
+              style={{ background: i % 2 === 0 ? "#00B4D8" : "#E8C547" }}
+              aria-hidden="true"
+            />
+            <Icon size={13} strokeWidth={1.6} aria-hidden="true" />
             {label}
           </div>
         ))}
