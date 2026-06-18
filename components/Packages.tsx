@@ -211,6 +211,18 @@ export default function Packages() {
             )
           )}
         </motion.div>
+
+        {/* Flat-rate reassurance */}
+        <motion.p
+          initial={{ opacity: 0, y: 12 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.45, ease: "easeOut" }}
+          className="text-center text-muted-foreground text-sm mt-10"
+        >
+          Every package is{" "}
+          <span className="font-semibold text-foreground">flat-rate</span>.
+          No hourly billing. No surprise invoices. No hidden fees. Ever.
+        </motion.p>
       </div>
     </section>
   );

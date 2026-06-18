@@ -35,6 +35,11 @@
     --success: 142 71% 45%;
     --success-foreground: 0 0% 100%;
 
+    /* Hope bridge warm background */
+    --hope-bg: 38 55% 96%;
+    --hope-text: 222 47% 11%;
+    --hope-subtext: 222 20% 38%;
+
     /* Radii */
     --radius-sm: 0.375rem;
     --radius: 0.5rem;
@@ -43,24 +48,27 @@
     --radius-xl: 1.25rem;
   }
 
-  /* Dark mode overrides */
+  /* Dark mode overrides — warm dark, not cold navy */
   [data-theme="dark"] {
-    --background: 222 42% 7%;
-    --foreground: 214 32% 92%;
-    --muted: 220 35% 12%;
-    --muted-foreground: 215 20% 60%;
-    --border: 220 28% 18%;
-    --card: 220 38% 10%;
-    --card-foreground: 214 32% 92%;
-    --primary: 217 91% 65%;
-    --primary-light: 217 91% 76%;
-    --primary-foreground: 222 47% 9%;
-    --accent: 33 98% 60%;
-    --care-bg: 222 47% 4%;
-    --care-card: 220 42% 8%;
-    --care-border: 220 30% 15%;
+    --background: 224 20% 9%;
+    --foreground: 38 20% 93%;
+    --muted: 224 18% 14%;
+    --muted-foreground: 220 14% 58%;
+    --border: 224 16% 20%;
+    --card: 224 20% 11%;
+    --card-foreground: 38 20% 93%;
+    --primary: 217 91% 67%;
+    --primary-light: 217 91% 78%;
+    --primary-foreground: 224 20% 9%;
+    --accent: 33 98% 62%;
+    --care-bg: 224 22% 6%;
+    --care-card: 224 22% 9%;
+    --care-border: 224 18% 16%;
     --destructive: 0 84% 65%;
     --success: 142 71% 50%;
+    --hope-bg: 224 20% 13%;
+    --hope-text: 38 20% 93%;
+    --hope-subtext: 220 14% 65%;
   }
 
   * {
@@ -131,6 +139,12 @@
   .section-padding {
     @apply px-4 sm:px-6 lg:px-8;
   }
+}
+
+/* Marquee animation */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
 }
 
 /* Scrollbar */

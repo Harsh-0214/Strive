@@ -52,7 +52,7 @@ export default function Results() {
             id="results-heading"
             className="font-heading font-extrabold text-3xl sm:text-4xl md:text-5xl text-foreground tracking-tight"
           >
-            The{" "}
+            Here&apos;s what happens when{" "}
             <span
               style={{
                 background:
@@ -62,12 +62,11 @@ export default function Results() {
                 backgroundClip: "text",
               }}
             >
-              numbers
-            </span>{" "}
-            speak for themselves.
+              you stop hiding.
+            </span>
           </h2>
           <p className="mt-4 text-muted-foreground text-lg max-w-xl mx-auto">
-            Average results our clients see after launching with Strive.
+            Average results our clients see in the first 90 days after launching with Strive.
           </p>
         </motion.div>
 

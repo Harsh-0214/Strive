@@ -102,7 +102,8 @@ export default function StriveCare() {
           </h2>
           <p className="max-w-2xl mx-auto text-care-muted text-lg leading-relaxed">
             A monthly plan that keeps your website updated, secure, and
-            performing — without the surprise invoices.
+            performing — without the surprise invoices. Think of it as having
+            a web developer on your team, without the salary.
           </p>
         </motion.div>
 

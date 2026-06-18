@@ -2,7 +2,9 @@ import dynamic from "next/dynamic";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Stats from "@/components/Stats";
+import Marquee from "@/components/Marquee";
 import PainPoints from "@/components/PainPoints";
+import HopeBridge from "@/components/HopeBridge";
 import Packages from "@/components/Packages";
 import StriveCare from "@/components/StriveCare";
 import HowItWorks from "@/components/HowItWorks";
@@ -25,7 +27,9 @@ export default function Home() {
       <main id="main-content">
         <Hero />
         <Stats />
+        <Marquee />
         <PainPoints />
+        <HopeBridge />
         <Packages />
         <StriveCare />
         <HowItWorks />
