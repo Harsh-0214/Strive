@@ -1,0 +1,107 @@
+import { TrendingUp, Instagram, Facebook, Linkedin } from "lucide-react";
+
+const footerLinks = [
+  { label: "Packages", href: "#packages" },
+  { label: "Strive Care", href: "#strive-care" },
+  { label: "How It Works", href: "#how-it-works" },
+  { label: "FAQ", href: "#faq" },
+  { label: "Get a Quote", href: "#contact" },
+];
+
+const socialLinks = [
+  {
+    label: "Instagram",
+    Icon: Instagram,
+    href: "https://instagram.com",
+  },
+  {
+    label: "Facebook",
+    Icon: Facebook,
+    href: "https://facebook.com",
+  },
+  {
+    label: "LinkedIn",
+    Icon: Linkedin,
+    href: "https://linkedin.com",
+  },
+];
+
+export default function Footer() {
+  return (
+    <footer className="bg-foreground text-primary-foreground" role="contentinfo">
+      <div className="max-w-7xl mx-auto section-padding py-14">
+        {/* Top */}
+        <div className="flex flex-col md:flex-row items-start justify-between gap-10 mb-10">
+          {/* Brand */}
+          <div className="flex flex-col gap-4 max-w-xs">
+            <a
+              href="#"
+              className="flex items-center gap-2 group"
+              aria-label="Strive — go to top"
+            >
+              <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-primary">
+                <TrendingUp
+                  size={18}
+                  strokeWidth={2.5}
+                  className="text-primary-foreground"
+                  aria-hidden="true"
+                />
+              </div>
+              <span className="font-heading font-extrabold text-xl text-white tracking-tight">
+                Strive
+              </span>
+            </a>
+            <p className="text-sm text-white/60 leading-relaxed">
+              We build the web presence your business deserves.
+            </p>
+            {/* Social */}
+            <div className="flex items-center gap-3">
+              {socialLinks.map(({ label, Icon, href }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Strive on ${label}`}
+                  className="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center text-white/60 hover:text-white hover:bg-white/20 transition-colors duration-200"
+                >
+                  <Icon size={17} strokeWidth={1.75} aria-hidden="true" />
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* Nav links */}
+          <nav aria-label="Footer navigation">
+            <ul className="flex flex-wrap gap-x-8 gap-y-3" role="list">
+              {footerLinks.map(({ label, href }) => (
+                <li key={href}>
+                  <a
+                    href={href}
+                    className="text-sm text-white/60 hover:text-white transition-colors duration-150"
+                  >
+                    {label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </div>
+
+        {/* Divider */}
+        <div className="border-t border-white/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/40">
+          <p>© 2025 Strive. All rights reserved.</p>
+          <p>
+            Built by{" "}
+            <a
+              href="#"
+              className="text-white/60 hover:text-white transition-colors duration-150"
+            >
+              Strive
+            </a>
+          </p>
+        </div>
+      </div>
+    </footer>
+  );
+}
