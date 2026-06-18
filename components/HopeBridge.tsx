@@ -20,7 +20,7 @@ export default function HopeBridge() {
         className="absolute inset-0 pointer-events-none"
         style={{
           backgroundImage:
-            "radial-gradient(ellipse 70% 60% at 80% 50%, hsl(33 98% 54% / 0.08) 0%, transparent 70%), radial-gradient(ellipse 50% 50% at 20% 80%, hsl(220 85% 35% / 0.05) 0%, transparent 60%)",
+            "radial-gradient(ellipse 70% 60% at 80% 50%, hsl(33 98% 54% / 0.08) 0%, transparent 70%), radial-gradient(ellipse 50% 50% at 20% 80%, hsl(var(--primary) / 0.05) 0%, transparent 60%)",
         }}
         aria-hidden="true"
       />

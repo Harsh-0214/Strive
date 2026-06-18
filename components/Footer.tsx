@@ -98,7 +98,7 @@ export default function Footer() {
 
         {/* Divider */}
         <div className="border-t border-white/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/60">
-          <p>© 2025 Strive. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Strive. All rights reserved.</p>
           <p>
             Built by{" "}
             <a

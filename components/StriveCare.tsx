@@ -18,30 +18,39 @@ const plans = [
     price: "$49",
     period: "/mo",
     cta: "Start Starter Care",
+    features: [
+      { icon: RefreshCw, text: "Content updates (48hr turnaround)" },
+      { icon: Activity, text: "Uptime monitoring" },
+      { icon: BarChart2, text: "Monthly analytics summary" },
+    ],
   },
   {
     tier: "Business Care",
     price: "$99",
     period: "/mo",
     cta: "Start Business Care",
+    popular: true,
+    features: [
+      { icon: RefreshCw, text: "Content updates (24hr turnaround)" },
+      { icon: Activity, text: "Uptime monitoring" },
+      { icon: BarChart2, text: "Monthly analytics report" },
+      { icon: ShieldCheck, text: "Security & software updates" },
+      { icon: Phone, text: "Monthly 15-min check-in call" },
+    ],
   },
   {
     tier: "Premium Care",
     price: "$199",
     period: "/mo",
     cta: "Start Premium Care",
+    features: [
+      { icon: RefreshCw, text: "Content updates (same-day priority)" },
+      { icon: Activity, text: "Uptime monitoring" },
+      { icon: BarChart2, text: "Monthly analytics + SEO report" },
+      { icon: ShieldCheck, text: "Security & software updates" },
+      { icon: Phone, text: "Bi-weekly strategy calls" },
+    ],
   },
-];
-
-const inclusions = [
-  {
-    icon: RefreshCw,
-    text: "Unlimited small content updates (48hr turnaround)",
-  },
-  { icon: BarChart2, text: "Monthly analytics report" },
-  { icon: ShieldCheck, text: "Security & software updates" },
-  { icon: Activity, text: "Uptime monitoring" },
-  { icon: Phone, text: "Monthly 15-min check-in call" },
 ];
 
 const containerVariants = {
@@ -112,18 +121,39 @@ export default function StriveCare() {
           variants={containerVariants}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
-          className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-12"
+          className="grid grid-cols-1 md:grid-cols-3 gap-5"
         >
-          {plans.map(({ tier, price, period, cta }) => (
+          {plans.map(({ tier, price, period, cta, popular, features }) => (
             <motion.article
               key={tier}
               variants={cardVariants}
-              className="bg-care-card border border-care-border rounded-2xl p-7 flex flex-col gap-4 hover:border-primary/50 transition-colors duration-300"
+              className={`relative bg-care-card border rounded-2xl p-7 flex flex-col gap-5 transition-colors duration-300 overflow-hidden ${
+                popular
+                  ? "border-primary/50 shadow-lg shadow-primary/10"
+                  : "border-care-border hover:border-primary/40"
+              }`}
             >
+              {popular && (
+                <div
+                  className="absolute top-0 left-0 right-0 h-0.5"
+                  style={{
+                    background: "linear-gradient(90deg, hsl(var(--primary)), hsl(var(--primary-light)))",
+                  }}
+                  aria-hidden="true"
+                />
+              )}
+
               <div>
-                <h3 className="font-heading font-bold text-lg text-care-foreground mb-2">
-                  {tier}
-                </h3>
+                <div className="flex items-center justify-between mb-2">
+                  <h3 className="font-heading font-bold text-lg text-care-foreground">
+                    {tier}
+                  </h3>
+                  {popular && (
+                    <span className="text-xs font-bold text-primary bg-primary/15 px-2.5 py-1 rounded-full border border-primary/25">
+                      Popular
+                    </span>
+                  )}
+                </div>
                 <div className="flex items-end gap-1">
                   <span className="font-heading font-extrabold text-4xl text-care-foreground">
                     {price}
@@ -131,9 +161,25 @@ export default function StriveCare() {
                   <span className="text-care-muted text-base mb-1">{period}</span>
                 </div>
               </div>
+
+              <ul className="flex flex-col gap-3 flex-1" role="list">
+                {features.map(({ icon: Icon, text }) => (
+                  <li key={text} className="flex items-start gap-3 text-sm text-care-muted">
+                    <div className="w-7 h-7 rounded-lg bg-primary/12 flex items-center justify-center shrink-0 mt-0.5">
+                      <Icon size={14} strokeWidth={1.75} className="text-primary" aria-hidden="true" />
+                    </div>
+                    <span className="leading-snug pt-1">{text}</span>
+                  </li>
+                ))}
+              </ul>
+
               <a
                 href="#contact"
-                className="inline-flex items-center justify-center gap-2 w-full px-5 py-3 rounded-xl bg-primary text-primary-foreground font-semibold text-sm hover:opacity-90 active:scale-95 transition-all duration-200 shadow-md shadow-primary/20 mt-auto"
+                className={`inline-flex items-center justify-center gap-2 w-full px-5 py-3 rounded-xl font-semibold text-sm active:scale-95 transition-all duration-200 ${
+                  popular
+                    ? "bg-primary text-primary-foreground hover:opacity-90 shadow-md shadow-primary/20"
+                    : "bg-white/10 text-care-foreground border border-white/15 hover:bg-white/15 transition-colors"
+                }`}
               >
                 {cta}
                 <ArrowRight size={16} aria-hidden="true" />
@@ -142,48 +188,17 @@ export default function StriveCare() {
           ))}
         </motion.div>
 
-        {/* Shared inclusions */}
+        {/* No lock-in note */}
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.55, delay: 0.35, ease: "easeOut" }}
-          className="bg-care-card border border-care-border rounded-2xl p-8"
+          transition={{ duration: 0.5, delay: 0.4, ease: "easeOut" }}
+          className="flex items-center justify-center gap-2 mt-8"
         >
-          <p className="font-heading font-bold text-care-foreground text-lg text-center mb-7">
-            All Strive Care plans include:
+          <Check size={15} strokeWidth={2.5} className="text-success shrink-0" aria-hidden="true" />
+          <p className="text-care-muted text-sm">
+            No lock-in contracts. Cancel or pause anytime.
           </p>
-          <ul
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
-            role="list"
-          >
-            {inclusions.map(({ icon: Icon, text }) => (
-              <li
-                key={text}
-                className="flex items-start gap-3 text-sm text-care-muted"
-              >
-                <div className="w-8 h-8 rounded-lg bg-primary/15 flex items-center justify-center shrink-0 mt-0.5">
-                  <Icon
-                    size={16}
-                    strokeWidth={1.75}
-                    className="text-primary"
-                    aria-hidden="true"
-                  />
-                </div>
-                <span className="leading-snug pt-1">{text}</span>
-              </li>
-            ))}
-          </ul>
-          <div className="mt-6 flex items-center gap-2">
-            <Check
-              size={16}
-              strokeWidth={2.5}
-              className="text-success shrink-0"
-              aria-hidden="true"
-            />
-            <p className="text-care-muted text-sm">
-              No lock-in contracts. Cancel or pause anytime.
-            </p>
-          </div>
         </motion.div>
       </div>
     </section>

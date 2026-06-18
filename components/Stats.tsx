@@ -61,7 +61,7 @@ export default function Stats() {
         className="absolute inset-0 -z-10"
         style={{
           background:
-            "linear-gradient(90deg, hsl(220 85% 35%) 0%, hsl(215 90% 45%) 50%, hsl(220 85% 35%) 100%)",
+            "linear-gradient(90deg, hsl(var(--primary-dark)) 0%, hsl(var(--primary)) 50%, hsl(var(--primary-dark)) 100%)",
         }}
         aria-hidden="true"
       />
