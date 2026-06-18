@@ -265,7 +265,7 @@ export default function Hero() {
 
       {/* Sparkle field */}
       <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
-        {Array.from({ length: 28 }).map((_, i) => (
+        {Array.from({ length: 16 }).map((_, i) => (
           <Sparkle key={i} index={i} />
         ))}
       </div>
