@@ -59,7 +59,7 @@ export default function Footer() {
                 Strive
               </span>
             </a>
-            <p className="text-sm text-white/60 leading-relaxed">
+            <p className="text-sm text-white/75 leading-relaxed">
               We build the web presence your business deserves.
             </p>
             {/* Social */}
@@ -71,7 +71,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`Strive on ${label}`}
-                  className="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center text-white/60 hover:text-white hover:bg-white/20 transition-colors duration-200"
+                  className="w-11 h-11 rounded-lg bg-white/10 flex items-center justify-center text-white/75 hover:text-white hover:bg-white/20 transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-white"
                 >
                   <Icon size={17} strokeWidth={1.75} aria-hidden="true" />
                 </a>
@@ -86,7 +86,7 @@ export default function Footer() {
                 <li key={href}>
                   <a
                     href={href}
-                    className="text-sm text-white/60 hover:text-white transition-colors duration-150"
+                    className="text-sm text-white/75 hover:text-white transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-white"
                   >
                     {label}
                   </a>
@@ -97,13 +97,13 @@ export default function Footer() {
         </div>
 
         {/* Divider */}
-        <div className="border-t border-white/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/40">
+        <div className="border-t border-white/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/60">
           <p>© 2025 Strive. All rights reserved.</p>
           <p>
             Built by{" "}
             <a
               href="#"
-              className="text-white/60 hover:text-white transition-colors duration-150"
+              className="text-white/75 hover:text-white transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-white"
             >
               Strive
             </a>

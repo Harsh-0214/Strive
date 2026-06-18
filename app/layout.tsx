@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, Inter } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "@/lib/theme";
 
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -47,7 +48,15 @@ export default function RootLayout({
       lang="en"
       className={`${plusJakarta.variable} ${inter.variable}`}
     >
-      <body>{children}</body>
+      {/* Anti-FOUC: synchronously apply stored theme before paint */}
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `(function(){try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light'){document.documentElement.setAttribute('data-theme',t);}else if(window.matchMedia('(prefers-color-scheme: dark)').matches){document.documentElement.setAttribute('data-theme','dark');}}catch(e){}})();`,
+        }}
+      />
+      <body>
+        <ThemeProvider>{children}</ThemeProvider>
+      </body>
     </html>
   );
 }

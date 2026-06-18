@@ -60,7 +60,7 @@ function AccordionItem({
           onClick={() => setOpen(!open)}
           className="flex items-center justify-between w-full py-5 text-left gap-4 group focus-visible:outline-2 focus-visible:outline-primary rounded-sm"
         >
-          <span className="font-heading font-semibold text-base sm:text-lg text-foreground group-hover:text-primary transition-colors duration-150">
+          <span className={`font-heading font-semibold text-base sm:text-lg transition-colors duration-150 ${open ? "text-primary" : "text-foreground group-hover:text-primary"}`}>
             {question}
           </span>
           <motion.div

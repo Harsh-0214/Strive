@@ -121,7 +121,7 @@ export default function Packages() {
                 variants={cardVariants}
                 className={`relative rounded-2xl border flex flex-col overflow-hidden transition-all duration-300 hover:-translate-y-1 ${
                   popular
-                    ? "border-primary/60 shadow-2xl shadow-primary/20 ring-1 ring-primary/40 md:-mt-3 md:mb-3"
+                    ? "border-primary/60 shadow-2xl shadow-primary/20 ring-1 ring-primary/40 md:shadow-2xl md:shadow-primary/20"
                     : "border-border shadow-sm hover:shadow-md"
                 } bg-card`}
               style={

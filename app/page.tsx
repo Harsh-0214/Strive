@@ -7,8 +7,11 @@ import Packages from "@/components/Packages";
 import StriveCare from "@/components/StriveCare";
 import HowItWorks from "@/components/HowItWorks";
 import Testimonials from "@/components/Testimonials";
+import Results from "@/components/Results";
 import FAQ from "@/components/FAQ";
 import Footer from "@/components/Footer";
+import ScrollProgress from "@/components/ScrollProgress";
+import MobileCtaBar from "@/components/MobileCtaBar";
 
 const ContactForm = dynamic(() => import("@/components/ContactForm"), {
   ssr: false,
@@ -17,6 +20,7 @@ const ContactForm = dynamic(() => import("@/components/ContactForm"), {
 export default function Home() {
   return (
     <>
+      <ScrollProgress />
       <Navbar />
       <main id="main-content">
         <Hero />
@@ -26,10 +30,12 @@ export default function Home() {
         <StriveCare />
         <HowItWorks />
         <Testimonials />
+        <Results />
         <FAQ />
         <ContactForm />
       </main>
       <Footer />
+      <MobileCtaBar />
     </>
   );
 }

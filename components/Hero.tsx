@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, ChevronDown } from "lucide-react";
 
-const PARTICLE_COUNT = 22;
+const PARTICLE_COUNT = 16;
 
 const businessTypes = [
   "restaurants",
@@ -29,6 +29,7 @@ function FloatingParticle({ index }: { index: number }) {
         height: size,
         left: `${left}%`,
         bottom: "-20px",
+        willChange: "transform",
         background:
           index % 3 === 0
             ? "hsl(33 98% 54% / 0.35)"
@@ -120,7 +121,7 @@ export default function Hero() {
         >
           {/* Eyebrow pill */}
           <motion.div variants={itemVariants}>
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 text-white/85 text-sm font-medium border border-white/15 backdrop-blur-md">
+            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/15 text-white/95 text-sm font-medium border border-white/15 backdrop-blur-md">
               <span
                 className="w-2 h-2 rounded-full bg-accent animate-pulse-glow inline-block"
                 aria-hidden="true"
@@ -190,7 +191,7 @@ export default function Hero() {
           >
             <a
               href="#contact"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold text-base text-white active:scale-95 transition-all duration-200 shadow-xl"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold text-base text-white active:scale-95 transition-all duration-200 shadow-xl focus-visible:outline-2 focus-visible:outline-white"
               style={{
                 background:
                   "linear-gradient(135deg, hsl(33 98% 52%), hsl(25 95% 46%))",
@@ -202,7 +203,7 @@ export default function Hero() {
             </a>
             <a
               href="#packages"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-white/10 text-white font-semibold text-base border border-white/20 hover:bg-white/18 active:scale-95 transition-all duration-200 backdrop-blur-sm"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-white/10 text-white font-semibold text-base border border-white/20 hover:bg-white/18 active:scale-95 transition-all duration-200 backdrop-blur-sm focus-visible:outline-2 focus-visible:outline-white"
             >
               See Our Packages
             </a>

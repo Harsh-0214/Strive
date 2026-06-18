@@ -96,7 +96,7 @@ export default function HowItWorks() {
               }}
               initial={{ width: "0%" }}
               animate={inView ? { width: "100%" } : {}}
-              transition={{ duration: 1.2, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.9, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
             />
           </div>
 
@@ -108,7 +108,7 @@ export default function HowItWorks() {
             >
               {/* Step circle */}
               <div className="relative mb-6">
-                <div className="w-20 h-20 rounded-full bg-background border-2 border-border flex items-center justify-center shadow-sm z-10 relative">
+                <div className="w-20 h-20 rounded-full bg-card border border-border flex items-center justify-center shadow-md z-10 relative">
                   <Icon
                     size={32}
                     strokeWidth={1.5}

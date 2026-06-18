@@ -17,7 +17,7 @@
     --background: 0 0% 100%;
     --foreground: 222 47% 11%;
     --muted: 214 32% 96%;
-    --muted-foreground: 215 16% 47%;
+    --muted-foreground: 215 16% 52%;
     --border: 214 32% 91%;
     --card: 0 0% 100%;
     --card-foreground: 222 47% 11%;
@@ -41,6 +41,26 @@
     --radius-md: 0.625rem;
     --radius-lg: 0.875rem;
     --radius-xl: 1.25rem;
+  }
+
+  /* Dark mode overrides */
+  [data-theme="dark"] {
+    --background: 222 42% 7%;
+    --foreground: 214 32% 92%;
+    --muted: 220 35% 12%;
+    --muted-foreground: 215 20% 60%;
+    --border: 220 28% 18%;
+    --card: 220 38% 10%;
+    --card-foreground: 214 32% 92%;
+    --primary: 217 91% 65%;
+    --primary-light: 217 91% 76%;
+    --primary-foreground: 222 47% 9%;
+    --accent: 33 98% 60%;
+    --care-bg: 222 47% 4%;
+    --care-card: 220 42% 8%;
+    --care-border: 220 30% 15%;
+    --destructive: 0 84% 65%;
+    --success: 142 71% 50%;
   }
 
   * {
@@ -96,6 +116,10 @@
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid hsl(var(--border) / 0.6);
+  }
+
+  [data-theme="dark"] .glass {
+    background: rgba(10, 15, 30, 0.85);
   }
 
   .glass-dark {

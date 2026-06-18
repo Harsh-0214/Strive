@@ -98,7 +98,7 @@ export default function PainPoints() {
 
               {/* Oversized decorative number */}
               <span
-                className="absolute bottom-3 right-4 font-heading font-extrabold text-8xl leading-none text-foreground/[0.04] select-none pointer-events-none"
+                className="absolute bottom-3 right-4 font-heading font-extrabold text-8xl leading-none text-foreground/[0.07] select-none pointer-events-none"
                 aria-hidden="true"
               >
                 {num}

@@ -2,7 +2,7 @@
 
 import { useRef, useState, useId } from "react";
 import { motion, useInView } from "framer-motion";
-import { Loader2, CheckCircle2, AlertCircle } from "lucide-react";
+import { Loader2, CheckCircle2, AlertCircle, ShieldCheck, Zap } from "lucide-react";
 
 type FieldError = string | null;
 
@@ -243,6 +243,28 @@ export default function ContactForm() {
           <p className="text-muted-foreground text-lg leading-relaxed">
             Tell us about your business and we&apos;ll get back to you within 24 hours.
           </p>
+        </motion.div>
+
+        {/* Trust badges */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.55, delay: 0.1, ease: "easeOut" }}
+          className="flex flex-wrap items-center justify-center gap-3 mb-6"
+          aria-label="Trust indicators"
+        >
+          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-muted text-muted-foreground text-xs font-medium">
+            <ShieldCheck size={13} strokeWidth={2} className="text-primary" aria-hidden="true" />
+            100% confidential
+          </span>
+          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-muted text-muted-foreground text-xs font-medium">
+            <Zap size={13} strokeWidth={2} className="text-accent" aria-hidden="true" />
+            24hr response
+          </span>
+          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-muted text-muted-foreground text-xs font-medium">
+            <CheckCircle2 size={13} strokeWidth={2} className="text-success" aria-hidden="true" />
+            No commitment
+          </span>
         </motion.div>
 
         <motion.form
