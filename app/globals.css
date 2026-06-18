@@ -4,43 +4,44 @@
 
 @layer base {
   :root {
-    /* Core palette — deep blue brand */
-    --primary: 220 85% 35%;
-    --primary-light: 217 91% 60%;
+    /* ── Primary: vivid indigo-blue — modern, electric, premium ── */
+    --primary: 226 71% 52%;
+    --primary-light: 212 100% 65%;
+    --primary-dark: 232 68% 36%;
     --primary-foreground: 0 0% 100%;
 
-    /* Accent — amber/orange energy */
-    --accent: 33 98% 54%;
+    /* ── Accent: deep golden amber — energy, warmth, action ── */
+    --accent: 38 100% 54%;
     --accent-foreground: 0 0% 100%;
 
-    /* Neutrals */
+    /* ── Neutrals: cool-tinted for modern feel ── */
     --background: 0 0% 100%;
-    --foreground: 222 47% 11%;
-    --muted: 214 32% 96%;
-    --muted-foreground: 215 16% 52%;
-    --border: 214 32% 91%;
+    --foreground: 226 25% 10%;
+    --muted: 220 22% 96%;
+    --muted-foreground: 220 12% 50%;
+    --border: 220 18% 90%;
     --card: 0 0% 100%;
-    --card-foreground: 222 47% 11%;
+    --card-foreground: 226 25% 10%;
 
-    /* Strive Care — distinct dark navy */
-    --care-bg: 222 47% 9%;
-    --care-foreground: 214 32% 96%;
-    --care-muted: 215 20% 55%;
-    --care-card: 220 39% 14%;
-    --care-border: 220 30% 22%;
+    /* ── Strive Care dark section ── */
+    --care-bg: 228 40% 8%;
+    --care-foreground: 218 30% 94%;
+    --care-muted: 220 16% 54%;
+    --care-card: 228 35% 13%;
+    --care-border: 228 24% 20%;
 
-    /* Semantic */
-    --destructive: 0 84% 60%;
+    /* ── Semantic ── */
+    --destructive: 0 84% 58%;
     --destructive-foreground: 0 0% 100%;
-    --success: 142 71% 45%;
+    --success: 152 68% 42%;
     --success-foreground: 0 0% 100%;
 
-    /* Hope bridge warm background */
-    --hope-bg: 38 55% 96%;
-    --hope-text: 222 47% 11%;
-    --hope-subtext: 222 20% 38%;
+    /* ── HopeBridge: warm cream break ── */
+    --hope-bg: 40 50% 96%;
+    --hope-text: 226 25% 10%;
+    --hope-subtext: 224 16% 38%;
 
-    /* Radii */
+    /* ── Radii ── */
     --radius-sm: 0.375rem;
     --radius: 0.5rem;
     --radius-md: 0.625rem;
@@ -48,37 +49,49 @@
     --radius-xl: 1.25rem;
   }
 
-  /* Dark mode overrides — warm dark, not cold navy */
+  /* ── Dark mode: cool premium near-black (Linear / Vercel aesthetic) ── */
   [data-theme="dark"] {
-    --background: 224 20% 9%;
-    --foreground: 38 20% 93%;
-    --muted: 224 18% 14%;
-    --muted-foreground: 220 14% 58%;
-    --border: 224 16% 20%;
-    --card: 224 20% 11%;
-    --card-foreground: 38 20% 93%;
-    --primary: 217 91% 67%;
-    --primary-light: 217 91% 78%;
-    --primary-foreground: 224 20% 9%;
-    --accent: 33 98% 62%;
-    --care-bg: 224 22% 6%;
-    --care-card: 224 22% 9%;
-    --care-border: 224 18% 16%;
+    --background: 228 18% 7%;
+    --foreground: 216 28% 93%;
+    --muted: 228 16% 12%;
+    --muted-foreground: 220 12% 58%;
+    --border: 228 14% 18%;
+    --card: 228 18% 10%;
+    --card-foreground: 216 28% 93%;
+
+    /* Primary brightens in dark mode for readable contrast */
+    --primary: 226 85% 65%;
+    --primary-light: 212 100% 74%;
+    --primary-dark: 232 68% 46%;
+    --primary-foreground: 228 18% 7%;
+
+    --accent: 38 100% 60%;
+    --accent-foreground: 228 18% 7%;
+
+    --care-bg: 228 22% 5%;
+    --care-card: 228 20% 9%;
+    --care-border: 228 16% 15%;
+    --care-foreground: 218 30% 94%;
+    --care-muted: 220 14% 56%;
+
     --destructive: 0 84% 65%;
-    --success: 142 71% 50%;
-    --hope-bg: 224 20% 13%;
-    --hope-text: 38 20% 93%;
-    --hope-subtext: 220 14% 65%;
+    --success: 152 68% 50%;
+
+    --hope-bg: 228 20% 12%;
+    --hope-text: 216 28% 93%;
+    --hope-subtext: 220 14% 64%;
+  }
+
+  /* ── Theme transition — no flash when toggling ── */
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    transition: background-color 220ms ease, color 220ms ease;
   }
 
   * {
     @apply border-border;
     box-sizing: border-box;
-  }
-
-  html {
-    scroll-behavior: smooth;
-    -webkit-text-size-adjust: 100%;
   }
 
   body {
@@ -88,13 +101,32 @@
     min-height: 100dvh;
   }
 
-  /* Visible focus rings on all interactive elements */
+  /* ── Skip to content ── */
+  .skip-link {
+    position: absolute;
+    top: -100%;
+    left: 1rem;
+    z-index: 9999;
+    padding: 0.75rem 1.25rem;
+    background: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+    font-weight: 600;
+    font-size: 0.875rem;
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+    text-decoration: none;
+    transition: top 0.15s ease;
+  }
+  .skip-link:focus {
+    top: 0;
+  }
+
+  /* ── Focus rings ── */
   :focus-visible {
     @apply outline-2 outline-offset-2;
     outline-color: hsl(var(--primary));
   }
 
-  /* Reduce motion */
+  /* ── Respect prefers-reduced-motion ── */
   @media (prefers-reduced-motion: reduce) {
     *,
     ::before,
@@ -120,44 +152,39 @@
   }
 
   .glass {
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid hsl(var(--border) / 0.6);
+    background: rgba(255, 255, 255, 0.82);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid hsl(var(--border) / 0.5);
   }
 
   [data-theme="dark"] .glass {
-    background: rgba(10, 15, 30, 0.85);
-  }
-
-  .glass-dark {
-    background: rgba(15, 23, 42, 0.85);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    background: rgba(10, 12, 22, 0.82);
   }
 
   .section-padding {
     @apply px-4 sm:px-6 lg:px-8;
   }
+
+  /* Safe-area bottom for mobile CTA bar */
+  .pb-safe-area {
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  }
 }
 
-/* Marquee animation */
+/* ── Marquee animation ── */
 @keyframes marquee {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
 }
 
-/* Scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
-}
-::-webkit-scrollbar-track {
-  background: hsl(var(--muted));
-}
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb {
-  background: hsl(var(--primary) / 0.4);
-  border-radius: 3px;
+  background: hsl(var(--primary) / 0.35);
+  border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: hsl(var(--primary) / 0.7);
+  background: hsl(var(--primary) / 0.6);
 }

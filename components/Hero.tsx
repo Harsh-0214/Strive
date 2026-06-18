@@ -79,7 +79,7 @@ export default function Hero() {
         className="absolute inset-0 -z-10"
         style={{
           background:
-            "linear-gradient(145deg, hsl(224 75% 14%) 0%, hsl(220 85% 28%) 35%, hsl(215 90% 42%) 65%, hsl(220 70% 25%) 100%)",
+            "linear-gradient(145deg, hsl(232 68% 10%) 0%, hsl(228 65% 22%) 35%, hsl(218 90% 40%) 65%, hsl(232 55% 18%) 100%)",
           backgroundSize: "300% 300%",
           animation: "gradient-shift 10s ease infinite",
         }}
@@ -90,7 +90,7 @@ export default function Hero() {
         className="absolute inset-0 -z-10"
         style={{
           backgroundImage:
-            "radial-gradient(ellipse 60% 50% at 85% 80%, hsl(33 98% 54% / 0.22) 0%, transparent 70%), radial-gradient(ellipse 50% 60% at 15% 30%, hsl(210 100% 70% / 0.15) 0%, transparent 60%)",
+            "radial-gradient(ellipse 60% 50% at 85% 80%, hsl(38 100% 54% / 0.18) 0%, transparent 70%), radial-gradient(ellipse 50% 60% at 15% 30%, hsl(212 100% 70% / 0.14) 0%, transparent 60%)",
         }}
         aria-hidden="true"
       />

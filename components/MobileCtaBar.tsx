@@ -30,13 +30,12 @@ export default function MobileCtaBar() {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 80, opacity: 0 }}
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed bottom-0 left-0 right-0 z-40 md:hidden px-4 pb-safe pb-4 pt-3"
+            className="fixed bottom-0 left-0 right-0 z-40 md:hidden px-4 pt-3 pb-safe-area"
             style={{
-              background: "rgba(var(--background-rgb, 255 255 255) / 0.9)",
-              backdropFilter: "blur(12px)",
-              WebkitBackdropFilter: "blur(12px)",
+              backdropFilter: "blur(14px)",
+              WebkitBackdropFilter: "blur(14px)",
               borderTop: "1px solid hsl(var(--border) / 0.5)",
-              backgroundColor: "hsl(var(--background) / 0.9)",
+              backgroundColor: "hsl(var(--background) / 0.88)",
             }}
           >
             <a

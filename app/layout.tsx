@@ -18,6 +18,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://strivewebdesign.ca"),
   title: "Strive — We build the web presence your business deserves.",
   description:
     "Strive builds fast, beautiful websites for small businesses — so you can focus on what you do best. Serving restaurants, salons, contractors, clothing brands and more across Canada.",
@@ -35,6 +36,13 @@ export const metadata: Metadata = {
     description:
       "Your competitors are online. It's time you were too. Strive builds fast, beautiful websites for small businesses.",
     type: "website",
+    images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Strive — Web Design for Small Businesses",
+    description:
+      "Your competitors are online. It's time you were too. Strive builds fast, beautiful websites for small businesses.",
   },
 };
 
@@ -55,6 +63,10 @@ export default function RootLayout({
         }}
       />
       <body>
+        {/* Skip to main content — keyboard accessibility */}
+        <a href="#main-content" className="skip-link">
+          Skip to main content
+        </a>
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>

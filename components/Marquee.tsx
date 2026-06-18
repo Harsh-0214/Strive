@@ -1,3 +1,5 @@
+"use client";
+
 import {
   UtensilsCrossed,
   Scissors,
@@ -12,6 +14,7 @@ import {
   Music,
   Heart,
 } from "lucide-react";
+import { useState } from "react";
 
 const items = [
   { icon: UtensilsCrossed, label: "Restaurants" },
@@ -32,10 +35,16 @@ const items = [
 const all = [...items, ...items];
 
 export default function Marquee() {
+  const [paused, setPaused] = useState(false);
+
   return (
     <div
       className="relative py-5 overflow-hidden bg-background border-y border-border"
       aria-label="Industries we serve"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      onFocus={() => setPaused(true)}
+      onBlur={() => setPaused(false)}
     >
       {/* Left fade */}
       <div
@@ -56,10 +65,18 @@ export default function Marquee() {
         aria-hidden="true"
       />
 
+      {/* Visually hidden static list for screen readers */}
+      <ul className="sr-only" aria-label="Industries we serve">
+        {items.map(({ label }) => (
+          <li key={label}>{label}</li>
+        ))}
+      </ul>
+
       <div
         className="flex gap-6 w-max"
         style={{
           animation: "marquee 32s linear infinite",
+          animationPlayState: paused ? "paused" : "running",
           willChange: "transform",
         }}
         aria-hidden="true"
