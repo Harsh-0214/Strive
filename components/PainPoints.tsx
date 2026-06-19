@@ -49,7 +49,7 @@ function TypewriterHeading({ inView }: { inView: boolean }) {
     <h2
       id="pain-heading"
       className="font-heading font-extrabold leading-none tracking-tight mb-16 lg:mb-20"
-      style={{ fontSize: "clamp(2.5rem, 7vw, 6rem)", color: "#0A0A0A", fontWeight: 800 }}
+      style={{ fontSize: "clamp(1.6rem, 6vw, 5.5rem)", color: "#0A0A0A", fontWeight: 800 }}
       aria-label="You're invisible. Your competitors aren't."
     >
       {/* Line 1 — each character fades in sequentially */}
