@@ -6,7 +6,7 @@ import { Check, X, Minus } from "lucide-react";
 
 const rows = [
   { label: "Typical turnaround",   diy: "You do it",    freelancer: "4–8 weeks",    agency: "3–6 months",   strive: "2 weeks" },
-  { label: "Starting price",        diy: "$20–50/mo",    freelancer: "$1,500+",      agency: "$10,000+",     strive: "From $300" },
+  { label: "Starting price",        diy: "$20–50/mo",    freelancer: "$1,500+",      agency: "$10,000+",     strive: "From $199" },
   { label: "Professional design",   diy: false,          freelancer: "maybe",        agency: true,           strive: true },
   { label: "Done-for-you setup",    diy: false,          freelancer: true,           agency: true,           strive: true },
   { label: "Ongoing support",       diy: false,          freelancer: false,          agency: "extra cost",   strive: true },

@@ -417,9 +417,9 @@ export default function ContactForm() {
                   <option value="" disabled>
                     Select a package...
                   </option>
-                  <option value="starter">Starter ($300–800)</option>
-                  <option value="business">Business ($1,500–3,500)</option>
-                  <option value="premium">Premium ($4,000–10,000+)</option>
+                  <option value="starter">Starter ($199–350)</option>
+                  <option value="business">Business ($800–1,500)</option>
+                  <option value="premium">Premium ($2,500–4,000)</option>
                   <option value="unsure">Not sure yet</option>
                 </select>
               </FieldWrapper>

@@ -8,8 +8,8 @@ const packages = [
   {
     icon: Zap,
     name: "Starter",
-    range: "$300",
-    rangeSuffix: "– $800",
+    range: "$199",
+    rangeSuffix: "– $350",
     period: "one-time",
     description: "Everything you need to get found online.",
     popular: false,
@@ -26,8 +26,8 @@ const packages = [
   {
     icon: Star,
     name: "Business",
-    range: "$1,500",
-    rangeSuffix: "– $3,500",
+    range: "$800",
+    rangeSuffix: "– $1,500",
     period: "one-time",
     description: "A full online presence built to grow with you.",
     popular: true,
@@ -45,8 +45,8 @@ const packages = [
   {
     icon: ShoppingBag,
     name: "Premium",
-    range: "$4,000",
-    rangeSuffix: "+",
+    range: "$2,500",
+    rangeSuffix: "– $4,000",
     period: "one-time",
     description: "A complete e-commerce solution built to sell.",
     popular: false,

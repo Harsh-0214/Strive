@@ -15,7 +15,7 @@ import {
 const plans = [
   {
     tier: "Starter Care",
-    price: "$49",
+    price: "$29",
     period: "/mo",
     cta: "Get Started",
     accent: "#E8C547",
@@ -27,7 +27,7 @@ const plans = [
   },
   {
     tier: "Business Care",
-    price: "$99",
+    price: "$59",
     period: "/mo",
     cta: "Get Started",
     popular: true,
@@ -42,7 +42,7 @@ const plans = [
   },
   {
     tier: "Premium Care",
-    price: "$199",
+    price: "$99",
     period: "/mo",
     cta: "Get Started",
     accent: "#E8C547",
