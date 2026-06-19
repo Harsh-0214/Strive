@@ -5,12 +5,12 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, ChevronDown } from "lucide-react";
 
 const businessTypes = [
-  "restaurants",
-  "salons",
-  "contractors",
-  "clothing brands",
-  "photographers",
-  "fitness coaches",
+  "Restaurants",
+  "Salons",
+  "Contractors",
+  "Clothing Brands",
+  "Photographers",
+  "Fitness Coaches",
 ];
 
 // Large blurred orb — the core of the aurora mesh effect
@@ -304,7 +304,7 @@ export default function Hero() {
           {/* Subheadline with cycling type */}
           <motion.div
             variants={itemVariants}
-            className="max-w-2xl text-lg sm:text-xl text-white/65 leading-relaxed flex flex-col items-center gap-1"
+            className="max-w-2xl text-lg sm:text-xl text-white/65 leading-relaxed flex flex-col items-center gap-1 text-center"
           >
             <span>
               Strive Builds Fast, Beautiful Websites For{" "}

@@ -34,6 +34,75 @@ const rowVariants = {
   }),
 };
 
+// Character-by-character reveal with a calm blinking cursor
+function TypewriterHeading({ inView }: { inView: boolean }) {
+  const line1 = "You're invisible.";
+  const line2 = "Your competitors aren't.";
+  const stagger = 0.048;
+  const startDelay = 0.2;
+  const linePause = 0.32;
+  const line2Start = startDelay + line1.length * stagger + linePause;
+  const doneAt = line2Start + line2.length * stagger;
+  const cursorDuration = doneAt - line2Start + 1.6;
+
+  return (
+    <h2
+      id="pain-heading"
+      className="font-heading font-extrabold leading-none tracking-tight mb-16 lg:mb-20"
+      style={{ fontSize: "clamp(2.5rem, 7vw, 6rem)", color: "#0A0A0A", fontWeight: 800 }}
+      aria-label="You're invisible. Your competitors aren't."
+    >
+      {/* Line 1 — each character fades in sequentially */}
+      {Array.from(line1).map((char, i) => (
+        <motion.span
+          key={`l1-${i}`}
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.1, delay: startDelay + i * stagger, ease: "easeOut" }}
+          style={{ display: "inline-block", whiteSpace: "pre" }}
+          aria-hidden="true"
+        >
+          {char}
+        </motion.span>
+      ))}
+
+      <br aria-hidden="true" />
+
+      {/* Line 2 — grey, starts after line 1 + pause */}
+      <span style={{ color: "#6B6B6B" }}>
+        {Array.from(line2).map((char, i) => (
+          <motion.span
+            key={`l2-${i}`}
+            initial={{ opacity: 0 }}
+            animate={inView ? { opacity: 1 } : {}}
+            transition={{ duration: 0.1, delay: line2Start + i * stagger, ease: "easeOut" }}
+            style={{ display: "inline-block", whiteSpace: "pre" }}
+            aria-hidden="true"
+          >
+            {char}
+          </motion.span>
+        ))}
+
+        {/* Blinking cursor — appears when line2 starts, fades after typing finishes */}
+        <motion.span
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: [0, 1, 0, 1, 0, 1, 0, 0] } : {}}
+          transition={{
+            delay: line2Start,
+            duration: cursorDuration,
+            times: [0, 0.04, 0.3, 0.46, 0.65, 0.8, 0.92, 1],
+            ease: "linear",
+          }}
+          style={{ display: "inline-block", marginLeft: "2px", fontWeight: 300 }}
+          aria-hidden="true"
+        >
+          |
+        </motion.span>
+      </span>
+    </h2>
+  );
+}
+
 export default function PainPoints() {
   const ref = useRef<HTMLElement>(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
@@ -57,23 +126,7 @@ export default function PainPoints() {
           The Problem
         </motion.p>
 
-        {/* Big headline */}
-        <motion.h2
-          id="pain-heading"
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.06, ease: [0.23, 1, 0.32, 1] }}
-          className="font-heading font-extrabold leading-none tracking-tight mb-16 lg:mb-20"
-          style={{
-            fontSize: "clamp(2.5rem, 7vw, 6rem)",
-            color: "#0A0A0A",
-            fontWeight: 800,
-          }}
-        >
-          You&rsquo;re invisible.
-          <br />
-          <span style={{ color: "#6B6B6B" }}>Your competitors aren&rsquo;t.</span>
-        </motion.h2>
+        <TypewriterHeading inView={inView} />
 
         {/* Problem rows */}
         <div className="flex flex-col" role="list">
