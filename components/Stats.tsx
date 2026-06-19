@@ -110,7 +110,7 @@ export default function Stats() {
               <Counter target={50} suffix="+" active={inView} />
             </div>
             <p className="text-base font-medium" style={{ color: "rgba(255,255,255,0.45)" }}>
-              small businesses across Canada
+              businesses across Canada
             </p>
           </motion.div>
 
@@ -131,11 +131,11 @@ export default function Stats() {
               Avg. Launch Time
             </p>
             <div
-              className="font-heading font-black leading-none tabular-nums"
+              className="font-heading font-black leading-none"
               style={{ fontSize: "clamp(2.5rem, 5vw, 3.75rem)", color: "#00B4D8" }}
-              aria-label="2 weeks average launch"
+              aria-label="1 to 2 weeks average launch"
             >
-              <Counter target={2} suffix=" wks" active={inView} />
+              1-2 Weeks
             </div>
           </motion.div>
 
@@ -217,7 +217,7 @@ export default function Stats() {
                   color: "rgba(255,255,255,0.75)",
                 }}
               >
-                &ldquo;We make businesses that look like they mean it.&rdquo;
+                &ldquo;Your website should work as hard as you do.&rdquo;
               </p>
               <footer
                 className="mt-4 text-xs font-medium uppercase tracking-widest"

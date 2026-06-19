@@ -117,8 +117,9 @@ function ShootingStar({
 
 // Twinkling sparkle point
 function Sparkle({ index }: { index: number }) {
-  const x = (index * 19 + 7) % 93;
-  const y = (index * 29 + 11) % 82;
+  // index 7 naturally lands near the subheadline text — redirect it to the empty bottom-right
+  const x = index === 7 ? 88 : (index * 19 + 7) % 93;
+  const y = index === 7 ? 78 : (index * 29 + 11) % 82;
   const delay = (index * 0.28) % 5;
   const duration = 2.4 + (index % 4) * 0.6;
   const isCyan = index % 3 === 0;
@@ -333,7 +334,7 @@ export default function Hero() {
                 </AnimatePresence>
               </span>
             </span>
-            <span>— Freeing You To Focus On What You Do Best.</span>
+            <span>Freeing You To Focus On What You Do Best.</span>
           </motion.div>
 
           {/* CTAs */}
@@ -397,7 +398,7 @@ export default function Hero() {
               ))}
             </div>
             <p className="text-white/50 text-sm">
-              <span className="text-white/90 font-semibold">50+</span> small businesses launched across Canada
+              <span className="text-white/90 font-semibold">50+</span> businesses launched across Canada
             </p>
           </motion.div>
         </motion.div>
