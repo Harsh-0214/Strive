@@ -284,8 +284,8 @@ export default function Hero() {
             variants={itemVariants}
             className="font-heading font-extrabold text-[2.6rem] sm:text-6xl md:text-7xl lg:text-[5.25rem] leading-[1.06] tracking-tight text-white max-w-4xl"
           >
-            Your competitors
-            <br className="hidden sm:block" /> are{" "}
+            Your Competitors
+            <br className="hidden sm:block" /> Are{" "}
             <span
               style={{
                 background: "linear-gradient(92deg, hsl(199 100% 72%), hsl(212 100% 82%))",
@@ -294,19 +294,19 @@ export default function Hero() {
                 backgroundClip: "text",
               }}
             >
-              online.
+              Online.
             </span>
             <br />
-            It&apos;s time you were too.
+            It&apos;s Time You Were Too.
           </motion.h1>
 
           {/* Subheadline with cycling type */}
           <motion.div
             variants={itemVariants}
-            className="max-w-2xl text-lg sm:text-xl text-white/65 leading-relaxed"
+            className="max-w-2xl text-lg sm:text-xl text-white/65 leading-relaxed flex flex-col items-center gap-1"
           >
-            <p>
-              Strive builds fast, beautiful websites for{" "}
+            <span>
+              Strive Builds Fast, Beautiful Websites For{" "}
               <span
                 className="inline-flex overflow-hidden"
                 style={{ minWidth: "11rem", verticalAlign: "bottom" }}
@@ -331,9 +331,9 @@ export default function Hero() {
                     {businessTypes[typeIndex]}
                   </motion.span>
                 </AnimatePresence>
-              </span>{" "}
-              — so you can focus on what you do best.
-            </p>
+              </span>
+            </span>
+            <span>— Freeing You To Focus On What You Do Best.</span>
           </motion.div>
 
           {/* CTAs */}
