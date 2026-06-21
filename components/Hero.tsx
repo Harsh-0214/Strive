@@ -304,35 +304,35 @@ export default function Hero() {
           {/* Subheadline with cycling type */}
           <motion.div
             variants={itemVariants}
-            className="max-w-2xl text-lg sm:text-xl text-white/65 leading-relaxed flex flex-col items-center gap-1 text-center"
+            className="max-w-2xl text-lg sm:text-xl text-white/65 leading-relaxed flex flex-col items-center gap-0.5 text-center"
           >
-            <span>
-              Strive Builds Fast, Beautiful Websites For{" "}
-              <span
-                className="inline-flex overflow-hidden"
-                style={{ minWidth: "11rem", verticalAlign: "bottom" }}
-                aria-live="polite"
-                aria-atomic="true"
-              >
-                <AnimatePresence mode="wait">
-                  <motion.span
-                    key={typeIndex}
-                    initial={{ opacity: 0, y: 14 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -14 }}
-                    transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-                    style={{
-                      background: "linear-gradient(90deg, hsl(199 100% 65%), hsl(212 90% 75%))",
-                      WebkitBackgroundClip: "text",
-                      WebkitTextFillColor: "transparent",
-                      backgroundClip: "text",
-                      fontWeight: 600,
-                    }}
-                  >
-                    {businessTypes[typeIndex]}
-                  </motion.span>
-                </AnimatePresence>
-              </span>
+            <span>Strive Builds Fast, Beautiful Websites For</span>
+            {/* Cycling word on its own centered row so it never mis-aligns on mobile */}
+            <span
+              className="overflow-hidden flex justify-center"
+              style={{ height: "1.5em" }}
+              aria-live="polite"
+              aria-atomic="true"
+            >
+              <AnimatePresence mode="wait">
+                <motion.span
+                  key={typeIndex}
+                  initial={{ opacity: 0, y: 14 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -14 }}
+                  transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+                  style={{
+                    background: "linear-gradient(90deg, hsl(199 100% 65%), hsl(212 90% 75%))",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                    backgroundClip: "text",
+                    fontWeight: 600,
+                    display: "block",
+                  }}
+                >
+                  {businessTypes[typeIndex]}
+                </motion.span>
+              </AnimatePresence>
             </span>
             <span>Freeing You To Focus On What You Do Best.</span>
           </motion.div>
