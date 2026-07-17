@@ -87,7 +87,7 @@ export default function Testimonials() {
       style={{ background: "#F5F0E8" }}
       aria-labelledby="testimonials-heading"
     >
-      <div className="max-w-[1600px] mx-auto section-padding">
+      <div className="w-full section-padding">
         {/* Giant decorative quote */}
         <motion.div
           initial={{ opacity: 0 }}

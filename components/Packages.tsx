@@ -188,7 +188,7 @@ export default function Packages() {
       className="py-20 lg:py-28 bg-white"
       aria-labelledby="packages-heading"
     >
-      <div className="max-w-[1600px] mx-auto section-padding">
+      <div className="w-full section-padding">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}

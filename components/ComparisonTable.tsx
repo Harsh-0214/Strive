@@ -73,7 +73,7 @@ export default function ComparisonTable() {
       style={{ background: "#0d1117" }}
       aria-labelledby="comparison-heading"
     >
-      <div className="max-w-[1200px] mx-auto section-padding">
+      <div className="w-full section-padding">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}

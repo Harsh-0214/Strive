@@ -11,19 +11,24 @@ export default function Icon() {
         style={{
           width: "32px",
           height: "32px",
-          borderRadius: "8px",
-          background: "linear-gradient(135deg, #3861f5 0%, #62a4ff 100%)",
+          borderRadius: "7px",
+          background: "#ffffff",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          color: "#ffffff",
-          fontSize: "18px",
-          fontWeight: 800,
-          fontFamily: "sans-serif",
-          letterSpacing: "-1px",
         }}
       >
-        S
+        <svg width="24" height="24" viewBox="0 0 100 100">
+          <path
+            d="M78 22H45C34 22 27 29 27 38c0 8 5 14 15 16l16 3c6 1 9 4 9 8 0 5-4 8-11 8H24"
+            fill="none"
+            stroke="#0B1739"
+            strokeWidth="14"
+            strokeLinecap="square"
+            strokeLinejoin="round"
+          />
+          <path d="M14 65L30 65L18 80L2 80Z" fill="#1E5FE8" />
+        </svg>
       </div>
     ),
     { ...size }

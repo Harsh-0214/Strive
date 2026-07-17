@@ -68,7 +68,7 @@ export default function WorkContent() {
 
       {/* Grid */}
       <section ref={gridRef} className="py-16 lg:py-24" style={{ background: "#0d1117" }}>
-        <div className="max-w-[1500px] mx-auto section-padding">
+        <div className="w-full section-padding">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {prototypes.map((p, i) => (
               <motion.div

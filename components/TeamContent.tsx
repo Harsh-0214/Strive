@@ -110,7 +110,7 @@ export default function TeamContent() {
         style={{ background: "#0d1117" }}
         aria-labelledby="founders-heading"
       >
-        <div className="max-w-[1200px] mx-auto section-padding">
+        <div className="w-full section-padding">
           <h2 id="founders-heading" className="sr-only">
             Meet the founders
           </h2>
@@ -169,7 +169,7 @@ export default function TeamContent() {
 
       {/* Values */}
       <section ref={valuesRef} className="py-20 lg:py-28 bg-white" aria-labelledby="values-heading">
-        <div className="max-w-[1400px] mx-auto section-padding">
+        <div className="w-full section-padding">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={valuesInView ? { opacity: 1, y: 0 } : {}}

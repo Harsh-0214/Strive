@@ -114,7 +114,7 @@ export default function PainPoints() {
       style={{ background: "#F5F0E8" }}
       aria-labelledby="pain-heading"
     >
-      <div className="max-w-[1400px] mx-auto section-padding">
+      <div className="w-full section-padding">
         {/* Label */}
         <motion.p
           initial={{ opacity: 0, y: 12 }}

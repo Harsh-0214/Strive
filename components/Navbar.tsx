@@ -3,9 +3,9 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import StriveMark from "@/components/StriveMark";
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -96,8 +96,8 @@ export default function Navbar() {
           }
         >
           <div
-            className={`max-w-[1680px] mx-auto grid grid-cols-[auto_1fr_auto] items-center transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] ${
-              scrolled ? "h-14 px-4 sm:px-6" : "h-24 px-5 sm:px-8 lg:px-14 xl:px-20"
+            className={`w-full grid grid-cols-[auto_1fr_auto] items-center transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] ${
+              scrolled ? "h-14 px-4 sm:px-6" : "h-24 section-padding"
             }`}
           >
             {/* Logo — left */}
@@ -107,17 +107,11 @@ export default function Navbar() {
               aria-label="Strive — go to homepage"
             >
               <div
-                className={`relative flex-shrink-0 overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] ${
-                  scrolled ? "w-10 h-10" : "w-36 h-16"
+                className={`relative flex-shrink-0 transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] ${
+                  scrolled ? "w-8 h-8" : "w-10 h-10"
                 }`}
               >
-                <Image
-                  src="/Logo(s).png"
-                  alt="Strive logo"
-                  fill
-                  className="object-cover object-top"
-                  priority
-                />
+                <StriveMark tone="light" className="w-full h-full" />
               </div>
               <div
                 className={`flex flex-col leading-none gap-0.5 transition-all duration-300 overflow-hidden ${

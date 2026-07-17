@@ -228,7 +228,7 @@ export default function ContactForm({ showHeading = true }: { showHeading?: bool
       aria-label={showHeading ? undefined : "Contact form"}
       aria-labelledby={showHeading ? "contact-heading" : undefined}
     >
-      <div className="max-w-[1500px] mx-auto section-padding">
+      <div className="w-full section-padding">
         {/* Heading: full width */}
         {showHeading && (
           <motion.div
