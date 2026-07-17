@@ -12,6 +12,7 @@ const packages = [
     rangeSuffix: "",
     period: "one-time",
     description: "A sharp one-pager that shows off your work and gets you found.",
+    bestFor: "Just need a portfolio or one-pager.",
     popular: false,
     features: [
       "Single-page portfolio or landing site",
@@ -30,6 +31,7 @@ const packages = [
     rangeSuffix: "",
     period: "one-time",
     description: "For restaurants, salons & booking-driven businesses that live on repeat traffic.",
+    bestFor: "Restaurants, salons, and anything with bookings or high traffic.",
     popular: true,
     features: [
       "Everything in Launch",
@@ -49,6 +51,7 @@ const packages = [
     rangeSuffix: "+",
     period: "one-time",
     description: "A full storefront built to sell: clothing, retail & product-based brands.",
+    bestFor: "Selling physical products online.",
     popular: false,
     features: [
       "Everything in Growth",
@@ -341,6 +344,60 @@ export default function Packages() {
               </TiltCard>
             )
           )}
+        </motion.div>
+
+        {/* Which package is right for my business? */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.55, delay: 0.3, ease: [0.23, 1, 0.32, 1] }}
+          className="mt-10 rounded-2xl p-7 sm:p-9"
+          style={{ background: "#F5F0E8" }}
+        >
+          <h3 className="font-heading font-bold text-lg mb-6" style={{ color: "#0A0A0A" }}>
+            Which package is right for my business?
+          </h3>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-7">
+            {packages.map(({ icon: Icon, name, bestFor, popular }) => (
+              <div key={name} className="flex items-start gap-3">
+                <div
+                  className="w-9 h-9 rounded-lg flex items-center justify-center shrink-0"
+                  style={{ background: popular ? "hsl(199 100% 42% / 0.12)" : "rgba(10,10,10,0.06)" }}
+                >
+                  <Icon
+                    size={16}
+                    strokeWidth={1.75}
+                    style={{ color: popular ? "#00B4D8" : "#6B6B6B" }}
+                    aria-hidden="true"
+                  />
+                </div>
+                <div>
+                  <p className="font-heading font-bold text-sm mb-0.5" style={{ color: "#0A0A0A" }}>
+                    {name}
+                  </p>
+                  <p className="text-sm leading-snug" style={{ color: "#6B6B6B" }}>
+                    {bestFor}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div
+            className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-6"
+            style={{ borderTop: "1px solid rgba(10,10,10,0.1)" }}
+          >
+            <p className="text-sm" style={{ color: "#6B6B6B" }}>
+              Not sure? Tell us about your business and we&apos;ll recommend one.
+            </p>
+            <a
+              href="/contact"
+              className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-semibold text-sm text-white shrink-0 active:scale-[0.97] transition-transform duration-150"
+              style={{ background: "#0A0A0A" }}
+            >
+              Tell Us About Your Business
+              <ArrowRight size={15} aria-hidden="true" />
+            </a>
+          </div>
         </motion.div>
       </div>
     </section>
