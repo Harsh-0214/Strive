@@ -171,8 +171,21 @@ export default function WorkContent() {
       </section>
 
       {/* Real client work */}
-      <section ref={clientsRef} className="py-20 lg:py-24" style={{ background: "#F7F7F5" }}>
-        <div className="w-full section-padding">
+      <section
+        ref={clientsRef}
+        className="relative py-20 lg:py-28 overflow-hidden"
+        style={{ background: "hsl(220 70% 3%)" }}
+      >
+        <div
+          className="absolute -z-0 top-0 left-1/2 -translate-x-1/2"
+          style={{
+            width: "900px",
+            height: "60%",
+            background: "radial-gradient(ellipse 50% 100% at 50% 0%, hsl(210 90% 58% / 0.14) 0%, transparent 72%)",
+          }}
+          aria-hidden="true"
+        />
+        <div className="relative w-full section-padding">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={clientsInView ? { opacity: 1, y: 0 } : {}}
@@ -184,11 +197,11 @@ export default function WorkContent() {
             </p>
             <h2
               className="font-heading font-extrabold tracking-tight"
-              style={{ fontSize: "clamp(1.75rem, 4vw, 2.75rem)", color: "#0A0A0A" }}
+              style={{ fontSize: "clamp(1.75rem, 4vw, 2.75rem)", color: "#FFFFFF" }}
             >
               Real client work
             </h2>
-            <p className="mt-3 max-w-xl" style={{ color: "#6B6B6B" }}>
+            <p className="mt-3 max-w-xl" style={{ color: "rgba(255,255,255,0.5)" }}>
               Not prototypes. These are live websites we&apos;ve built and shipped for actual
               businesses.
             </p>
@@ -206,35 +219,59 @@ export default function WorkContent() {
                 initial={{ opacity: 0, y: 24 }}
                 animate={clientsInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: i * 0.06, ease: [0.23, 1, 0.32, 1] }}
-                className="relative flex flex-col rounded-2xl p-6 overflow-hidden group"
+                className="relative flex flex-col rounded-2xl p-7 overflow-hidden group"
                 style={{
-                  background: "#FFFFFF",
-                  border: "1px solid rgba(10,10,10,0.08)",
-                  transition: "transform 220ms cubic-bezier(0.23,1,0.32,1), box-shadow 220ms ease",
-                  transform: hoveredClient === i ? "translateY(-4px)" : "translateY(0)",
-                  boxShadow: hoveredClient === i ? "0 20px 48px rgba(0,0,0,0.10)" : "0 2px 10px rgba(0,0,0,0.04)",
+                  background: "rgba(255,255,255,0.03)",
+                  border: `1px solid ${hoveredClient === i ? `${c.accent}55` : "rgba(255,255,255,0.08)"}`,
+                  transition: "transform 220ms cubic-bezier(0.23,1,0.32,1), box-shadow 220ms ease, border-color 220ms ease",
+                  transform: hoveredClient === i ? "translateY(-5px)" : "translateY(0)",
+                  boxShadow: hoveredClient === i ? `0 24px 56px -12px ${c.accent}40` : "0 2px 10px rgba(0,0,0,0.2)",
                 }}
               >
-                <div className="flex items-start justify-between mb-5">
+                {/* Soft accent glow in the corner */}
+                <div
+                  className="absolute -z-0 rounded-full transition-opacity duration-300"
+                  style={{
+                    width: 180,
+                    height: 180,
+                    top: -70,
+                    right: -70,
+                    background: `radial-gradient(circle, ${c.accent}30, transparent 70%)`,
+                    opacity: hoveredClient === i ? 1 : 0.5,
+                  }}
+                  aria-hidden="true"
+                />
+
+                <div className="relative flex items-start justify-between mb-6">
                   <div
-                    className="w-11 h-11 rounded-xl flex items-center justify-center font-heading font-black text-lg text-white shrink-0"
-                    style={{ background: c.accent }}
+                    className="w-12 h-12 rounded-xl flex items-center justify-center font-heading font-black text-lg text-white shrink-0"
+                    style={{ background: c.accent, boxShadow: `0 8px 20px -4px ${c.accent}80` }}
                     aria-hidden="true"
                   >
                     {c.initial}
                   </div>
-                  <ExternalLink
-                    size={16}
-                    className="shrink-0 mt-1 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                    style={{ color: "#B0B0B0" }}
-                  />
+                  <span
+                    className="flex items-center justify-center w-8 h-8 rounded-full shrink-0 transition-all duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                    style={{
+                      background: "rgba(255,255,255,0.06)",
+                      color: hoveredClient === i ? "#FFFFFF" : "rgba(255,255,255,0.4)",
+                    }}
+                  >
+                    <ExternalLink size={14} aria-hidden="true" />
+                  </span>
                 </div>
-                <h3 className="font-heading font-bold text-lg mb-1" style={{ color: "#0A0A0A" }}>
+                <h3 className="relative font-heading font-bold text-lg mb-1" style={{ color: "#FFFFFF" }}>
                   {c.name}
                 </h3>
-                <p className="text-sm" style={{ color: "#6B6B6B" }}>
+                <p className="relative text-sm mb-5" style={{ color: "rgba(255,255,255,0.5)" }}>
                   {c.category}
                 </p>
+                <span
+                  className="relative mt-auto text-xs font-semibold uppercase tracking-widest pt-4"
+                  style={{ color: c.accent, borderTop: "1px solid rgba(255,255,255,0.08)" }}
+                >
+                  Visit Live Site
+                </span>
               </motion.a>
             ))}
           </div>
