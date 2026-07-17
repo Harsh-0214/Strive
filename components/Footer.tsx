@@ -3,9 +3,10 @@ import Image from "next/image";
 import Link from "next/link";
 
 const footerLinks = [
+  { label: "Home", href: "/" },
   { label: "Our Work", href: "/work" },
+  { label: "Our Team", href: "/team" },
   { label: "Pricing", href: "/pricing" },
-  { label: "Team", href: "/team" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -18,7 +19,7 @@ const socialLinks = [
 export default function Footer() {
   return (
     <footer style={{ background: "#070b14" }} role="contentinfo">
-      <div className="max-w-7xl mx-auto section-padding py-12">
+      <div className="max-w-[1600px] mx-auto section-padding py-12">
         {/* Main row */}
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 mb-8">
           {/* Logo */}

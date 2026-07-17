@@ -26,7 +26,7 @@ export default function PageHero({
         }}
         aria-hidden="true"
       />
-      <div className="max-w-3xl mx-auto section-padding text-center relative">
+      <div className="max-w-4xl mx-auto section-padding text-center relative">
         <motion.p
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}

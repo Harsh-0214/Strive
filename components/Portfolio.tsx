@@ -19,7 +19,7 @@ export default function Portfolio() {
       style={{ background: "#0A0A0A" }}
       aria-labelledby="portfolio-heading"
     >
-      <div className="max-w-7xl mx-auto section-padding">
+      <div className="max-w-[1600px] mx-auto section-padding">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}

@@ -8,9 +8,10 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const navLinks = [
+  { label: "Home", href: "/" },
   { label: "Our Work", href: "/work" },
+  { label: "Our Team", href: "/team" },
   { label: "Pricing", href: "/pricing" },
-  { label: "Team", href: "/team" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -81,7 +82,7 @@ export default function Navbar() {
       >
         <div
           className={`pointer-events-auto w-full transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] ${
-            scrolled ? "mt-3 mx-4 max-w-3xl rounded-2xl border border-white/[0.08]" : ""
+            scrolled ? "mt-3 mx-4 rounded-2xl border border-white/[0.08]" : ""
           }`}
           style={
             scrolled
@@ -95,14 +96,14 @@ export default function Navbar() {
           }
         >
           <div
-            className={`flex items-center justify-between transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] ${
-              scrolled ? "h-14 px-4" : "h-24 px-4 sm:px-8 lg:px-14"
+            className={`max-w-[1680px] mx-auto grid grid-cols-[auto_1fr_auto] items-center transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] ${
+              scrolled ? "h-14 px-4 sm:px-6" : "h-24 px-5 sm:px-8 lg:px-14 xl:px-20"
             }`}
           >
-            {/* Logo */}
+            {/* Logo — left */}
             <Link
               href="/"
-              className="flex items-center gap-3 flex-shrink-0"
+              className="flex items-center gap-3 flex-shrink-0 justify-self-start"
               aria-label="Strive — go to homepage"
             >
               <div
@@ -132,15 +133,16 @@ export default function Navbar() {
               </div>
             </Link>
 
-            {/* Desktop nav */}
-            <ul className="hidden md:flex items-center gap-0.5" role="list">
+            {/* Desktop nav — centered */}
+            <ul className="hidden md:flex items-center justify-center gap-0.5 justify-self-center" role="list">
               {navLinks.map((link) => {
                 const active = isActive(link.href);
                 return (
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className={`relative px-4 py-2 rounded-xl text-sm font-medium transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-cyan-400 ${
+                      aria-current={active ? "page" : undefined}
+                      className={`relative px-4 py-2 rounded-xl text-sm font-medium whitespace-nowrap transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-cyan-400 ${
                         active ? "text-white" : "text-white/50 hover:text-white/90"
                       }`}
                     >
@@ -159,7 +161,7 @@ export default function Navbar() {
             </ul>
 
             {/* Right controls */}
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 justify-self-end">
               <Link
                 href="/contact"
                 className="hidden sm:inline-flex items-center px-4 py-2 rounded-xl text-sm font-semibold text-white transition-all duration-150 active:scale-[0.97] focus-visible:outline-2 focus-visible:outline-cyan-400"
@@ -242,15 +244,21 @@ export default function Navbar() {
               aria-label="Mobile navigation menu"
             >
               <nav className="p-3 flex flex-col gap-1">
-                {navLinks.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    className="text-left px-4 py-3 rounded-xl text-base font-medium text-white/60 hover:text-white hover:bg-white/[0.06] transition-all duration-150 focus-visible:outline-2 focus-visible:outline-cyan-400"
-                  >
-                    {link.label}
-                  </Link>
-                ))}
+                {navLinks.map((link) => {
+                  const active = isActive(link.href);
+                  return (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      aria-current={active ? "page" : undefined}
+                      className={`text-left px-4 py-3 rounded-xl text-base font-medium transition-all duration-150 focus-visible:outline-2 focus-visible:outline-cyan-400 ${
+                        active ? "text-white bg-white/[0.06]" : "text-white/60 hover:text-white hover:bg-white/[0.06]"
+                      }`}
+                    >
+                      {link.label}
+                    </Link>
+                  );
+                })}
                 <div className="h-px bg-white/[0.07] my-1" />
                 <Link
                   href="/contact"
