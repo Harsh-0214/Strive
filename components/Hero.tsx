@@ -1,9 +1,10 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence, useInView } from "framer-motion";
+import { motion, AnimatePresence, useInView, useReducedMotion } from "framer-motion";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import StriveMark from "@/components/StriveMark";
+import { INTRO_STORAGE_KEY, INTRO_DISMISSED_EVENT } from "@/components/IntroScreen";
 
 const businessTypes = [
   "Barbershops",
@@ -290,6 +291,8 @@ function StatsBento() {
 
 export default function Hero() {
   const [typeIndex, setTypeIndex] = useState(0);
+  const [bgActive, setBgActive] = useState(false);
+  const shouldReduceMotion = useReducedMotion();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -297,6 +300,30 @@ export default function Hero() {
     }, 2200);
     return () => clearInterval(interval);
   }, []);
+
+  // Defer the heavy animated background (blurred orbs, sparkles) until the intro
+  // screen is dismissed — no point burning CPU/GPU on it while it's fully covered.
+  useEffect(() => {
+    if (shouldReduceMotion) return;
+    let alreadyDismissed = false;
+    try {
+      alreadyDismissed = sessionStorage.getItem(INTRO_STORAGE_KEY) === "1";
+    } catch {
+      // sessionStorage unavailable — just show the background right away
+      alreadyDismissed = true;
+    }
+    if (alreadyDismissed) {
+      setBgActive(true);
+      return;
+    }
+    const onDismiss = () => setBgActive(true);
+    window.addEventListener(INTRO_DISMISSED_EVENT, onDismiss);
+    const fallback = window.setTimeout(() => setBgActive(true), 2500);
+    return () => {
+      window.removeEventListener(INTRO_DISMISSED_EVENT, onDismiss);
+      window.clearTimeout(fallback);
+    };
+  }, [shouldReduceMotion]);
 
   return (
     <section
@@ -312,53 +339,57 @@ export default function Hero() {
         aria-hidden="true"
       />
 
-      {/* Orb A — electric blue, top-left, drifts right-down */}
-      <GlowOrb
-        color="hsl(218 90% 48% / 0.6)"
-        size={560}
-        left="-10%"
-        top="-8%"
-        animX={[0, 80, 30, 0]}
-        animY={[0, 60, 110, 0]}
-        duration={18}
-      />
+      {bgActive && (
+        <>
+          {/* Orb A — electric blue, top-left, drifts right-down */}
+          <GlowOrb
+            color="hsl(218 90% 48% / 0.6)"
+            size={560}
+            left="-10%"
+            top="-8%"
+            animX={[0, 80, 30, 0]}
+            animY={[0, 60, 110, 0]}
+            duration={18}
+          />
 
-      {/* Orb B — vivid cyan, center-right, drifts left */}
-      <GlowOrb
-        color="hsl(199 100% 50% / 0.45)"
-        size={480}
-        left="55%"
-        top="20%"
-        animX={[0, -90, -40, 0]}
-        animY={[0, 50, -30, 0]}
-        duration={20}
-        delay={3}
-      />
+          {/* Orb B — vivid cyan, center-right, drifts left */}
+          <GlowOrb
+            color="hsl(199 100% 50% / 0.45)"
+            size={480}
+            left="55%"
+            top="20%"
+            animX={[0, -90, -40, 0]}
+            animY={[0, 50, -30, 0]}
+            duration={20}
+            delay={3}
+          />
 
-      {/* Orb C — indigo, bottom-center, slow pulse */}
-      <GlowOrb
-        color="hsl(240 70% 38% / 0.5)"
-        size={520}
-        left="25%"
-        top="55%"
-        animX={[0, 60, -30, 0]}
-        animY={[0, -40, 20, 0]}
-        duration={22}
-        delay={7}
-      />
+          {/* Orb C — indigo, bottom-center, slow pulse */}
+          <GlowOrb
+            color="hsl(240 70% 38% / 0.5)"
+            size={520}
+            left="25%"
+            top="55%"
+            animX={[0, 60, -30, 0]}
+            animY={[0, -40, 20, 0]}
+            duration={22}
+            delay={7}
+          />
 
-      {/* Occasional shooting stars — staggered so they feel like a delight */}
-      <div className="absolute inset-0 -z-10 overflow-hidden" aria-hidden="true">
-        <ShootingStar top="12%" left="8%" delay={2} repeatDelay={11} travel={420} />
-        <ShootingStar top="8%" left="30%" delay={9} repeatDelay={16} travel={480} />
-      </div>
+          {/* Occasional shooting stars — staggered so they feel like a delight */}
+          <div className="absolute inset-0 -z-10 overflow-hidden" aria-hidden="true">
+            <ShootingStar top="12%" left="8%" delay={2} repeatDelay={11} travel={420} />
+            <ShootingStar top="8%" left="30%" delay={9} repeatDelay={16} travel={480} />
+          </div>
 
-      {/* Sparkle field — kept to the left half so it doesn't clash with the stats grid */}
-      <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
-        {Array.from({ length: 12 }).map((_, i) => (
-          <Sparkle key={i} index={i} />
-        ))}
-      </div>
+          {/* Sparkle field — kept to the left half so it doesn't clash with the stats grid */}
+          <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
+            {Array.from({ length: 8 }).map((_, i) => (
+              <Sparkle key={i} index={i} />
+            ))}
+          </div>
+        </>
+      )}
 
       {/* ── Content ── */}
       <div className="relative z-10 w-full section-padding">

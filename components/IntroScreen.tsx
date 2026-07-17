@@ -5,7 +5,9 @@ import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import StriveMark from "@/components/StriveMark";
 
-const STORAGE_KEY = "strive-intro-shown";
+export const INTRO_STORAGE_KEY = "strive-intro-shown";
+export const INTRO_DISMISSED_EVENT = "strive:intro-dismissed";
+const STORAGE_KEY = INTRO_STORAGE_KEY;
 
 export default function IntroScreen() {
   const [visible, setVisible] = useState(true);
@@ -42,6 +44,7 @@ export default function IntroScreen() {
       // ignore
     }
     setVisible(false);
+    window.dispatchEvent(new Event(INTRO_DISMISSED_EVENT));
   };
 
   return (
