@@ -300,7 +300,7 @@ export default function Hero() {
 
   return (
     <section
-      className="relative min-h-dvh flex flex-col justify-center overflow-hidden pt-28 pb-16"
+      className="relative overflow-hidden pt-28 pb-16 lg:min-h-dvh lg:flex lg:flex-col lg:justify-center"
       aria-labelledby="hero-heading"
     >
       {/* ── Aurora mesh background ── */}
@@ -360,9 +360,158 @@ export default function Hero() {
         ))}
       </div>
 
-      {/* ── Content: two columns ── */}
+      {/* ── Content ── */}
       <div className="relative z-10 w-full section-padding">
-        <div className="max-w-[2200px] mx-auto grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-16 lg:gap-24 items-center">
+        {/* Mobile / tablet layout (below lg): logo-led, centered, one screen ending at social proof — then a distinct second block on scroll. */}
+        <div className="lg:hidden flex flex-col">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="flex flex-col items-center text-center gap-7 justify-center"
+            style={{ minHeight: "calc(100dvh - 11rem)" }}
+          >
+            {/* Brand lockup — big, centered, the dominant element on first screen */}
+            <motion.div variants={itemVariants} className="flex flex-col items-center gap-4">
+              <div className="relative shrink-0" style={{ width: "clamp(5rem, 26vw, 8rem)", height: "clamp(5rem, 26vw, 8rem)" }}>
+                <StriveMark tone="light" className="w-full h-full" />
+              </div>
+              <div className="flex flex-col items-center leading-none gap-2">
+                <h1
+                  id="hero-heading"
+                  className="font-heading font-extrabold uppercase tracking-tight text-white"
+                  style={{ fontSize: "clamp(2.5rem, 13vw, 4rem)", lineHeight: 0.95 }}
+                >
+                  Strive
+                </h1>
+                <span className="text-[10px] tracking-[0.25em] uppercase text-white/45 font-medium">
+                  Web Design &amp; Development
+                </span>
+              </div>
+            </motion.div>
+
+            {/* Slogan */}
+            <motion.p
+              variants={itemVariants}
+              className="font-heading font-bold tracking-tight"
+              style={{
+                fontSize: "clamp(1.75rem, 8vw, 2.5rem)",
+                background: "linear-gradient(92deg, hsl(199 100% 72%), hsl(212 100% 82%))",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}
+            >
+              We Build, You Grow.
+            </motion.p>
+
+            {/* CTAs */}
+            <motion.div variants={itemVariants} className="flex flex-col items-center gap-3.5 w-full max-w-xs">
+              <a
+                href="#contact"
+                className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl font-bold text-base text-white transition-all duration-200 active:scale-95 focus-visible:outline-2 focus-visible:outline-white overflow-hidden w-full"
+                style={{
+                  background: "linear-gradient(135deg, hsl(199 100% 44%) 0%, hsl(212 90% 40%) 100%)",
+                  boxShadow:
+                    "0 0 0 1px hsl(199 100% 60% / 0.35) inset, 0 8px 32px hsl(199 100% 44% / 0.45), 0 2px 8px hsl(212 90% 40% / 0.3)",
+                }}
+              >
+                <span className="relative">Get a Free Quote</span>
+                <ArrowRight size={18} className="relative" aria-hidden="true" />
+              </a>
+
+              <a
+                href="#packages"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-semibold text-base text-white/90 border border-white/20 bg-white/[0.07] backdrop-blur-sm active:scale-95 transition-all duration-200 focus-visible:outline-2 focus-visible:outline-white w-full"
+              >
+                View Packages
+              </a>
+            </motion.div>
+
+            {/* Social proof */}
+            <motion.div variants={itemVariants} className="flex items-center gap-3">
+              <div className="flex -space-x-2" aria-hidden="true">
+                {(["MT", "JR", "AK", "SC"] as const).map((initials, i) => (
+                  <div
+                    key={initials}
+                    className="w-8 h-8 rounded-full border-2 border-white/15 flex items-center justify-center text-[10px] font-bold text-white"
+                    style={{
+                      background: (["hsl(330 60% 55%)", "hsl(210 70% 50%)", "hsl(270 55% 55%)", "hsl(160 55% 45%)"])[i],
+                      zIndex: 4 - i,
+                    }}
+                  >
+                    {initials}
+                  </div>
+                ))}
+              </div>
+              <p className="text-white/50 text-sm">
+                <span className="text-white/90 font-semibold">50+</span> businesses launched across Canada
+              </p>
+            </motion.div>
+          </motion.div>
+
+          {/* Second block, revealed on scroll: what we build + stats */}
+          <div className="flex flex-col gap-12 pt-8 pb-4">
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-60px" }}
+              className="flex flex-col items-center text-center gap-3"
+            >
+              <motion.p
+                variants={itemVariants}
+                className="text-xs font-semibold uppercase tracking-widest"
+                style={{ color: "#00B4D8" }}
+              >
+                What We Build
+              </motion.p>
+              <motion.h2
+                variants={itemVariants}
+                className="font-heading font-extrabold text-white leading-[1.1]"
+                style={{ fontSize: "clamp(1.85rem, 8vw, 2.5rem)" }}
+              >
+                Fast, Beautiful Websites For
+              </motion.h2>
+              <motion.span
+                variants={itemVariants}
+                className="overflow-hidden flex justify-center w-full"
+                style={{ height: "1.25em" }}
+                aria-live="polite"
+                aria-atomic="true"
+              >
+                <AnimatePresence mode="wait">
+                  <motion.span
+                    key={typeIndex}
+                    initial={{ opacity: 0, y: 14 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -14 }}
+                    transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+                    className="font-heading font-black"
+                    style={{
+                      fontSize: "clamp(2rem, 9vw, 2.75rem)",
+                      background: "linear-gradient(90deg, hsl(199 100% 65%), hsl(212 90% 75%))",
+                      WebkitBackgroundClip: "text",
+                      WebkitTextFillColor: "transparent",
+                      backgroundClip: "text",
+                      display: "block",
+                    }}
+                  >
+                    {businessTypes[typeIndex]}
+                  </motion.span>
+                </AnimatePresence>
+              </motion.span>
+              <motion.p variants={itemVariants} className="text-white/55 mt-1" style={{ fontSize: "1.05rem" }}>
+                Freeing you to focus on what you do best.
+              </motion.p>
+            </motion.div>
+
+            <StatsBento />
+          </div>
+        </div>
+
+        {/* Desktop layout (lg+): two columns side by side, single screen */}
+        <div className="hidden lg:grid max-w-[2200px] mx-auto lg:grid-cols-[1fr_1fr] gap-16 lg:gap-24 items-center">
           {/* Left — brand */}
           <motion.div
             variants={containerVariants}
@@ -370,20 +519,19 @@ export default function Hero() {
             animate="visible"
             className="flex flex-col items-start gap-6 text-left"
           >
-            {/* Brand lockup — the hero headline. Visually hidden below lg: the navbar right above it already carries the logo, so repeating it full-size reads as a glitch on mobile. Kept in the accessibility tree via sr-only so the h1 is still announced. */}
-            <motion.div variants={itemVariants} className="sr-only lg:not-sr-only lg:flex lg:items-center lg:gap-7">
+            {/* Brand lockup — the hero headline */}
+            <motion.div variants={itemVariants} className="flex items-center gap-7">
               <div className="relative shrink-0" style={{ width: "clamp(2.75rem, 9vw, 7.5rem)", height: "clamp(2.75rem, 9vw, 7.5rem)" }}>
                 <StriveMark tone="light" className="w-full h-full" />
               </div>
-              <div className="flex flex-col leading-none gap-2 sm:gap-2.5 min-w-0">
-                <h1
-                  id="hero-heading"
+              <div className="flex flex-col leading-none gap-2.5 min-w-0">
+                <span
                   className="font-heading font-extrabold uppercase tracking-tight text-white"
                   style={{ fontSize: "clamp(2.1rem, 8.5vw, 7.5rem)", lineHeight: 0.95 }}
                 >
                   Strive
-                </h1>
-                <span className="text-[10px] sm:text-base tracking-[0.15em] sm:tracking-[0.25em] uppercase text-white/45 font-medium">
+                </span>
+                <span className="text-base tracking-[0.25em] uppercase text-white/45 font-medium">
                   Web Design &amp; Development
                 </span>
               </div>
@@ -407,7 +555,7 @@ export default function Hero() {
             {/* CTAs */}
             <motion.div
               variants={itemVariants}
-              className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mt-3 w-full"
+              className="flex flex-row items-center gap-4 mt-3 w-full"
             >
               <a
                 href="#contact"
