@@ -244,8 +244,13 @@ export default function WorkContent() {
 
                 <div className="relative flex items-start justify-between mb-6">
                   <div
-                    className="w-12 h-12 rounded-xl flex items-center justify-center font-heading font-black text-lg text-white shrink-0"
-                    style={{ background: c.accent, boxShadow: `0 8px 20px -4px ${c.accent}80` }}
+                    className="w-12 h-12 rounded-xl flex items-center justify-center font-heading font-black text-lg shrink-0"
+                    style={{
+                      background: c.badge,
+                      color: c.textDark ? "#0A0A0A" : "#FFFFFF",
+                      boxShadow: `0 8px 20px -4px ${c.accent}80`,
+                      border: c.badge === "#0A0A0A" ? "1px solid rgba(255,255,255,0.18)" : "none",
+                    }}
                     aria-hidden="true"
                   >
                     {c.initial}

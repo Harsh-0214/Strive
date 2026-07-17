@@ -10,9 +10,9 @@ import StriveMark from "@/components/StriveMark";
 const navLinks = [
   { label: "Home", href: "/" },
   { label: "Our Work", href: "/work" },
-  { label: "Our Team", href: "/team" },
   { label: "Pricing", href: "/pricing" },
   { label: "Contact", href: "/contact" },
+  { label: "Our Team", href: "/team" },
 ];
 
 export default function Navbar() {
