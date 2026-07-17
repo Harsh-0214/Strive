@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 // A sentinel placed at the bottom of the Hero section triggers visibility
 export default function MobileCtaBar() {
@@ -12,6 +13,8 @@ export default function MobileCtaBar() {
   // We place the bar in the DOM and show it once a sentinel (rendered inside
   // this component at the top of the page) scrolls out of view.
   const heroInView = useInView(sentinelRef, { margin: "0px" });
+  const pathname = usePathname();
+  const ctaHref = pathname === "/" ? "#contact" : "/contact";
 
   return (
     <>
@@ -39,7 +42,7 @@ export default function MobileCtaBar() {
             }}
           >
             <a
-              href="#contact"
+              href={ctaHref}
               className="flex items-center justify-center gap-2 w-full px-6 py-3.5 rounded-xl bg-primary text-primary-foreground font-semibold text-base shadow-lg shadow-primary/25 hover:opacity-90 active:scale-95 transition-all duration-200 focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2"
             >
               Get a Free Quote

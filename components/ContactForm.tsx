@@ -134,7 +134,7 @@ const inputClass = (error: FieldError) =>
       : "border-border focus:border-primary"
   }`;
 
-export default function ContactForm() {
+export default function ContactForm({ showHeading = true }: { showHeading?: boolean }) {
   const uid = useId();
   const ref = useRef<HTMLElement>(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
@@ -225,26 +225,29 @@ export default function ContactForm() {
       id="contact"
       ref={ref}
       className="py-20 lg:py-28 bg-background"
-      aria-labelledby="contact-heading"
+      aria-label={showHeading ? undefined : "Contact form"}
+      aria-labelledby={showHeading ? "contact-heading" : undefined}
     >
       <div className="max-w-6xl mx-auto section-padding">
         {/* Heading: full width */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.55, ease: "easeOut" }}
-          className="text-center mb-10"
-        >
-          <h2
-            id="contact-heading"
-            className="font-heading font-extrabold text-3xl sm:text-4xl md:text-5xl text-foreground tracking-tight mb-3"
+        {showHeading && (
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.55, ease: "easeOut" }}
+            className="text-center mb-10"
           >
-            Let&apos;s build something great.
-          </h2>
-          <p className="text-muted-foreground text-lg leading-relaxed">
-            Tell us about your business and we&apos;ll get back to you within 24 hours.
-          </p>
-        </motion.div>
+            <h2
+              id="contact-heading"
+              className="font-heading font-extrabold text-3xl sm:text-4xl md:text-5xl text-foreground tracking-tight mb-3"
+            >
+              Let&apos;s build something great.
+            </h2>
+            <p className="text-muted-foreground text-lg leading-relaxed">
+              Tell us about your business and we&apos;ll get back to you within 24 hours.
+            </p>
+          </motion.div>
+        )}
 
         {/* 2-col layout: form (left, wider) | sidebar (right) */}
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-16 items-start">
@@ -417,9 +420,9 @@ export default function ContactForm() {
                   <option value="" disabled>
                     Select a package...
                   </option>
-                  <option value="starter">Starter ($300–800)</option>
-                  <option value="business">Business ($1,500–3,500)</option>
-                  <option value="premium">Premium ($4,000–10,000+)</option>
+                  <option value="launch">Launch — $500 (landing / portfolio)</option>
+                  <option value="growth">Growth — $1,500 (booking & high-traffic)</option>
+                  <option value="commerce">Commerce — $2,000+ (e-commerce)</option>
                   <option value="unsure">Not sure yet</option>
                 </select>
               </FieldWrapper>

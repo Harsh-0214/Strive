@@ -5,12 +5,12 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, ChevronDown } from "lucide-react";
 
 const businessTypes = [
+  "Barbershops",
+  "Nail Studios",
   "Restaurants",
-  "Salons",
-  "Contractors",
   "Clothing Brands",
-  "Photographers",
-  "Fitness Coaches",
+  "Contractors",
+  "E-Commerce Stores",
 ];
 
 // Large blurred orb — the core of the aurora mesh effect
@@ -285,8 +285,8 @@ export default function Hero() {
             variants={itemVariants}
             className="font-heading font-extrabold text-[2.6rem] sm:text-6xl md:text-7xl lg:text-[5.25rem] leading-[1.06] tracking-tight text-white max-w-4xl"
           >
-            Your Competitors
-            <br className="hidden sm:block" /> Are{" "}
+            Websites As
+            <br className="hidden sm:block" /> Ambitious As{" "}
             <span
               style={{
                 background: "linear-gradient(92deg, hsl(199 100% 72%), hsl(212 100% 82%))",
@@ -295,10 +295,8 @@ export default function Hero() {
                 backgroundClip: "text",
               }}
             >
-              Online.
+              Your Business.
             </span>
-            <br />
-            It&apos;s Time You Were Too.
           </motion.h1>
 
           {/* Subheadline with cycling type */}

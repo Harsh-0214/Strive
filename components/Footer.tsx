@@ -1,12 +1,12 @@
 import { Instagram, Facebook, Linkedin } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 const footerLinks = [
-  { label: "Packages", href: "#packages" },
-  { label: "Strive Care", href: "#strive-care" },
-  { label: "How It Works", href: "#how-it-works" },
-  { label: "FAQ", href: "#faq" },
-  { label: "Get a Quote", href: "#contact" },
+  { label: "Our Work", href: "/work" },
+  { label: "Pricing", href: "/pricing" },
+  { label: "Team", href: "/team" },
+  { label: "Contact", href: "/contact" },
 ];
 
 const socialLinks = [
@@ -22,10 +22,10 @@ export default function Footer() {
         {/* Main row */}
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 mb-8">
           {/* Logo */}
-          <a
-            href="#"
+          <Link
+            href="/"
             className="flex items-center gap-3 group"
-            aria-label="Strive — go to top"
+            aria-label="Strive — go to homepage"
           >
             <div className="relative w-12 h-12 flex-shrink-0 overflow-hidden">
               <Image
@@ -49,19 +49,19 @@ export default function Footer() {
                 Web Design & Development
               </span>
             </div>
-          </a>
+          </Link>
 
           {/* Nav links — centered */}
           <nav aria-label="Footer navigation">
             <ul className="flex flex-wrap gap-x-7 gap-y-3" role="list">
               {footerLinks.map(({ label, href }) => (
                 <li key={href}>
-                  <a
+                  <Link
                     href={href}
                     className="text-sm font-medium text-white/50 hover:text-white transition-colors duration-150"
                   >
                     {label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -89,16 +89,9 @@ export default function Footer() {
           className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/30"
           style={{ borderTop: "1px solid rgba(255,255,255,0.07)" }}
         >
-          <p>&copy; {new Date().getFullYear()} Strive. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Strive Web Design. All rights reserved.</p>
           <p>
-            Crafted by{" "}
-            <a
-              href="#"
-              className="text-white/50 hover:text-white transition-colors duration-150"
-            >
-              Strive
-            </a>{" "}
-            · Canada
+            Founded by Harsh Tamakuwala &amp; Rahul Modhera · Ontario, Canada
           </p>
         </div>
       </div>
