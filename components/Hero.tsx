@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import { ArrowRight, ChevronDown } from "lucide-react";
+import StriveMark from "@/components/StriveMark";
 
 const businessTypes = [
   "Barbershops",
@@ -369,6 +370,35 @@ export default function Hero() {
             animate="visible"
             className="flex flex-col items-start gap-5 text-left"
           >
+            {/* Logo lockup */}
+            <motion.div variants={itemVariants} className="flex items-center gap-3">
+              <div className="relative w-11 h-11 shrink-0">
+                <StriveMark tone="light" className="w-full h-full" />
+              </div>
+              <div className="flex flex-col leading-none gap-1">
+                <span className="font-heading font-extrabold text-xl tracking-widest uppercase text-white whitespace-nowrap">
+                  Strive
+                </span>
+                <span className="text-[10px] tracking-[0.2em] uppercase text-white/45 font-medium whitespace-nowrap">
+                  Web Design &amp; Development
+                </span>
+              </div>
+            </motion.div>
+
+            {/* Slogan */}
+            <motion.p
+              variants={itemVariants}
+              className="text-sm sm:text-base font-semibold uppercase tracking-[0.15em]"
+              style={{
+                background: "linear-gradient(92deg, hsl(199 100% 72%), hsl(212 100% 82%))",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}
+            >
+              We Build, You Grow.
+            </motion.p>
+
             <motion.h1
               id="hero-heading"
               variants={itemVariants}

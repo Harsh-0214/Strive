@@ -2,9 +2,10 @@
 
 import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
-import { Sparkles, ArrowRight, Check, MapPin, Clock, Star } from "lucide-react";
+import { ArrowRight, Check, MapPin, Clock, Star } from "lucide-react";
 import { getPrototype } from "@/lib/prototypes";
 import { PrototypeBadge, PrototypeCtaBar } from "@/components/PrototypeChrome";
+import { Flower, Sprig, FloatingPetal } from "@/components/prototypes/nail-studio/Florals";
 
 const proto = getPrototype("nail-studio")!;
 const ROSE = proto.accent;
@@ -48,7 +49,7 @@ export default function NailStudioContent() {
       {/* Hero */}
       <section className="relative min-h-dvh flex flex-col items-center justify-center text-center overflow-hidden px-6 pt-24 pb-16">
         <div
-          className="absolute -z-10 rounded-full"
+          className="absolute rounded-full"
           style={{
             width: 520,
             height: 520,
@@ -60,7 +61,7 @@ export default function NailStudioContent() {
           aria-hidden="true"
         />
         <div
-          className="absolute -z-10 rounded-full"
+          className="absolute rounded-full"
           style={{
             width: 460,
             height: 460,
@@ -72,6 +73,44 @@ export default function NailStudioContent() {
           aria-hidden="true"
         />
 
+        {/* Falling petals */}
+        <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
+          {Array.from({ length: 10 }).map((_, i) => (
+            <FloatingPetal key={i} index={i} />
+          ))}
+        </div>
+
+        {/* Corner sprigs */}
+        <Sprig
+          size={130}
+          color="#C97B84"
+          leaf="#E8B4BC"
+          className="absolute hidden sm:block"
+          style={{ top: "-6%", left: "2%", transform: "rotate(200deg)" }}
+        />
+        <Sprig
+          size={130}
+          color="#C97B84"
+          leaf="#E8B4BC"
+          flip
+          className="absolute hidden sm:block"
+          style={{ bottom: "-6%", right: "2%", transform: "rotate(-20deg) scaleX(-1)" }}
+        />
+        <Flower
+          size={38}
+          color="#D9A5AE"
+          center="#FDF6F3"
+          className="absolute hidden md:block"
+          style={{ top: "18%", right: "10%", opacity: 0.7 }}
+        />
+        <Flower
+          size={26}
+          color="#E8B4BC"
+          center="#FDF6F3"
+          className="absolute hidden md:block"
+          style={{ bottom: "22%", left: "8%", opacity: 0.6 }}
+        />
+
         <motion.span
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -79,7 +118,7 @@ export default function NailStudioContent() {
           className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-widest mb-8"
           style={{ background: proto.accentSoft, color: ROSE }}
         >
-          <Sparkles size={13} aria-hidden="true" /> Nail Studio &amp; Spa
+          <Flower size={15} color={ROSE} center="#FDF6F3" /> Nail Studio &amp; Spa
         </motion.span>
 
         <motion.h1
@@ -120,11 +159,18 @@ export default function NailStudioContent() {
       </section>
 
       {/* Services */}
-      <section className="py-24 px-6 sm:px-12 lg:px-20">
+      <section className="relative py-24 px-6 sm:px-12 lg:px-20 overflow-hidden">
+        <Flower
+          size={64}
+          color="#F0DCC8"
+          center="#FDF6F3"
+          className="absolute hidden lg:block"
+          style={{ top: "6%", left: "4%", opacity: 0.5 }}
+        />
         <div className="max-w-5xl mx-auto">
           <Reveal className="text-center mb-14">
-            <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: ROSE }}>
-              Menu
+            <p className="flex items-center justify-center gap-2 text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: ROSE }}>
+              <Flower size={16} color={ROSE} center="#FDF6F3" /> Menu
             </p>
             <h2 className="font-heading italic font-bold" style={{ fontSize: "clamp(1.75rem, 4vw, 2.75rem)", color: "#3A2C2A" }}>
               Services, done gently.
@@ -134,14 +180,21 @@ export default function NailStudioContent() {
             {services.map((s, i) => (
               <Reveal key={s.name} delay={i * 0.06}>
                 <div
-                  className="flex items-center justify-between p-6 rounded-2xl"
+                  className="relative flex items-center justify-between p-6 rounded-2xl overflow-hidden group"
                   style={{ background: "#FFFFFF", border: "1px solid rgba(74,59,56,0.08)" }}
                 >
-                  <div>
+                  <Flower
+                    size={70}
+                    color={ROSE}
+                    center={ROSE}
+                    className="absolute transition-transform duration-300 group-hover:scale-110"
+                    style={{ top: "-18px", right: "-18px", opacity: 0.07 }}
+                  />
+                  <div className="relative">
                     <p className="font-heading font-semibold text-lg" style={{ color: "#3A2C2A" }}>{s.name}</p>
                     <p className="text-sm mt-1" style={{ color: "#A6928E" }}>{s.time}</p>
                   </div>
-                  <span className="font-heading font-bold text-lg" style={{ color: ROSE }}>{s.price}</span>
+                  <span className="relative font-heading font-bold text-lg" style={{ color: ROSE }}>{s.price}</span>
                 </div>
               </Reveal>
             ))}
@@ -150,11 +203,18 @@ export default function NailStudioContent() {
       </section>
 
       {/* Booking widget mock */}
-      <section id="book" className="py-24 px-6 sm:px-12 lg:px-20" style={{ background: "#F7ECE8" }}>
+      <section id="book" className="relative py-24 px-6 sm:px-12 lg:px-20 overflow-hidden" style={{ background: "#F7ECE8" }}>
+        <Sprig
+          size={100}
+          color="#C97B84"
+          leaf="#D9A5AE"
+          className="absolute hidden lg:block"
+          style={{ top: "-4%", right: "6%", transform: "rotate(15deg)" }}
+        />
         <div className="max-w-2xl mx-auto">
           <Reveal className="text-center mb-10">
-            <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: ROSE }}>
-              Book Online
+            <p className="flex items-center justify-center gap-2 text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: ROSE }}>
+              <Flower size={16} color={ROSE} center="#FDF6F3" /> Book Online
             </p>
             <h2 className="font-heading italic font-bold" style={{ fontSize: "clamp(1.75rem, 4vw, 2.75rem)", color: "#3A2C2A" }}>
               Pick a time that suits you.
@@ -197,11 +257,18 @@ export default function NailStudioContent() {
       </section>
 
       {/* Shades gallery */}
-      <section className="py-24 px-6 sm:px-12 lg:px-20">
+      <section className="relative py-24 px-6 sm:px-12 lg:px-20 overflow-hidden">
+        <Flower
+          size={54}
+          color="#E3C4A8"
+          center="#FDF6F3"
+          className="absolute hidden lg:block"
+          style={{ bottom: "8%", right: "5%", opacity: 0.55 }}
+        />
         <div className="max-w-5xl mx-auto">
           <Reveal className="text-center mb-14">
-            <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: ROSE }}>
-              Palette
+            <p className="flex items-center justify-center gap-2 text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: ROSE }}>
+              <Flower size={16} color={ROSE} center="#FDF6F3" /> Palette
             </p>
             <h2 className="font-heading italic font-bold" style={{ fontSize: "clamp(1.75rem, 4vw, 2.75rem)", color: "#3A2C2A" }}>
               Every shade, in-house.
@@ -211,10 +278,17 @@ export default function NailStudioContent() {
             {shades.map((c, i) => (
               <Reveal key={c} delay={i * 0.04}>
                 <div
-                  className="aspect-square rounded-2xl transition-transform duration-200 hover:scale-105"
+                  className="group relative aspect-square rounded-2xl overflow-hidden transition-transform duration-200 hover:scale-105"
                   style={{ background: c, boxShadow: "0 6px 18px rgba(74,59,56,0.10)" }}
                   aria-hidden="true"
-                />
+                >
+                  <Flower
+                    size={40}
+                    color="rgba(255,255,255,0.9)"
+                    center="rgba(255,255,255,0.9)"
+                    className="absolute inset-0 m-auto opacity-0 group-hover:opacity-60 transition-opacity duration-200"
+                  />
+                </div>
               </Reveal>
             ))}
           </div>
@@ -222,12 +296,16 @@ export default function NailStudioContent() {
       </section>
 
       {/* Testimonial */}
-      <section className="py-24 px-6 sm:px-12 lg:px-20 text-center" style={{ background: "#F7ECE8" }}>
+      <section className="relative py-24 px-6 sm:px-12 lg:px-20 text-center overflow-hidden" style={{ background: "#F7ECE8" }}>
         <Reveal className="max-w-2xl mx-auto">
-          <div className="flex justify-center gap-1 mb-6" aria-hidden="true">
-            {Array.from({ length: 5 }).map((_, i) => (
-              <Star key={i} size={16} fill={ROSE} strokeWidth={0} />
-            ))}
+          <div className="flex justify-center items-center gap-4 mb-6" aria-hidden="true">
+            <Flower size={22} color="#D9A5AE" center="#FDF6F3" style={{ opacity: 0.8 }} />
+            <div className="flex gap-1">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <Star key={i} size={16} fill={ROSE} strokeWidth={0} />
+              ))}
+            </div>
+            <Flower size={22} color="#D9A5AE" center="#FDF6F3" style={{ opacity: 0.8, transform: "scaleX(-1)" }} />
           </div>
           <p className="font-heading italic font-medium leading-snug mb-6" style={{ fontSize: "clamp(1.25rem, 3vw, 2rem)", color: "#3A2C2A" }}>
             &ldquo;The calmest, prettiest studio I&apos;ve been to. Booking online took ten seconds and my gel set lasted three weeks.&rdquo;
@@ -239,8 +317,15 @@ export default function NailStudioContent() {
       </section>
 
       {/* Footer info */}
-      <section className="py-16 px-6 sm:px-12 lg:px-20 mt-auto">
-        <Reveal className="flex flex-col sm:flex-row items-center justify-center gap-8 text-sm" >
+      <section className="relative py-16 px-6 sm:px-12 lg:px-20 mt-auto overflow-hidden">
+        <Sprig
+          size={80}
+          color="#D9A5AE"
+          leaf="#F0DCC8"
+          className="absolute hidden md:block left-1/2 -translate-x-1/2"
+          style={{ top: "-14%", opacity: 0.6, transform: "translateX(-50%) rotate(180deg)" }}
+        />
+        <Reveal className="flex flex-col sm:flex-row items-center justify-center gap-8 text-sm">
           <span className="flex items-center gap-2" style={{ color: "#8A7370" }}>
             <MapPin size={15} style={{ color: ROSE }} aria-hidden="true" /> 42 Rosewood Ave, Oakville, ON
           </span>
