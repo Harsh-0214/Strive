@@ -210,12 +210,12 @@ function StatsBento() {
       variants={bentoContainer}
       initial="hidden"
       animate={inView ? "visible" : "hidden"}
-      className="grid grid-cols-2 gap-3 w-full"
+      className="grid grid-cols-2 gap-4 w-full"
     >
       {/* Big hero stat */}
       <motion.div
         variants={bentoItem}
-        className="col-span-2 rounded-2xl p-6 sm:p-7"
+        className="col-span-2 rounded-2xl p-7 sm:p-9"
         style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}
       >
         <p className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: "rgba(255,255,255,0.4)" }}>
@@ -223,12 +223,12 @@ function StatsBento() {
         </p>
         <div
           className="font-heading font-black leading-none mb-2 tabular-nums text-white"
-          style={{ fontSize: "clamp(3rem, 5.5vw, 4.5rem)" }}
+          style={{ fontSize: "clamp(3.5rem, 7vw, 5.75rem)" }}
           aria-label="50+ businesses launched"
         >
           <Counter target={50} suffix="+" active={inView} />
         </div>
-        <p className="text-sm font-medium" style={{ color: "rgba(255,255,255,0.45)" }}>
+        <p className="text-base font-medium" style={{ color: "rgba(255,255,255,0.45)" }}>
           businesses across Canada
         </p>
       </motion.div>
@@ -236,7 +236,7 @@ function StatsBento() {
       {/* Launch time */}
       <motion.div
         variants={bentoItem}
-        className="rounded-2xl p-5"
+        className="rounded-2xl p-6"
         style={{
           background: "rgba(255,255,255,0.03)",
           border: "1px solid rgba(255,255,255,0.07)",
@@ -246,7 +246,7 @@ function StatsBento() {
         <p className="text-xs font-semibold uppercase tracking-widest mb-2" style={{ color: "rgba(255,255,255,0.4)" }}>
           Avg. Launch Time
         </p>
-        <div className="font-heading font-black leading-none" style={{ fontSize: "clamp(1.5rem, 2.5vw, 2rem)", color: "#00B4D8" }}>
+        <div className="font-heading font-black leading-none" style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", color: "#00B4D8" }}>
           1–2 Weeks
         </div>
       </motion.div>
@@ -254,7 +254,7 @@ function StatsBento() {
       {/* Satisfaction */}
       <motion.div
         variants={bentoItem}
-        className="rounded-2xl p-5"
+        className="rounded-2xl p-6"
         style={{
           background: "rgba(255,255,255,0.03)",
           border: "1px solid rgba(255,255,255,0.07)",
@@ -264,7 +264,7 @@ function StatsBento() {
         <p className="text-xs font-semibold uppercase tracking-widest mb-2" style={{ color: "rgba(255,255,255,0.4)" }}>
           Satisfaction Rate
         </p>
-        <div className="font-heading font-black leading-none tabular-nums" style={{ fontSize: "clamp(1.5rem, 2.5vw, 2rem)", color: "#E8C547" }}>
+        <div className="font-heading font-black leading-none tabular-nums" style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", color: "#E8C547" }}>
           <Counter target={100} suffix="%" active={inView} />
         </div>
       </motion.div>
@@ -272,14 +272,14 @@ function StatsBento() {
       {/* Quote */}
       <motion.div
         variants={bentoItem}
-        className="col-span-2 rounded-2xl p-5"
+        className="col-span-2 rounded-2xl p-6"
         style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}
       >
         <blockquote>
-          <p className="font-heading font-bold italic leading-snug text-sm" style={{ color: "rgba(255,255,255,0.75)" }}>
+          <p className="font-heading font-bold italic leading-snug" style={{ fontSize: "1.05rem", color: "rgba(255,255,255,0.75)" }}>
             &ldquo;Your website should work as hard as you do.&rdquo;
           </p>
-          <footer className="mt-2 text-[11px] font-medium uppercase tracking-widest" style={{ color: "rgba(255,255,255,0.3)" }}>
+          <footer className="mt-2 text-xs font-medium uppercase tracking-widest" style={{ color: "rgba(255,255,255,0.3)" }}>
             Strive Design Agency
           </footer>
         </blockquote>
@@ -362,7 +362,7 @@ export default function Hero() {
 
       {/* ── Content: two columns ── */}
       <div className="relative z-10 w-full section-padding">
-        <div className="grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-12 lg:gap-16 items-center">
+        <div className="max-w-[2200px] mx-auto grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-16 lg:gap-24 items-center">
           {/* Left — brand */}
           <motion.div
             variants={containerVariants}
@@ -371,19 +371,19 @@ export default function Hero() {
             className="flex flex-col items-start gap-6 text-left"
           >
             {/* Brand lockup — the hero headline */}
-            <motion.div variants={itemVariants} className="flex items-center gap-4 sm:gap-5">
-              <div className="relative shrink-0" style={{ width: "clamp(3.25rem, 7vw, 5.75rem)", height: "clamp(3.25rem, 7vw, 5.75rem)" }}>
+            <motion.div variants={itemVariants} className="flex items-center gap-3 sm:gap-7">
+              <div className="relative shrink-0" style={{ width: "clamp(2.75rem, 9vw, 7.5rem)", height: "clamp(2.75rem, 9vw, 7.5rem)" }}>
                 <StriveMark tone="light" className="w-full h-full" />
               </div>
-              <div className="flex flex-col leading-none gap-2">
+              <div className="flex flex-col leading-none gap-2 sm:gap-2.5 min-w-0">
                 <h1
                   id="hero-heading"
                   className="font-heading font-extrabold uppercase tracking-tight text-white"
-                  style={{ fontSize: "clamp(2.4rem, 6vw, 5.5rem)", lineHeight: 1 }}
+                  style={{ fontSize: "clamp(2.1rem, 8.5vw, 7.5rem)", lineHeight: 0.95 }}
                 >
                   Strive
                 </h1>
-                <span className="text-xs sm:text-sm tracking-[0.25em] uppercase text-white/45 font-medium whitespace-nowrap">
+                <span className="text-[10px] sm:text-base tracking-[0.15em] sm:tracking-[0.25em] uppercase text-white/45 font-medium">
                   Web Design &amp; Development
                 </span>
               </div>
@@ -394,7 +394,7 @@ export default function Hero() {
               variants={itemVariants}
               className="font-heading font-bold tracking-tight"
               style={{
-                fontSize: "clamp(1.5rem, 3vw, 2.5rem)",
+                fontSize: "clamp(1.85rem, 4vw, 3.25rem)",
                 background: "linear-gradient(92deg, hsl(199 100% 72%), hsl(212 100% 82%))",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
@@ -407,11 +407,11 @@ export default function Hero() {
             {/* CTAs */}
             <motion.div
               variants={itemVariants}
-              className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mt-2 w-full"
+              className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mt-3 w-full"
             >
               <a
                 href="#contact"
-                className="group relative inline-flex items-center gap-2.5 px-8 py-4 rounded-xl font-bold text-base text-white transition-all duration-200 active:scale-95 focus-visible:outline-2 focus-visible:outline-white overflow-hidden"
+                className="group relative inline-flex items-center gap-3 px-10 py-5 rounded-xl font-bold text-lg text-white transition-all duration-200 active:scale-95 focus-visible:outline-2 focus-visible:outline-white overflow-hidden"
                 style={{
                   background: "linear-gradient(135deg, hsl(199 100% 44%) 0%, hsl(212 90% 40%) 100%)",
                   boxShadow:
@@ -427,7 +427,7 @@ export default function Hero() {
                 />
                 <span className="relative">Get a Free Quote</span>
                 <ArrowRight
-                  size={18}
+                  size={20}
                   className="relative transition-transform duration-200 group-hover:translate-x-0.5"
                   aria-hidden="true"
                 />
@@ -435,19 +435,19 @@ export default function Hero() {
 
               <a
                 href="#packages"
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold text-base text-white/90 border border-white/20 bg-white/[0.07] backdrop-blur-sm hover:bg-white/[0.13] hover:border-white/30 active:scale-95 transition-all duration-200 focus-visible:outline-2 focus-visible:outline-white"
+                className="inline-flex items-center gap-2 px-10 py-5 rounded-xl font-semibold text-lg text-white/90 border border-white/20 bg-white/[0.07] backdrop-blur-sm hover:bg-white/[0.13] hover:border-white/30 active:scale-95 transition-all duration-200 focus-visible:outline-2 focus-visible:outline-white"
               >
                 View Packages
               </a>
             </motion.div>
 
             {/* Social proof */}
-            <motion.div variants={itemVariants} className="flex items-center gap-3 mt-1">
+            <motion.div variants={itemVariants} className="flex items-center gap-3 mt-2">
               <div className="flex -space-x-2" aria-hidden="true">
                 {(["MT", "JR", "AK", "SC"] as const).map((initials, i) => (
                   <div
                     key={initials}
-                    className="w-8 h-8 rounded-full border-2 border-white/15 flex items-center justify-center text-xs font-bold text-white"
+                    className="w-9 h-9 rounded-full border-2 border-white/15 flex items-center justify-center text-xs font-bold text-white"
                     style={{
                       background: (["hsl(330 60% 55%)", "hsl(210 70% 50%)", "hsl(270 55% 55%)", "hsl(160 55% 45%)"])[i],
                       zIndex: 4 - i,
@@ -457,26 +457,26 @@ export default function Hero() {
                   </div>
                 ))}
               </div>
-              <p className="text-white/50 text-sm">
+              <p className="text-white/50 text-base">
                 <span className="text-white/90 font-semibold">50+</span> businesses launched across Canada
               </p>
             </motion.div>
           </motion.div>
 
           {/* Right — subheadline + stats bento */}
-          <div className="flex flex-col gap-8 w-full">
+          <div className="flex flex-col gap-10 w-full">
             <motion.div
               variants={containerVariants}
               initial="hidden"
               animate="visible"
-              className="text-white/65 leading-relaxed flex flex-col items-start gap-0.5 text-left"
-              style={{ fontSize: "clamp(1.05rem, 1.5vw, 1.35rem)" }}
+              className="font-heading font-semibold text-white/80 leading-tight flex flex-col items-start gap-1 text-left"
+              style={{ fontSize: "clamp(1.5rem, 2.4vw, 2.25rem)" }}
             >
               <motion.span variants={itemVariants}>Strive Builds Fast, Beautiful Websites For</motion.span>
               <motion.span
                 variants={itemVariants}
                 className="overflow-hidden flex justify-start"
-                style={{ height: "1.5em" }}
+                style={{ height: "1.3em" }}
                 aria-live="polite"
                 aria-atomic="true"
               >
@@ -492,7 +492,7 @@ export default function Hero() {
                       WebkitBackgroundClip: "text",
                       WebkitTextFillColor: "transparent",
                       backgroundClip: "text",
-                      fontWeight: 600,
+                      fontWeight: 800,
                       display: "block",
                     }}
                   >
