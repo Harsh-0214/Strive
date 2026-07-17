@@ -13,7 +13,7 @@ const founders = [
     gradient: "linear-gradient(135deg, #0070f3 0%, #00b4d8 100%)",
     bio: "Studied engineering at Ontario Tech University, then turned that background into a craft. He builds websites that are engineered to load fast, rank well, and convert, not just look nice in a mockup.",
     focus: ["Front-end architecture", "Performance", "Client strategy"],
-    linkedin: null as string | null,
+    linkedin: "https://www.linkedin.com/in/harshtamakuwala/" as string | null,
   },
   {
     name: "Rahul Modhera",

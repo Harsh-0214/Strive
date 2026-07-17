@@ -2,9 +2,16 @@
 
 import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Scissors, Sparkles, Flame, ShoppingBag } from "lucide-react";
 import Link from "next/link";
 import { prototypes } from "@/lib/prototypes";
+
+const prototypeIcons: Record<string, typeof Scissors> = {
+  barbershop: Scissors,
+  "nail-studio": Sparkles,
+  restaurant: Flame,
+  ecommerce: ShoppingBag,
+};
 
 export default function Portfolio() {
   const ref = useRef<HTMLElement>(null);
@@ -58,90 +65,111 @@ export default function Portfolio() {
 
         {/* Prototype cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {prototypes.map((p, i) => (
-            <motion.div
-              key={p.slug}
-              initial={{ opacity: 0, y: 24 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{
-                duration: 0.6,
-                delay: i * 0.1,
-                ease: [0.23, 1, 0.32, 1],
-              }}
-            >
-              <Link
-                href={`/work/${p.slug}`}
-                onMouseEnter={() => setHoveredIndex(i)}
-                onMouseLeave={() => setHoveredIndex(null)}
-                className="relative flex flex-col rounded-2xl overflow-hidden group"
-                style={{
-                  background: "#111111",
-                  border: "1px solid rgba(255,255,255,0.06)",
-                  transition: "transform 240ms cubic-bezier(0.23,1,0.32,1), box-shadow 240ms ease",
-                  transform: hoveredIndex === i ? "translateY(-4px)" : "translateY(0)",
-                  boxShadow: hoveredIndex === i ? "0 24px 60px rgba(0,0,0,0.4)" : "0 2px 12px rgba(0,0,0,0.2)",
+          {prototypes.map((p, i) => {
+            const Icon = prototypeIcons[p.slug] ?? Sparkles;
+            const hovered = hoveredIndex === i;
+            return (
+              <motion.div
+                key={p.slug}
+                initial={{ opacity: 0, y: 24 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{
+                  duration: 0.6,
+                  delay: i * 0.1,
+                  ease: [0.23, 1, 0.32, 1],
                 }}
               >
-                {/* Colored panel */}
-                <div
-                  className="relative flex items-center justify-between px-7 py-10"
-                  style={{ background: p.panelGradient }}
+                <Link
+                  href={`/work/${p.slug}`}
+                  onMouseEnter={() => setHoveredIndex(i)}
+                  onMouseLeave={() => setHoveredIndex(null)}
+                  className="relative flex flex-col rounded-2xl overflow-hidden group"
+                  style={{
+                    background: "#111111",
+                    border: `1px solid ${hovered ? `${p.accent}55` : "rgba(255,255,255,0.06)"}`,
+                    transition: "transform 240ms cubic-bezier(0.23,1,0.32,1), box-shadow 240ms ease, border-color 240ms ease",
+                    transform: hovered ? "translateY(-4px)" : "translateY(0)",
+                    boxShadow: hovered ? `0 24px 60px -8px ${p.accent}55` : "0 2px 12px rgba(0,0,0,0.2)",
+                  }}
                 >
-                  <div>
-                    <span
-                      className="font-heading font-black"
-                      style={{ fontSize: "3.5rem", color: "rgba(255,255,255,0.25)", lineHeight: 1 }}
+                  {/* Colored panel */}
+                  <div
+                    className="relative flex items-center justify-between px-7 py-10 overflow-hidden"
+                    style={{ background: p.panelGradient }}
+                  >
+                    <Icon
+                      size={140}
+                      strokeWidth={1.25}
+                      className="absolute -left-4 -top-4 pointer-events-none"
+                      style={{
+                        color: "rgba(255,255,255,0.10)",
+                        transition: "transform 400ms cubic-bezier(0.23,1,0.32,1)",
+                        transform: hovered ? "scale(1.1) rotate(3deg)" : "scale(1) rotate(0deg)",
+                      }}
                       aria-hidden="true"
+                    />
+                    <div
+                      className="relative flex items-center justify-center w-14 h-14 rounded-2xl"
+                      style={{ background: "rgba(255,255,255,0.16)", backdropFilter: "blur(6px)" }}
                     >
-                      {p.letter}
+                      <Icon size={26} strokeWidth={1.75} color="#fff" aria-hidden="true" />
+                    </div>
+                    <span
+                      className="relative text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full"
+                      style={{ background: "rgba(0,0,0,0.3)", color: "#fff" }}
+                    >
+                      {p.tag} · {p.price}
                     </span>
                   </div>
-                  <span
-                    className="text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full"
-                    style={{ background: "rgba(0,0,0,0.3)", color: "#fff" }}
-                  >
-                    {p.tag} · {p.price}
-                  </span>
-                </div>
 
-                {/* Content */}
-                <div className="flex flex-col flex-1 p-7">
-                  <div className="flex items-start justify-between mb-3">
-                    <div>
-                      <h3
-                        className="font-heading font-bold text-xl"
-                        style={{ color: "#FFFFFF" }}
-                      >
-                        {p.name}
-                      </h3>
-                      <p className="text-sm mt-0.5" style={{ color: "rgba(255,255,255,0.4)" }}>
-                        {p.business} · {p.category}
-                      </p>
-                    </div>
-                    <ArrowUpRight
-                      size={20}
-                      className="shrink-0 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                      style={{ color: "rgba(255,255,255,0.4)" }}
+                  {/* Content */}
+                  <div className="relative flex flex-col flex-1 p-7 overflow-hidden">
+                    <div
+                      className="absolute -top-10 -right-10 w-44 h-44 rounded-full pointer-events-none"
+                      style={{
+                        background: `radial-gradient(circle, ${p.accent}25, transparent 70%)`,
+                        opacity: hovered ? 1 : 0,
+                        transition: "opacity 300ms ease",
+                      }}
+                      aria-hidden="true"
                     />
+                    <div className="relative flex items-start justify-between mb-3">
+                      <div>
+                        <h3
+                          className="font-heading font-bold text-xl"
+                          style={{ color: "#FFFFFF" }}
+                        >
+                          {p.name}
+                        </h3>
+                        <p className="text-sm mt-0.5" style={{ color: "rgba(255,255,255,0.4)" }}>
+                          {p.business} · {p.category}
+                        </p>
+                      </div>
+                      <ArrowUpRight
+                        size={20}
+                        className="shrink-0 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                        style={{ color: "rgba(255,255,255,0.4)" }}
+                      />
+                    </div>
+
+                    <p
+                      className="relative text-sm leading-relaxed mb-4"
+                      style={{ color: "rgba(255,255,255,0.55)" }}
+                    >
+                      {p.tagline}
+                    </p>
+
+                    <p
+                      className="relative text-xs font-semibold uppercase tracking-widest mt-auto"
+                      style={{ color: p.accent }}
+                    >
+                      {p.vibe}
+                    </p>
                   </div>
-
-                  <p
-                    className="text-sm leading-relaxed mb-4"
-                    style={{ color: "rgba(255,255,255,0.55)" }}
-                  >
-                    {p.tagline}
-                  </p>
-
-                  <p
-                    className="text-xs font-semibold uppercase tracking-widest mt-auto"
-                    style={{ color: p.accent }}
-                  >
-                    {p.vibe}
-                  </p>
-                </div>
-              </Link>
-            </motion.div>
-          ))}
+                </Link>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>
