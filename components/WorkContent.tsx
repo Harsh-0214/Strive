@@ -59,7 +59,7 @@ export default function WorkContent() {
             className="text-lg leading-relaxed max-w-2xl mx-auto"
             style={{ color: "rgba(255,255,255,0.55)" }}
           >
-            We built four full prototypes from scratch — not templates — to prove we can design
+            We built four full prototypes from scratch, not templates, to prove we can design
             for anyone. A barbershop doesn&apos;t need to look like a nail studio. A restaurant
             shouldn&apos;t look like a clothing store. Click through and see for yourself.
           </motion.p>
@@ -153,7 +153,7 @@ export default function WorkContent() {
             Don&apos;t see your industry? We&apos;ll design for it anyway.
           </h2>
           <p className="text-lg mb-8" style={{ color: "#6B6B6B" }}>
-            These four prototypes are a taste of our range — not the limit of it.
+            These four prototypes are a taste of our range, not the limit of it.
           </p>
           <Link
             href="/contact"

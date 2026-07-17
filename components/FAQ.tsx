@@ -7,7 +7,7 @@ const faqs = [
   {
     question: "Do I own my website after it's built?",
     answer:
-      "Yes, 100%. Your site, your domain, your content — always. We hand over everything and never hold anything hostage.",
+      "Yes, 100%. Your site, your domain, your content, always. We hand over everything and never hold anything hostage.",
   },
   {
     question: "How long does it take to build my site?",
@@ -17,7 +17,7 @@ const faqs = [
   {
     question: "What if I need changes after my site launches?",
     answer:
-      "Small tweaks after launch are on us for the first 30 days. Bigger updates after that are quoted separately — always transparently. No hidden fees, ever.",
+      "Small tweaks after launch are on us for the first 30 days. Bigger updates after that are quoted separately, always transparently. No hidden fees, ever.",
   },
   {
     question: "Do you work with businesses outside your city?",

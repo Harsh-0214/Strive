@@ -104,7 +104,7 @@ export default function Navbar() {
             <Link
               href="/"
               className="flex items-center gap-3 flex-shrink-0 justify-self-start"
-              aria-label="Strive — go to homepage"
+              aria-label="Strive, go to homepage"
             >
               <div
                 className={`relative flex-shrink-0 transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] ${

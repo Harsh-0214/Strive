@@ -7,7 +7,7 @@ import PageHero from "@/components/PageHero";
 const ContactForm = dynamic(() => import("@/components/ContactForm"), { ssr: false });
 
 export const metadata: Metadata = {
-  title: "Contact Us — Get a Free Website Quote",
+  title: "Contact Us: Get a Free Website Quote",
   description:
     "Tell us about your business and get a free, no-obligation website quote within 24 hours. Serving barbershops, salons, restaurants, contractors, and e-commerce brands across Canada.",
   keywords: [
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: "/contact" },
   openGraph: {
-    title: "Contact Strive — Get a Free Website Quote",
+    title: "Contact Strive: Get a Free Website Quote",
     description: "Tell us about your business and we'll get back to you within 24 hours.",
     type: "website",
     url: "/contact",
@@ -34,7 +34,7 @@ export default function ContactPage() {
         <PageHero
           eyebrow="Get in Touch"
           title="Let's build something great."
-          subtitle="Tell us about your business — whether it's a barbershop, a boutique, or a full storefront — and we'll reply within 24 hours with a free quote."
+          subtitle="Tell us about your business, whether it's a barbershop, a boutique, or a full storefront, and we'll reply within 24 hours with a free quote."
         />
         <ContactForm showHeading={false} />
       </main>

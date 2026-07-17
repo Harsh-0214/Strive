@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const alt = "Strive — Websites As Ambitious As Your Business.";
+export const alt = "Strive: Websites As Ambitious As Your Business.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -107,7 +107,7 @@ export default function OGImage() {
             maxWidth: "640px",
           }}
         >
-          Custom sites from $500 — barbershops to full e-commerce stores.
+          Custom sites from $500, barbershops to full e-commerce stores.
         </div>
 
         {/* CTA pill */}

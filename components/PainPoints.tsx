@@ -7,7 +7,7 @@ const problems = [
   {
     number: "01",
     title: "No website at all.",
-    body: "You don't exist to anyone searching online. If they can't find you, they find your competitors — every single time.",
+    body: "You don't exist to anyone searching online. If they can't find you, they find your competitors instead. Every single time.",
   },
   {
     number: "02",
@@ -17,7 +17,7 @@ const problems = [
   {
     number: "03",
     title: "Losing customers every day.",
-    body: "Every day without a professional site costs real money. Your competitors aren't waiting — and neither are your customers.",
+    body: "Every day without a professional site costs real money. Your competitors aren't waiting, and neither are your customers.",
   },
 ];
 

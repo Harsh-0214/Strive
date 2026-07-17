@@ -44,7 +44,7 @@ export function PrototypeCtaBar({ proto }: { proto: Prototype }) {
     >
       <div className="w-full section-padding py-4 flex flex-col sm:flex-row items-center justify-between gap-3">
         <p className="text-sm text-center sm:text-left" style={{ color: "rgba(255,255,255,0.65)" }}>
-          <span className="font-semibold text-white">{proto.name}</span> is a Strive prototype — not a real
+          <span className="font-semibold text-white">{proto.name}</span> is a Strive prototype, not a real
           business. Want something like this for yours?
         </p>
         <div className="flex items-center gap-3 shrink-0">

@@ -23,7 +23,7 @@ export const prototypes: Prototype[] = [
     business: "Barbershop",
     category: "Portfolio / Booking",
     tag: "Launch",
-    tagline: "Bold, dark, editorial — built to sell the cut before they sit in the chair.",
+    tagline: "Bold, dark, editorial: built to sell the cut before they sit in the chair.",
     description:
       "A moody, high-contrast one-pager for a barbershop: portfolio-first, booking CTA above the fold, editorial type that feels more magazine than menu.",
     vibe: "Dark editorial · grit & precision",
@@ -41,7 +41,7 @@ export const prototypes: Prototype[] = [
     business: "Nail Studio",
     category: "Booking Site",
     tag: "Growth",
-    tagline: "Soft, airy, tactile — a booking experience as polished as the manicures.",
+    tagline: "Soft, airy, tactile: a booking experience as polished as the manicures.",
     description:
       "A pastel, elegant booking site for a nail studio: service menu, gallery, and an online booking flow that feels like a spa appointment, not a form.",
     vibe: "Soft pastel · elegant & tactile",
@@ -59,7 +59,7 @@ export const prototypes: Prototype[] = [
     business: "Restaurant",
     category: "Menu / Reservations",
     tag: "Growth",
-    tagline: "Warm, rich, appetite-driven — a digital dining room that makes you hungry.",
+    tagline: "Warm, rich, appetite-driven: a digital dining room that makes you hungry.",
     description:
       "A warm, high-traffic restaurant site: full menu, reservation flow, chef's story, and photography-forward layout built to convert browsers into bookings.",
     vibe: "Warm & rich · appetite-driven",
@@ -77,9 +77,9 @@ export const prototypes: Prototype[] = [
     business: "Clothing / E-Commerce",
     category: "Full Storefront",
     tag: "Commerce",
-    tagline: "Sharp, high-contrast, fashion-forward — a full storefront built to sell.",
+    tagline: "Sharp, high-contrast, fashion-forward: a full storefront built to sell.",
     description:
-      "A complete clothing e-commerce experience: product grid, quick-add cart, collection drops, and checkout — the range-topping build we ship for retail brands.",
+      "A complete clothing e-commerce experience: product grid, quick-add cart, collection drops, and checkout. The range-topping build we ship for retail brands.",
     vibe: "High-contrast fashion · bold & minimal",
     priceTier: "Commerce",
     price: "$2,000+",

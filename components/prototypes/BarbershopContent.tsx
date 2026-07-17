@@ -75,7 +75,7 @@ export default function BarbershopContent() {
           className="flex items-center gap-3 text-xs font-bold uppercase tracking-[0.35em] mb-8"
           style={{ color: GOLD }}
         >
-          <Scissors size={14} aria-hidden="true" /> Est. 2018 — Downtown
+          <Scissors size={14} aria-hidden="true" /> Est. 2018, Downtown
         </motion.p>
 
         <motion.h1
@@ -202,7 +202,7 @@ export default function BarbershopContent() {
             &ldquo;Best fade in the city, no contest. In and out in 25 minutes, looking sharp for two weeks straight.&rdquo;
           </p>
           <p className="text-sm uppercase tracking-widest" style={{ color: "rgba(242,238,230,0.4)" }}>
-            — Regular Client
+            Regular Client
           </p>
         </Reveal>
       </section>

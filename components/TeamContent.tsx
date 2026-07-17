@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { GraduationCap, Code2, Sparkles, ArrowRight, ArrowUpRight, Mail } from "lucide-react";
+import { GraduationCap, Code2, Sparkles, ArrowRight, ArrowUpRight, Mail, Linkedin } from "lucide-react";
 import Link from "next/link";
 
 const founders = [
@@ -11,16 +11,18 @@ const founders = [
     role: "Co-Founder & Software Engineer",
     initials: "HT",
     gradient: "linear-gradient(135deg, #0070f3 0%, #00b4d8 100%)",
-    bio: "Studied engineering at Ontario Tech University before turning that background into a craft: building websites that are engineered to load fast, rank well, and convert — not just look nice in a mockup.",
+    bio: "Studied engineering at Ontario Tech University, then turned that background into a craft. He builds websites that are engineered to load fast, rank well, and convert, not just look nice in a mockup.",
     focus: ["Front-end architecture", "Performance", "Client strategy"],
+    linkedin: null as string | null,
   },
   {
     name: "Rahul Modhera",
     role: "Co-Founder & Software Engineer",
     initials: "RM",
     gradient: "linear-gradient(135deg, #7c3aed 0%, #00b4d8 100%)",
-    bio: "Also an Ontario Tech University engineering grad, obsessed with the details most agencies skip — animation timing, responsive edge cases, and interfaces that feel as good as they look.",
+    bio: "Also an Ontario Tech University engineering grad, obsessed with the details most agencies skip: animation timing, responsive edge cases, and interfaces that feel as good as they look.",
     focus: ["UI/UX design", "Systems & integrations", "Quality control"],
+    linkedin: "https://www.linkedin.com/in/rahulmodhera/",
   },
 ];
 
@@ -38,7 +40,7 @@ const values = [
   {
     icon: GraduationCap,
     title: "Built on fundamentals",
-    body: "Our engineering degrees show up in the details — clean structure, real performance budgets, sites that hold up under traffic.",
+    body: "Our engineering degrees show up in the details: clean structure, real performance budgets, sites that hold up under traffic.",
   },
 ];
 
@@ -98,7 +100,7 @@ export default function TeamContent() {
           >
             Strive was founded by Harsh Tamakuwala and Rahul Modhera, two software engineers
             and Ontario Tech University graduates who saw too many great local businesses stuck
-            with slow, dated, template-built sites — and decided to fix it.
+            with slow, dated, template-built sites, and decided to fix it.
           </motion.p>
         </div>
       </section>
@@ -121,12 +123,23 @@ export default function TeamContent() {
                 initial={{ opacity: 0, y: 32, scale: 0.97 }}
                 animate={foundersInView ? { opacity: 1, y: 0, scale: 1 } : {}}
                 transition={{ duration: 0.6, delay: i * 0.12, ease: [0.23, 1, 0.32, 1] }}
-                className="rounded-2xl p-8 flex flex-col"
+                className="relative rounded-2xl p-8 flex flex-col"
                 style={{
                   background: "rgba(255,255,255,0.03)",
                   border: "1px solid rgba(255,255,255,0.07)",
                 }}
               >
+                {f.linkedin && (
+                  <a
+                    href={f.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${f.name} on LinkedIn`}
+                    className="absolute top-6 right-6 w-9 h-9 rounded-lg flex items-center justify-center bg-white/[0.06] text-white/50 hover:bg-white/[0.12] hover:text-white transition-all duration-150"
+                  >
+                    <Linkedin size={15} strokeWidth={1.75} aria-hidden="true" />
+                  </a>
+                )}
                 <div
                   className="w-20 h-20 rounded-2xl flex items-center justify-center font-heading font-black text-2xl text-white mb-6 shrink-0"
                   style={{ background: f.gradient, boxShadow: "0 8px 32px rgba(0,180,216,0.25)" }}
@@ -226,7 +239,7 @@ export default function TeamContent() {
             Let&apos;s build something you&apos;re proud of.
           </h2>
           <p className="text-lg mb-8" style={{ color: "rgba(255,255,255,0.5)" }}>
-            Tell us about your business — we&apos;ll reply within 24 hours.
+            Tell us about your business. We&apos;ll reply within 24 hours.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link

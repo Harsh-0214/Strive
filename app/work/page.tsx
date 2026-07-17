@@ -5,9 +5,9 @@ import MobileCtaBar from "@/components/MobileCtaBar";
 import WorkContent from "@/components/WorkContent";
 
 export const metadata: Metadata = {
-  title: "Our Work — Live Website Prototypes",
+  title: "Our Work: Live Website Prototypes",
   description:
-    "Explore four full website prototypes built by Strive — a barbershop, nail studio, restaurant, and e-commerce store — each with a completely different design vibe.",
+    "Explore four full website prototypes built by Strive: a barbershop, nail studio, restaurant, and e-commerce store, each with a completely different design vibe.",
   keywords: [
     "web design portfolio",
     "website prototypes",
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: "/work" },
   openGraph: {
-    title: "Our Work — Live Website Prototypes | Strive",
+    title: "Our Work: Live Website Prototypes | Strive",
     description:
       "Four full prototypes, four completely different vibes. See the range Strive builds across.",
     type: "website",

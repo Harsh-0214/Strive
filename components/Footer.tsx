@@ -1,4 +1,4 @@
-import { Instagram, Facebook, Linkedin } from "lucide-react";
+import { Instagram } from "lucide-react";
 import Link from "next/link";
 import StriveMark from "@/components/StriveMark";
 
@@ -11,9 +11,7 @@ const footerLinks = [
 ];
 
 const socialLinks = [
-  { label: "Instagram", Icon: Instagram, href: "https://instagram.com" },
-  { label: "Facebook", Icon: Facebook, href: "https://facebook.com" },
-  { label: "LinkedIn", Icon: Linkedin, href: "https://linkedin.com" },
+  { label: "Instagram", Icon: Instagram, href: "https://instagram.com/builtbystrive" },
 ];
 
 export default function Footer() {
@@ -26,7 +24,7 @@ export default function Footer() {
           <Link
             href="/"
             className="flex items-center gap-3 group"
-            aria-label="Strive — go to homepage"
+            aria-label="Strive, go to homepage"
           >
             <div className="relative w-9 h-9 flex-shrink-0">
               <StriveMark tone="light" className="w-full h-full" />

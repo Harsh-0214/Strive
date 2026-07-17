@@ -9,14 +9,14 @@ const steps = [
     number: "01",
     icon: MessageSquare,
     title: "Consultation & Discovery",
-    body: "Tell us about your business, goals, and vision. We'll map out exactly what you need — no fluff, no jargon, just clarity.",
+    body: "Tell us about your business, goals, and vision. We'll map out exactly what you need: no fluff, no jargon, just clarity.",
     detail: "~30 min call",
   },
   {
     number: "02",
     icon: Palette,
     title: "Design & Build",
-    body: "Our team handles everything — design, development, copy, and testing. You review and we refine until every pixel is right.",
+    body: "Our team handles everything: design, development, copy, and testing. You review and we refine until every pixel is right.",
     detail: "1–4 weeks",
   },
   {

@@ -311,7 +311,7 @@ export default function NailStudioContent() {
             &ldquo;The calmest, prettiest studio I&apos;ve been to. Booking online took ten seconds and my gel set lasted three weeks.&rdquo;
           </p>
           <p className="text-sm uppercase tracking-widest" style={{ color: "#A6928E" }}>
-            — Studio Regular
+            Studio Regular
           </p>
         </Reveal>
       </section>

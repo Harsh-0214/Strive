@@ -191,7 +191,7 @@ export default function RestaurantContent() {
             &ldquo;The ribeye alone is worth the drive. Booked online in seconds, table was ready when we walked in.&rdquo;
           </p>
           <p className="text-sm uppercase tracking-widest" style={{ color: "rgba(242,232,222,0.4)" }}>
-            — Frequent Diner
+            Frequent Diner
           </p>
         </Reveal>
       </section>

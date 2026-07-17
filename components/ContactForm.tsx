@@ -211,7 +211,7 @@ export default function ContactForm({ showHeading = true }: { showHeading?: bool
               You&apos;re one step closer to growing online.
             </h2>
             <p className="text-muted-foreground text-lg leading-relaxed">
-              We&apos;ll be in touch soon — usually within 24 hours. Keep an eye on your
+              We&apos;ll be in touch soon, usually within 24 hours. Keep an eye on your
               inbox.
             </p>
           </motion.div>
@@ -420,9 +420,9 @@ export default function ContactForm({ showHeading = true }: { showHeading?: bool
                   <option value="" disabled>
                     Select a package...
                   </option>
-                  <option value="launch">Launch — $500 (landing / portfolio)</option>
-                  <option value="growth">Growth — $1,500 (booking & high-traffic)</option>
-                  <option value="commerce">Commerce — $2,000+ (e-commerce)</option>
+                  <option value="launch">Launch: $500 (landing / portfolio)</option>
+                  <option value="growth">Growth: $1,500 (booking & high-traffic)</option>
+                  <option value="commerce">Commerce: $2,000+ (e-commerce)</option>
                   <option value="unsure">Not sure yet</option>
                 </select>
               </FieldWrapper>
@@ -487,7 +487,7 @@ export default function ContactForm({ showHeading = true }: { showHeading?: bool
                 {[
                   { step: "1", text: "We review your request and reach out within 24 hours." },
                   { step: "2", text: "We jump on a quick call to learn about your business." },
-                  { step: "3", text: "You receive a custom proposal — no obligation." },
+                  { step: "3", text: "You receive a custom proposal, no obligation." },
                 ].map(({ step, text }) => (
                   <li key={step} className="flex items-start gap-3">
                     <span className="w-6 h-6 rounded-full bg-primary text-primary-foreground text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">

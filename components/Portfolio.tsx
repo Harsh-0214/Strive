@@ -42,7 +42,7 @@ export default function Portfolio() {
               See how far we go
             </h2>
             <p className="mt-3 max-w-xl" style={{ color: "rgba(255,255,255,0.45)" }}>
-              We built four full prototypes — each a completely different design language —
+              We built four full prototypes, each a completely different design language,
               to show you the range, not just the results.
             </p>
           </div>

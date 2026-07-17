@@ -21,7 +21,7 @@ const testimonials = [
   },
   {
     quote:
-      "Our online store launched perfectly. Strive handled everything — I didn't have to think about a thing.",
+      "Our online store launched perfectly. Strive handled everything, I didn't have to think about a thing.",
     name: "Aisha K.",
     role: "Founder, Kova Clothing",
     initials: "AK",

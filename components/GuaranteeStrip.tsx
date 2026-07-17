@@ -8,7 +8,7 @@ const pillars = [
   {
     icon: ShieldCheck,
     title: "Satisfaction Guarantee",
-    body: "Not happy with your site? We'll revise until you are — or refund you in full.",
+    body: "Not happy with your site? We'll revise until you are, or refund you in full.",
     accent: "#00B4D8",
   },
   {

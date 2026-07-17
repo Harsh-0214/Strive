@@ -15,7 +15,7 @@ const packages = [
     popular: false,
     features: [
       "Single-page portfolio or landing site",
-      "Custom design — no templates",
+      "Custom design, no templates",
       "Contact form",
       "Mobile responsive",
       "Fast load speed + SSL",
@@ -48,7 +48,7 @@ const packages = [
     range: "$2,000",
     rangeSuffix: "+",
     period: "one-time",
-    description: "A full storefront built to sell — clothing, retail & product-based brands.",
+    description: "A full storefront built to sell: clothing, retail & product-based brands.",
     popular: false,
     features: [
       "Everything in Growth",

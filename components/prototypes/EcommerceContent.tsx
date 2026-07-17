@@ -148,7 +148,7 @@ export default function EcommerceContent() {
           className="text-xs font-bold uppercase tracking-[0.35em] mb-6"
           style={{ color: RED }}
         >
-          Fall Drop — 01
+          Fall Drop, 01
         </motion.span>
         <motion.h1
           initial={{ opacity: 0, y: 30 }}

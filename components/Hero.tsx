@@ -280,7 +280,7 @@ function StatsBento() {
             &ldquo;Your website should work as hard as you do.&rdquo;
           </p>
           <footer className="mt-2 text-[11px] font-medium uppercase tracking-widest" style={{ color: "rgba(255,255,255,0.3)" }}>
-            — Strive Design Agency
+            Strive Design Agency
           </footer>
         </blockquote>
       </motion.div>
@@ -363,23 +363,27 @@ export default function Hero() {
       {/* ── Content: two columns ── */}
       <div className="relative z-10 w-full section-padding">
         <div className="grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-12 lg:gap-16 items-center">
-          {/* Left — text */}
+          {/* Left — brand */}
           <motion.div
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="flex flex-col items-start gap-5 text-left"
+            className="flex flex-col items-start gap-6 text-left"
           >
-            {/* Logo lockup */}
-            <motion.div variants={itemVariants} className="flex items-center gap-3">
-              <div className="relative w-11 h-11 shrink-0">
+            {/* Brand lockup — the hero headline */}
+            <motion.div variants={itemVariants} className="flex items-center gap-4 sm:gap-5">
+              <div className="relative shrink-0" style={{ width: "clamp(3.25rem, 7vw, 5.75rem)", height: "clamp(3.25rem, 7vw, 5.75rem)" }}>
                 <StriveMark tone="light" className="w-full h-full" />
               </div>
-              <div className="flex flex-col leading-none gap-1">
-                <span className="font-heading font-extrabold text-xl tracking-widest uppercase text-white whitespace-nowrap">
+              <div className="flex flex-col leading-none gap-2">
+                <h1
+                  id="hero-heading"
+                  className="font-heading font-extrabold uppercase tracking-tight text-white"
+                  style={{ fontSize: "clamp(2.4rem, 6vw, 5.5rem)", lineHeight: 1 }}
+                >
                   Strive
-                </span>
-                <span className="text-[10px] tracking-[0.2em] uppercase text-white/45 font-medium whitespace-nowrap">
+                </h1>
+                <span className="text-xs sm:text-sm tracking-[0.25em] uppercase text-white/45 font-medium whitespace-nowrap">
                   Web Design &amp; Development
                 </span>
               </div>
@@ -388,8 +392,9 @@ export default function Hero() {
             {/* Slogan */}
             <motion.p
               variants={itemVariants}
-              className="text-sm sm:text-base font-semibold uppercase tracking-[0.15em]"
+              className="font-heading font-bold tracking-tight"
               style={{
+                fontSize: "clamp(1.5rem, 3vw, 2.5rem)",
                 background: "linear-gradient(92deg, hsl(199 100% 72%), hsl(212 100% 82%))",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
@@ -398,61 +403,6 @@ export default function Hero() {
             >
               We Build, You Grow.
             </motion.p>
-
-            <motion.h1
-              id="hero-heading"
-              variants={itemVariants}
-              className="font-heading font-extrabold leading-[1.05] tracking-tight text-white"
-              style={{ fontSize: "clamp(2.4rem, 4.8vw, 4.75rem)" }}
-            >
-              Websites As Ambitious As{" "}
-              <span
-                style={{
-                  background: "linear-gradient(92deg, hsl(199 100% 72%), hsl(212 100% 82%))",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
-                Your Business.
-              </span>
-            </motion.h1>
-
-            {/* Subheadline with cycling type */}
-            <motion.div
-              variants={itemVariants}
-              className="max-w-xl text-white/65 leading-relaxed flex flex-col items-start gap-0.5 text-left"
-              style={{ fontSize: "clamp(1rem, 1.3vw, 1.25rem)" }}
-            >
-              <span>Strive Builds Fast, Beautiful Websites For</span>
-              <span
-                className="overflow-hidden flex justify-start"
-                style={{ height: "1.5em" }}
-                aria-live="polite"
-                aria-atomic="true"
-              >
-                <AnimatePresence mode="wait">
-                  <motion.span
-                    key={typeIndex}
-                    initial={{ opacity: 0, y: 14 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -14 }}
-                    transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-                    style={{
-                      background: "linear-gradient(90deg, hsl(199 100% 65%), hsl(212 90% 75%))",
-                      WebkitBackgroundClip: "text",
-                      WebkitTextFillColor: "transparent",
-                      backgroundClip: "text",
-                      fontWeight: 600,
-                      display: "block",
-                    }}
-                  >
-                    {businessTypes[typeIndex]}
-                  </motion.span>
-                </AnimatePresence>
-              </span>
-              <span>Freeing You To Focus On What You Do Best.</span>
-            </motion.div>
 
             {/* CTAs */}
             <motion.div
@@ -513,8 +463,48 @@ export default function Hero() {
             </motion.div>
           </motion.div>
 
-          {/* Right — stats bento */}
-          <StatsBento />
+          {/* Right — subheadline + stats bento */}
+          <div className="flex flex-col gap-8 w-full">
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+              className="text-white/65 leading-relaxed flex flex-col items-start gap-0.5 text-left"
+              style={{ fontSize: "clamp(1.05rem, 1.5vw, 1.35rem)" }}
+            >
+              <motion.span variants={itemVariants}>Strive Builds Fast, Beautiful Websites For</motion.span>
+              <motion.span
+                variants={itemVariants}
+                className="overflow-hidden flex justify-start"
+                style={{ height: "1.5em" }}
+                aria-live="polite"
+                aria-atomic="true"
+              >
+                <AnimatePresence mode="wait">
+                  <motion.span
+                    key={typeIndex}
+                    initial={{ opacity: 0, y: 14 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -14 }}
+                    transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+                    style={{
+                      background: "linear-gradient(90deg, hsl(199 100% 65%), hsl(212 90% 75%))",
+                      WebkitBackgroundClip: "text",
+                      WebkitTextFillColor: "transparent",
+                      backgroundClip: "text",
+                      fontWeight: 600,
+                      display: "block",
+                    }}
+                  >
+                    {businessTypes[typeIndex]}
+                  </motion.span>
+                </AnimatePresence>
+              </motion.span>
+              <motion.span variants={itemVariants}>Freeing You To Focus On What You Do Best.</motion.span>
+            </motion.div>
+
+            <StatsBento />
+          </div>
         </div>
       </div>
 

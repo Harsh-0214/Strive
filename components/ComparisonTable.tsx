@@ -94,7 +94,7 @@ export default function ComparisonTable() {
             How we stack up
           </h2>
           <p className="mt-3 max-w-xl mx-auto" style={{ color: "rgba(255,255,255,0.45)" }}>
-            Professional results at small-business prices — without the wait.
+            Professional results at small-business prices, without the wait.
           </p>
         </motion.div>
 

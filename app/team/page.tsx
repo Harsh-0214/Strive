@@ -5,7 +5,7 @@ import MobileCtaBar from "@/components/MobileCtaBar";
 import TeamContent from "@/components/TeamContent";
 
 export const metadata: Metadata = {
-  title: "Our Team — Founded by Ontario Tech Engineers",
+  title: "Our Team: Founded by Ontario Tech Engineers",
   description:
     "Meet the founders of Strive: Harsh Tamakuwala and Rahul Modhera, software engineers and Ontario Tech University graduates building fast, beautiful websites for small businesses across Canada.",
   keywords: [
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: "/team" },
   openGraph: {
-    title: "Meet the Founders — Strive Web Design",
+    title: "Meet the Founders at Strive Web Design",
     description:
       "Two software engineers from Ontario Tech University building websites that punch above their price tag.",
     type: "website",

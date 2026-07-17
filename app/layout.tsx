@@ -20,11 +20,11 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL("https://strivewebdesign.ca"),
   title: {
-    default: "Strive — Websites As Ambitious As Your Business",
+    default: "Strive: Websites As Ambitious As Your Business",
     template: "%s | Strive Web Design",
   },
   description:
-    "Strive is a web design agency building fast, beautiful, custom websites for small businesses — from $500 portfolio sites to $2,000+ e-commerce stores. Barbershops, salons, restaurants, contractors, and retail brands across Canada.",
+    "Strive is a web design agency building fast, beautiful, custom websites for small businesses, from $500 portfolio sites to $2,000+ e-commerce stores. Barbershops, salons, restaurants, contractors, and retail brands across Canada.",
   keywords: [
     "web design agency",
     "web design agency Canada",
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
   creator: "Strive Web Design",
   publisher: "Strive Web Design",
   openGraph: {
-    title: "Strive — Websites As Ambitious As Your Business",
+    title: "Strive: Websites As Ambitious As Your Business",
     description:
       "Custom websites for small businesses, from $500 portfolio sites to full e-commerce stores. See our range across barbershops, salons, restaurants, and retail brands.",
     type: "website",
@@ -57,7 +57,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Strive — Websites As Ambitious As Your Business",
+    title: "Strive: Websites As Ambitious As Your Business",
     description:
       "Custom websites for small businesses, from $500 portfolio sites to full e-commerce stores.",
   },
@@ -68,7 +68,7 @@ const organizationSchema = {
   "@type": "ProfessionalService",
   name: "Strive Web Design",
   description:
-    "Web design agency building custom websites for small businesses — landing pages, booking sites, and e-commerce stores.",
+    "Web design agency building custom websites for small businesses: landing pages, booking sites, and e-commerce stores.",
   url: "https://strivewebdesign.ca",
   areaServed: "CA",
   founders: [
@@ -77,9 +77,9 @@ const organizationSchema = {
   ],
   priceRange: "$500 - $2000+",
   makesOffer: [
-    { "@type": "Offer", name: "Launch — Landing/Portfolio Website", price: "500", priceCurrency: "USD" },
-    { "@type": "Offer", name: "Growth — Booking & High-Traffic Website", price: "1500", priceCurrency: "USD" },
-    { "@type": "Offer", name: "Commerce — E-Commerce Website", price: "2000", priceCurrency: "USD" },
+    { "@type": "Offer", name: "Launch: Landing/Portfolio Website", price: "500", priceCurrency: "USD" },
+    { "@type": "Offer", name: "Growth: Booking & High-Traffic Website", price: "1500", priceCurrency: "USD" },
+    { "@type": "Offer", name: "Commerce: E-Commerce Website", price: "2000", priceCurrency: "USD" },
   ],
 };
 
