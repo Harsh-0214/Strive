@@ -266,20 +266,20 @@ export default function WorkContent() {
                   style={{ background: c.panelGradient, minHeight: "180px" }}
                 >
                   {c.logo ? (
-                    <div
-                      className="absolute inset-0 flex items-center justify-center transition-transform duration-500 group-hover:scale-105"
-                      aria-hidden="true"
-                    >
+                    <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
                       <div
-                        className="relative rounded-2xl overflow-hidden"
+                        className="absolute inset-0 transition-transform duration-500 ease-out"
                         style={{
-                          width: "clamp(5rem, 30%, 7rem)",
-                          height: "clamp(5rem, 30%, 7rem)",
-                          boxShadow: "0 12px 32px rgba(0,0,0,0.35), 0 0 0 1px rgba(255,255,255,0.1)",
+                          transform: `scale(${hoveredClient === i ? 1.72 : 1.55}) rotate(${i % 2 === 0 ? -6 : 6}deg)`,
                         }}
                       >
-                        <Image src={c.logo} alt="" fill className="object-cover" sizes="200px" />
+                        <Image src={c.logo} alt="" fill className="object-cover" sizes="400px" />
                       </div>
+                      {/* Subtle scrim so the badge/category pill stay readable over busy logo art */}
+                      <div
+                        className="absolute inset-0"
+                        style={{ background: "linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.45) 100%)" }}
+                      />
                     </div>
                   ) : (
                     <span
