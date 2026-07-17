@@ -2,10 +2,17 @@
 
 import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
-import { ArrowUpRight, ArrowRight, ExternalLink } from "lucide-react";
+import { ArrowUpRight, ArrowRight, ExternalLink, Scissors, Sparkles, Flame, ShoppingBag } from "lucide-react";
 import Link from "next/link";
 import { prototypes } from "@/lib/prototypes";
 import { clients } from "@/lib/clients";
+
+const prototypeIcons: Record<string, typeof Scissors> = {
+  barbershop: Scissors,
+  "nail-studio": Sparkles,
+  restaurant: Flame,
+  ecommerce: ShoppingBag,
+};
 
 export default function WorkContent() {
   const heroRef = useRef<HTMLElement>(null);
@@ -74,75 +81,99 @@ export default function WorkContent() {
       <section ref={gridRef} className="py-16 lg:py-24" style={{ background: "#0d1117" }}>
         <div className="w-full section-padding">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            {prototypes.map((p, i) => (
-              <motion.div
-                key={p.slug}
-                initial={{ opacity: 0, y: 32 }}
-                animate={gridInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: i * 0.1, ease: [0.23, 1, 0.32, 1] }}
-              >
-                <Link
-                  href={`/work/${p.slug}`}
-                  onMouseEnter={() => setHovered(i)}
-                  onMouseLeave={() => setHovered(null)}
-                  className="relative flex flex-col rounded-2xl overflow-hidden group h-full"
-                  style={{
-                    background: "#111111",
-                    border: "1px solid rgba(255,255,255,0.07)",
-                    transition: "transform 240ms cubic-bezier(0.23,1,0.32,1), box-shadow 240ms ease",
-                    transform: hovered === i ? "translateY(-6px)" : "translateY(0)",
-                    boxShadow: hovered === i ? "0 28px 64px rgba(0,0,0,0.45)" : "0 2px 12px rgba(0,0,0,0.2)",
-                  }}
+            {prototypes.map((p, i) => {
+              const Icon = prototypeIcons[p.slug] ?? Sparkles;
+              return (
+                <motion.div
+                  key={p.slug}
+                  initial={{ opacity: 0, y: 32 }}
+                  animate={gridInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.6, delay: i * 0.1, ease: [0.23, 1, 0.32, 1] }}
                 >
-                  <div
-                    className="relative flex items-end justify-between px-8 py-14"
-                    style={{ background: p.panelGradient, minHeight: "200px" }}
+                  <Link
+                    href={`/work/${p.slug}`}
+                    onMouseEnter={() => setHovered(i)}
+                    onMouseLeave={() => setHovered(null)}
+                    className="relative flex flex-col rounded-2xl overflow-hidden group h-full"
+                    style={{
+                      background: "#111111",
+                      border: `1px solid ${hovered === i ? `${p.accent}55` : "rgba(255,255,255,0.07)"}`,
+                      transition: "transform 240ms cubic-bezier(0.23,1,0.32,1), box-shadow 240ms ease, border-color 240ms ease",
+                      transform: hovered === i ? "translateY(-6px)" : "translateY(0)",
+                      boxShadow: hovered === i ? `0 28px 64px -12px ${p.accent}55` : "0 2px 12px rgba(0,0,0,0.2)",
+                    }}
                   >
-                    <span
-                      className="font-heading font-black"
-                      style={{ fontSize: "5rem", color: "rgba(255,255,255,0.22)", lineHeight: 1 }}
-                      aria-hidden="true"
-                    >
-                      {p.letter}
-                    </span>
-                    <span
-                      className="text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full mb-1"
-                      style={{ background: "rgba(0,0,0,0.35)", color: "#fff" }}
-                    >
-                      {p.vibe}
-                    </span>
-                  </div>
-
-                  <div className="flex flex-col flex-1 p-8">
-                    <div className="flex items-start justify-between mb-3">
-                      <div>
-                        <h2 className="font-heading font-bold text-2xl text-white">{p.name}</h2>
-                        <p className="text-sm mt-1" style={{ color: "rgba(255,255,255,0.45)" }}>
-                          {p.business} · {p.category}
-                        </p>
-                      </div>
-                      <ArrowUpRight
-                        size={22}
-                        className="shrink-0 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                        style={{ color: "rgba(255,255,255,0.4)" }}
-                      />
-                    </div>
-                    <p className="text-sm leading-relaxed mb-6" style={{ color: "rgba(255,255,255,0.55)" }}>
-                      {p.description}
-                    </p>
                     <div
-                      className="flex items-center justify-between mt-auto pt-5"
-                      style={{ borderTop: "1px solid rgba(255,255,255,0.07)" }}
+                      className="relative flex items-end justify-between px-8 py-14 overflow-hidden"
+                      style={{ background: p.panelGradient, minHeight: "200px" }}
                     >
-                      <span className="text-xs font-semibold uppercase tracking-widest" style={{ color: p.accent }}>
-                        {p.priceTier} Package
+                      {/* Decorative oversized icon watermark */}
+                      <Icon
+                        size={160}
+                        strokeWidth={1}
+                        className="absolute transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3"
+                        style={{ color: "rgba(255,255,255,0.10)", top: "-30px", left: "-20px" }}
+                        aria-hidden="true"
+                      />
+                      {/* Icon badge */}
+                      <div
+                        className="relative w-16 h-16 rounded-2xl flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:scale-105"
+                        style={{ background: "rgba(255,255,255,0.16)", backdropFilter: "blur(6px)" }}
+                      >
+                        <Icon size={30} strokeWidth={1.75} style={{ color: "#fff" }} aria-hidden="true" />
+                      </div>
+                      <span
+                        className="relative text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full mb-1"
+                        style={{ background: "rgba(0,0,0,0.35)", color: "#fff" }}
+                      >
+                        {p.vibe}
                       </span>
-                      <span className="font-heading font-bold text-lg text-white">{p.price}</span>
                     </div>
-                  </div>
-                </Link>
-              </motion.div>
-            ))}
+
+                    <div className="relative flex flex-col flex-1 p-8 overflow-hidden">
+                      {/* Corner accent glow */}
+                      <div
+                        className="absolute rounded-full pointer-events-none transition-opacity duration-300"
+                        style={{
+                          width: 220,
+                          height: 220,
+                          top: -90,
+                          right: -90,
+                          background: `radial-gradient(circle, ${p.accent}25, transparent 70%)`,
+                          opacity: hovered === i ? 1 : 0.4,
+                        }}
+                        aria-hidden="true"
+                      />
+                      <div className="relative flex items-start justify-between mb-3">
+                        <div>
+                          <h2 className="font-heading font-bold text-2xl text-white">{p.name}</h2>
+                          <p className="text-sm mt-1" style={{ color: "rgba(255,255,255,0.45)" }}>
+                            {p.business} · {p.category}
+                          </p>
+                        </div>
+                        <ArrowUpRight
+                          size={22}
+                          className="shrink-0 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                          style={{ color: "rgba(255,255,255,0.4)" }}
+                        />
+                      </div>
+                      <p className="relative text-sm leading-relaxed mb-6" style={{ color: "rgba(255,255,255,0.55)" }}>
+                        {p.description}
+                      </p>
+                      <div
+                        className="relative flex items-center justify-between mt-auto pt-5"
+                        style={{ borderTop: "1px solid rgba(255,255,255,0.07)" }}
+                      >
+                        <span className="text-xs font-semibold uppercase tracking-widest" style={{ color: p.accent }}>
+                          {p.priceTier} Package
+                        </span>
+                        <span className="font-heading font-bold text-lg text-white">{p.price}</span>
+                      </div>
+                    </div>
+                  </Link>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
