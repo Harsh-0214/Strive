@@ -150,7 +150,8 @@
   }
 
   .section-padding {
-    @apply px-5 sm:px-8 lg:px-14 xl:px-20 2xl:px-28;
+    padding-left: clamp(1.25rem, 4vw, 5rem);
+    padding-right: clamp(1.25rem, 4vw, 5rem);
   }
 
   /* Safe-area bottom for mobile CTA bar */

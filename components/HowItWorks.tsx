@@ -39,7 +39,7 @@ export default function HowItWorks() {
       className="py-20 lg:py-32 bg-white"
       aria-labelledby="how-heading"
     >
-      <div className="max-w-[1400px] mx-auto section-padding">
+      <div className="w-full section-padding">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
