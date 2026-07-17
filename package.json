@@ -16,6 +16,7 @@
     "lucide-react": "^0.414.0",
     "@radix-ui/react-accordion": "^1.2.0",
     "@radix-ui/react-select": "^2.1.1",
+    "@vercel/speed-insights": "^1.1.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "tailwind-merge": "^2.4.0"
