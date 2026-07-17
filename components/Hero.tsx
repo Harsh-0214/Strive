@@ -475,8 +475,8 @@ export default function Hero() {
               </motion.h2>
               <motion.span
                 variants={itemVariants}
-                className="overflow-hidden flex justify-center w-full"
-                style={{ height: "1.25em" }}
+                className="overflow-hidden flex justify-center w-full py-1"
+                style={{ height: "clamp(3rem, 12vw, 3.75rem)" }}
                 aria-live="polite"
                 aria-atomic="true"
               >
@@ -490,6 +490,7 @@ export default function Hero() {
                     className="font-heading font-black"
                     style={{
                       fontSize: "clamp(2rem, 9vw, 2.75rem)",
+                      lineHeight: 1.15,
                       background: "linear-gradient(90deg, hsl(199 100% 65%), hsl(212 90% 75%))",
                       WebkitBackgroundClip: "text",
                       WebkitTextFillColor: "transparent",
@@ -617,14 +618,26 @@ export default function Hero() {
               variants={containerVariants}
               initial="hidden"
               animate="visible"
-              className="font-heading font-semibold text-white/80 leading-tight flex flex-col items-start gap-1 text-left"
-              style={{ fontSize: "clamp(1.5rem, 2.4vw, 2.25rem)" }}
+              className="flex flex-col items-start gap-2 text-left"
             >
-              <motion.span variants={itemVariants}>Strive Builds Fast, Beautiful Websites For</motion.span>
+              <motion.p
+                variants={itemVariants}
+                className="text-xs font-semibold uppercase tracking-widest"
+                style={{ color: "#00B4D8" }}
+              >
+                What We Build
+              </motion.p>
+              <motion.h2
+                variants={itemVariants}
+                className="font-heading font-extrabold text-white leading-[1.1]"
+                style={{ fontSize: "clamp(1.85rem, 2.6vw, 2.5rem)" }}
+              >
+                Fast, Beautiful Websites For
+              </motion.h2>
               <motion.span
                 variants={itemVariants}
-                className="overflow-hidden flex justify-start"
-                style={{ height: "1.3em" }}
+                className="overflow-hidden flex justify-start w-full py-1"
+                style={{ height: "clamp(2.75rem, 4.2vw, 3.5rem)" }}
                 aria-live="polite"
                 aria-atomic="true"
               >
@@ -635,12 +648,14 @@ export default function Hero() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -14 }}
                     transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+                    className="font-heading font-black"
                     style={{
+                      fontSize: "clamp(1.85rem, 3.4vw, 2.75rem)",
+                      lineHeight: 1.15,
                       background: "linear-gradient(90deg, hsl(199 100% 65%), hsl(212 90% 75%))",
                       WebkitBackgroundClip: "text",
                       WebkitTextFillColor: "transparent",
                       backgroundClip: "text",
-                      fontWeight: 800,
                       display: "block",
                     }}
                   >
@@ -648,7 +663,9 @@ export default function Hero() {
                   </motion.span>
                 </AnimatePresence>
               </motion.span>
-              <motion.span variants={itemVariants}>Freeing You To Focus On What You Do Best.</motion.span>
+              <motion.p variants={itemVariants} className="text-white/55 mt-1" style={{ fontSize: "1.1rem" }}>
+                Freeing you to focus on what you do best.
+              </motion.p>
             </motion.div>
 
             <StatsBento />
