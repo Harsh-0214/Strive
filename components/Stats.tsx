@@ -76,7 +76,7 @@ export default function Stats() {
         aria-hidden="true"
       />
 
-      <div className="max-w-7xl mx-auto section-padding">
+      <div className="max-w-[1600px] mx-auto section-padding">
         <motion.div
           variants={containerVariants}
           initial="hidden"

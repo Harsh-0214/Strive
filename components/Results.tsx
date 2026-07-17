@@ -86,7 +86,7 @@ export default function Results() {
       style={{ background: "#0d1117" }}
       aria-labelledby="results-heading"
     >
-      <div className="max-w-6xl mx-auto section-padding">
+      <div className="max-w-[1400px] mx-auto section-padding">
         {/* Heading */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
