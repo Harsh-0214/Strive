@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { ArrowUpRight, ArrowRight, ExternalLink, Scissors, Sparkles, Flame, ShoppingBag } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { prototypes } from "@/lib/prototypes";
 import { clients } from "@/lib/clients";
 
@@ -250,32 +251,46 @@ export default function WorkContent() {
                 initial={{ opacity: 0, y: 24 }}
                 animate={clientsInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: i * 0.06, ease: [0.23, 1, 0.32, 1] }}
-                className="relative flex flex-col rounded-2xl p-7 overflow-hidden group"
+                className="relative flex flex-col rounded-2xl overflow-hidden group h-full"
                 style={{
-                  background: "rgba(255,255,255,0.03)",
+                  background: "#111111",
                   border: `1px solid ${hoveredClient === i ? `${c.accent}55` : "rgba(255,255,255,0.08)"}`,
                   transition: "transform 220ms cubic-bezier(0.23,1,0.32,1), box-shadow 220ms ease, border-color 220ms ease",
                   transform: hoveredClient === i ? "translateY(-5px)" : "translateY(0)",
                   boxShadow: hoveredClient === i ? `0 24px 56px -12px ${c.accent}40` : "0 2px 10px rgba(0,0,0,0.2)",
                 }}
               >
-                {/* Soft accent glow in the corner */}
+                {/* Panel — logo backdrop */}
                 <div
-                  className="absolute -z-0 rounded-full transition-opacity duration-300"
-                  style={{
-                    width: 180,
-                    height: 180,
-                    top: -70,
-                    right: -70,
-                    background: `radial-gradient(circle, ${c.accent}30, transparent 70%)`,
-                    opacity: hoveredClient === i ? 1 : 0.5,
-                  }}
-                  aria-hidden="true"
-                />
-
-                <div className="relative flex items-start justify-between mb-6">
+                  className="relative flex items-end justify-between px-6 py-10 overflow-hidden"
+                  style={{ background: c.panelGradient, minHeight: "180px" }}
+                >
+                  {c.logo ? (
+                    <div
+                      className="absolute inset-0 flex items-center justify-center p-8 transition-transform duration-500 group-hover:scale-105"
+                      aria-hidden="true"
+                    >
+                      <div className="relative w-full h-full">
+                        <Image src={c.logo} alt="" fill className="object-contain" sizes="400px" />
+                      </div>
+                    </div>
+                  ) : (
+                    <span
+                      className="absolute font-heading font-black transition-transform duration-500 group-hover:scale-110"
+                      style={{
+                        fontSize: "7rem",
+                        color: "rgba(255,255,255,0.08)",
+                        lineHeight: 1,
+                        top: "-14px",
+                        left: "-6px",
+                      }}
+                      aria-hidden="true"
+                    >
+                      {c.initial}
+                    </span>
+                  )}
                   <div
-                    className="w-12 h-12 rounded-xl flex items-center justify-center font-heading font-black text-lg shrink-0"
+                    className="relative w-12 h-12 rounded-xl flex items-center justify-center font-heading font-black text-lg shrink-0 transition-transform duration-300 group-hover:scale-105"
                     style={{
                       background: c.badge,
                       color: c.textDark ? "#0A0A0A" : "#FFFFFF",
@@ -287,27 +302,48 @@ export default function WorkContent() {
                     {c.initial}
                   </div>
                   <span
-                    className="flex items-center justify-center w-8 h-8 rounded-full shrink-0 transition-all duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                    style={{
-                      background: "rgba(255,255,255,0.06)",
-                      color: hoveredClient === i ? "#FFFFFF" : "rgba(255,255,255,0.4)",
-                    }}
+                    className="relative text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full"
+                    style={{ background: "rgba(0,0,0,0.35)", color: "#fff" }}
                   >
-                    <ExternalLink size={14} aria-hidden="true" />
+                    {c.category}
                   </span>
                 </div>
-                <h3 className="relative font-heading font-bold text-lg mb-1" style={{ color: "#FFFFFF" }}>
-                  {c.name}
-                </h3>
-                <p className="relative text-sm mb-5" style={{ color: "rgba(255,255,255,0.5)" }}>
-                  {c.category}
-                </p>
-                <span
-                  className="relative mt-auto text-xs font-semibold uppercase tracking-widest pt-4"
-                  style={{ color: c.accent, borderTop: "1px solid rgba(255,255,255,0.08)" }}
-                >
-                  Visit Live Site
-                </span>
+
+                {/* Content */}
+                <div className="relative flex flex-col flex-1 p-7 overflow-hidden">
+                  <div
+                    className="absolute rounded-full pointer-events-none transition-opacity duration-300"
+                    style={{
+                      width: 180,
+                      height: 180,
+                      top: -70,
+                      right: -70,
+                      background: `radial-gradient(circle, ${c.accent}30, transparent 70%)`,
+                      opacity: hoveredClient === i ? 1 : 0.5,
+                    }}
+                    aria-hidden="true"
+                  />
+                  <div className="relative flex items-start justify-between mb-5">
+                    <h3 className="font-heading font-bold text-lg" style={{ color: "#FFFFFF" }}>
+                      {c.name}
+                    </h3>
+                    <span
+                      className="flex items-center justify-center w-8 h-8 rounded-full shrink-0 transition-all duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                      style={{
+                        background: "rgba(255,255,255,0.06)",
+                        color: hoveredClient === i ? "#FFFFFF" : "rgba(255,255,255,0.4)",
+                      }}
+                    >
+                      <ExternalLink size={14} aria-hidden="true" />
+                    </span>
+                  </div>
+                  <span
+                    className="relative mt-auto text-xs font-semibold uppercase tracking-widest pt-4"
+                    style={{ color: c.accent, borderTop: "1px solid rgba(255,255,255,0.08)" }}
+                  >
+                    Visit Live Site
+                  </span>
+                </div>
               </motion.a>
             ))}
           </div>
