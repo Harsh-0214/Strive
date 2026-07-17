@@ -370,8 +370,8 @@ export default function Hero() {
             animate="visible"
             className="flex flex-col items-start gap-6 text-left"
           >
-            {/* Brand lockup — the hero headline */}
-            <motion.div variants={itemVariants} className="flex items-center gap-3 sm:gap-7">
+            {/* Brand lockup — the hero headline. Visually hidden below lg: the navbar right above it already carries the logo, so repeating it full-size reads as a glitch on mobile. Kept in the accessibility tree via sr-only so the h1 is still announced. */}
+            <motion.div variants={itemVariants} className="sr-only lg:not-sr-only lg:flex lg:items-center lg:gap-7">
               <div className="relative shrink-0" style={{ width: "clamp(2.75rem, 9vw, 7.5rem)", height: "clamp(2.75rem, 9vw, 7.5rem)" }}>
                 <StriveMark tone="light" className="w-full h-full" />
               </div>
