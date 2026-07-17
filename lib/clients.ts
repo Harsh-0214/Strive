@@ -52,6 +52,7 @@ export const clients: Client[] = [
     textDark: true,
     initial: "S",
     panelGradient: "linear-gradient(135deg, #d9c2a6 0%, #8fa37e 100%)",
+    logo: "/logos/Siasmakeuplogo.jpg",
   },
   {
     name: "JN Entertainment",
@@ -61,6 +62,7 @@ export const clients: Client[] = [
     badge: "linear-gradient(135deg, #E11D2E 0%, #0A0A0A 100%)",
     initial: "J",
     panelGradient: "linear-gradient(135deg, #2a0505 0%, #0A0A0A 100%)",
+    logo: "/logos/JNentertainment_logo.jpg",
   },
   {
     name: "Unified Energy Interface",

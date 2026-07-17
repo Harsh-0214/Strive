@@ -267,11 +267,18 @@ export default function WorkContent() {
                 >
                   {c.logo ? (
                     <div
-                      className="absolute inset-0 flex items-center justify-center p-8 transition-transform duration-500 group-hover:scale-105"
+                      className="absolute inset-0 flex items-center justify-center transition-transform duration-500 group-hover:scale-105"
                       aria-hidden="true"
                     >
-                      <div className="relative w-full h-full">
-                        <Image src={c.logo} alt="" fill className="object-contain" sizes="400px" />
+                      <div
+                        className="relative rounded-2xl overflow-hidden"
+                        style={{
+                          width: "clamp(5rem, 30%, 7rem)",
+                          height: "clamp(5rem, 30%, 7rem)",
+                          boxShadow: "0 12px 32px rgba(0,0,0,0.35), 0 0 0 1px rgba(255,255,255,0.1)",
+                        }}
+                      >
+                        <Image src={c.logo} alt="" fill className="object-cover" sizes="200px" />
                       </div>
                     </div>
                   ) : (
