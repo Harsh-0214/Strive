@@ -2,9 +2,10 @@
 
 import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
-import { ArrowUpRight, ArrowRight } from "lucide-react";
+import { ArrowUpRight, ArrowRight, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import { prototypes } from "@/lib/prototypes";
+import { clients } from "@/lib/clients";
 
 export default function WorkContent() {
   const heroRef = useRef<HTMLElement>(null);
@@ -12,6 +13,9 @@ export default function WorkContent() {
   const gridRef = useRef<HTMLElement>(null);
   const gridInView = useInView(gridRef, { once: true, margin: "-80px" });
   const [hovered, setHovered] = useState<number | null>(null);
+  const clientsRef = useRef<HTMLElement>(null);
+  const clientsInView = useInView(clientsRef, { once: true, margin: "-80px" });
+  const [hoveredClient, setHoveredClient] = useState<number | null>(null);
 
   return (
     <>
@@ -163,6 +167,77 @@ export default function WorkContent() {
             Start Your Project
             <ArrowRight size={18} aria-hidden="true" />
           </Link>
+        </div>
+      </section>
+
+      {/* Real client work */}
+      <section ref={clientsRef} className="py-20 lg:py-24" style={{ background: "#F7F7F5" }}>
+        <div className="w-full section-padding">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={clientsInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.55, ease: [0.23, 1, 0.32, 1] }}
+            className="mb-14"
+          >
+            <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: "#00B4D8" }}>
+              Live Sites, Real Clients
+            </p>
+            <h2
+              className="font-heading font-extrabold tracking-tight"
+              style={{ fontSize: "clamp(1.75rem, 4vw, 2.75rem)", color: "#0A0A0A" }}
+            >
+              Real client work
+            </h2>
+            <p className="mt-3 max-w-xl" style={{ color: "#6B6B6B" }}>
+              Not prototypes. These are live websites we&apos;ve built and shipped for actual
+              businesses.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {clients.map((c, i) => (
+              <motion.a
+                key={c.url}
+                href={c.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                onMouseEnter={() => setHoveredClient(i)}
+                onMouseLeave={() => setHoveredClient(null)}
+                initial={{ opacity: 0, y: 24 }}
+                animate={clientsInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: i * 0.06, ease: [0.23, 1, 0.32, 1] }}
+                className="relative flex flex-col rounded-2xl p-6 overflow-hidden group"
+                style={{
+                  background: "#FFFFFF",
+                  border: "1px solid rgba(10,10,10,0.08)",
+                  transition: "transform 220ms cubic-bezier(0.23,1,0.32,1), box-shadow 220ms ease",
+                  transform: hoveredClient === i ? "translateY(-4px)" : "translateY(0)",
+                  boxShadow: hoveredClient === i ? "0 20px 48px rgba(0,0,0,0.10)" : "0 2px 10px rgba(0,0,0,0.04)",
+                }}
+              >
+                <div className="flex items-start justify-between mb-5">
+                  <div
+                    className="w-11 h-11 rounded-xl flex items-center justify-center font-heading font-black text-lg text-white shrink-0"
+                    style={{ background: c.accent }}
+                    aria-hidden="true"
+                  >
+                    {c.initial}
+                  </div>
+                  <ExternalLink
+                    size={16}
+                    className="shrink-0 mt-1 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                    style={{ color: "#B0B0B0" }}
+                  />
+                </div>
+                <h3 className="font-heading font-bold text-lg mb-1" style={{ color: "#0A0A0A" }}>
+                  {c.name}
+                </h3>
+                <p className="text-sm" style={{ color: "#6B6B6B" }}>
+                  {c.category}
+                </p>
+              </motion.a>
+            ))}
+          </div>
         </div>
       </section>
     </>
