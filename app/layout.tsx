@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/lib/theme";
+import IntroScreen from "@/components/IntroScreen";
 
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -110,6 +111,7 @@ export default function RootLayout({
         <a href="#main-content" className="skip-link">
           Skip to main content
         </a>
+        <IntroScreen />
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
