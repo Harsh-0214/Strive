@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence, useInView } from "framer-motion";
 import { ArrowRight, ChevronDown } from "lucide-react";
 
 const businessTypes = [
@@ -117,13 +117,11 @@ function ShootingStar({
 
 // Twinkling sparkle point
 function Sparkle({ index }: { index: number }) {
-  // index 7 naturally lands near the subheadline text — redirect it to the empty bottom-right
-  const x = index === 7 ? 88 : (index * 19 + 7) % 93;
-  const y = index === 7 ? 78 : (index * 29 + 11) % 82;
+  const x = (index * 19 + 7) % 45;
+  const y = (index * 29 + 11) % 92;
   const delay = (index * 0.28) % 5;
   const duration = 2.4 + (index % 4) * 0.6;
   const isCyan = index % 3 === 0;
-  // Vary sizes so some stars read as bright/close, others faint/distant
   const size = 2.5 + (index % 4) * 1.25;
 
   return (
@@ -146,6 +144,32 @@ function Sparkle({ index }: { index: number }) {
   );
 }
 
+function Counter({ target, suffix, active }: { target: number; suffix: string; active: boolean }) {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (!active) return;
+    const duration = 1400;
+    const start = performance.now();
+    const tick = (now: number) => {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 4);
+      setCount(Math.round(eased * target));
+      if (progress < 1) requestAnimationFrame(tick);
+    };
+    const raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [active, target]);
+
+  return (
+    <>
+      {count}
+      {suffix}
+    </>
+  );
+}
+
 const containerVariants = {
   hidden: {},
   visible: { transition: { staggerChildren: 0.14 } },
@@ -160,6 +184,109 @@ const itemVariants = {
   },
 };
 
+const bentoContainer = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.08, delayChildren: 0.3 } },
+};
+
+const bentoItem = {
+  hidden: { opacity: 0, y: 24, scale: 0.97 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.55, ease: [0.23, 1, 0.32, 1] },
+  },
+};
+
+function StatsBento() {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-40px" });
+
+  return (
+    <motion.div
+      ref={ref}
+      variants={bentoContainer}
+      initial="hidden"
+      animate={inView ? "visible" : "hidden"}
+      className="grid grid-cols-2 gap-3 w-full"
+    >
+      {/* Big hero stat */}
+      <motion.div
+        variants={bentoItem}
+        className="col-span-2 rounded-2xl p-6 sm:p-7"
+        style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}
+      >
+        <p className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: "rgba(255,255,255,0.4)" }}>
+          Total Businesses Launched
+        </p>
+        <div
+          className="font-heading font-black leading-none mb-2 tabular-nums text-white"
+          style={{ fontSize: "clamp(3rem, 5.5vw, 4.5rem)" }}
+          aria-label="50+ businesses launched"
+        >
+          <Counter target={50} suffix="+" active={inView} />
+        </div>
+        <p className="text-sm font-medium" style={{ color: "rgba(255,255,255,0.45)" }}>
+          businesses across Canada
+        </p>
+      </motion.div>
+
+      {/* Launch time */}
+      <motion.div
+        variants={bentoItem}
+        className="rounded-2xl p-5"
+        style={{
+          background: "rgba(255,255,255,0.03)",
+          border: "1px solid rgba(255,255,255,0.07)",
+          borderTop: "2px solid #00B4D8",
+        }}
+      >
+        <p className="text-xs font-semibold uppercase tracking-widest mb-2" style={{ color: "rgba(255,255,255,0.4)" }}>
+          Avg. Launch Time
+        </p>
+        <div className="font-heading font-black leading-none" style={{ fontSize: "clamp(1.5rem, 2.5vw, 2rem)", color: "#00B4D8" }}>
+          1–2 Weeks
+        </div>
+      </motion.div>
+
+      {/* Satisfaction */}
+      <motion.div
+        variants={bentoItem}
+        className="rounded-2xl p-5"
+        style={{
+          background: "rgba(255,255,255,0.03)",
+          border: "1px solid rgba(255,255,255,0.07)",
+          borderTop: "2px solid #E8C547",
+        }}
+      >
+        <p className="text-xs font-semibold uppercase tracking-widest mb-2" style={{ color: "rgba(255,255,255,0.4)" }}>
+          Satisfaction Rate
+        </p>
+        <div className="font-heading font-black leading-none tabular-nums" style={{ fontSize: "clamp(1.5rem, 2.5vw, 2rem)", color: "#E8C547" }}>
+          <Counter target={100} suffix="%" active={inView} />
+        </div>
+      </motion.div>
+
+      {/* Quote */}
+      <motion.div
+        variants={bentoItem}
+        className="col-span-2 rounded-2xl p-5"
+        style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}
+      >
+        <blockquote>
+          <p className="font-heading font-bold italic leading-snug text-sm" style={{ color: "rgba(255,255,255,0.75)" }}>
+            &ldquo;Your website should work as hard as you do.&rdquo;
+          </p>
+          <footer className="mt-2 text-[11px] font-medium uppercase tracking-widest" style={{ color: "rgba(255,255,255,0.3)" }}>
+            — Strive Design Agency
+          </footer>
+        </blockquote>
+      </motion.div>
+    </motion.div>
+  );
+}
+
 export default function Hero() {
   const [typeIndex, setTypeIndex] = useState(0);
 
@@ -172,7 +299,7 @@ export default function Hero() {
 
   return (
     <section
-      className="relative min-h-dvh flex flex-col items-center justify-center overflow-hidden pt-24 pb-16"
+      className="relative min-h-dvh flex flex-col justify-center overflow-hidden pt-28 pb-16"
       aria-labelledby="hero-heading"
     >
       {/* ── Aurora mesh background ── */}
@@ -219,187 +346,146 @@ export default function Hero() {
         delay={7}
       />
 
-      {/* Orb D — smaller cyan accent, far right */}
-      <GlowOrb
-        color="hsl(195 100% 45% / 0.3)"
-        size={320}
-        left="80%"
-        top="60%"
-        animX={[0, -50, 20, 0]}
-        animY={[0, -60, 30, 0]}
-        duration={16}
-        delay={2}
-      />
-
-      {/* Top-center light cone / god ray */}
-      <div
-        className="absolute -z-10 top-0 left-1/2 -translate-x-1/2"
-        style={{
-          width: "380px",
-          height: "55%",
-          background:
-            "radial-gradient(ellipse 50% 100% at 50% 0%, hsl(210 90% 58% / 0.22) 0%, transparent 72%)",
-          pointerEvents: "none",
-        }}
-        aria-hidden="true"
-      />
-
-      {/* Thin central beam */}
-      <div
-        className="absolute -z-10 top-0 left-1/2 -translate-x-1/2"
-        style={{
-          width: "1px",
-          height: "45%",
-          background:
-            "linear-gradient(180deg, hsl(199 100% 75% / 0.5) 0%, transparent 100%)",
-          filter: "blur(1px)",
-        }}
-        aria-hidden="true"
-      />
-
       {/* Occasional shooting stars — staggered so they feel like a delight */}
       <div className="absolute inset-0 -z-10 overflow-hidden" aria-hidden="true">
-        <ShootingStar top="12%" left="8%" delay={2} repeatDelay={11} travel={520} />
-        <ShootingStar top="22%" left="55%" delay={7} repeatDelay={15} travel={460} />
-        <ShootingStar top="6%" left="35%" delay={13} repeatDelay={18} travel={600} />
+        <ShootingStar top="12%" left="8%" delay={2} repeatDelay={11} travel={420} />
+        <ShootingStar top="8%" left="30%" delay={9} repeatDelay={16} travel={480} />
       </div>
 
-      {/* Sparkle field */}
+      {/* Sparkle field — kept to the left half so it doesn't clash with the stats grid */}
       <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
-        {Array.from({ length: 16 }).map((_, i) => (
+        {Array.from({ length: 12 }).map((_, i) => (
           <Sparkle key={i} index={i} />
         ))}
       </div>
 
-      {/* ── Content ── */}
-      <div className="relative z-10 w-full max-w-5xl mx-auto section-padding text-center">
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="flex flex-col items-center gap-5"
-        >
-          {/* Headline */}
-          <motion.h1
-            id="hero-heading"
-            variants={itemVariants}
-            className="font-heading font-extrabold text-[2.6rem] sm:text-6xl md:text-7xl lg:text-[5.25rem] leading-[1.06] tracking-tight text-white max-w-4xl"
-          >
-            Websites As
-            <br className="hidden sm:block" /> Ambitious As{" "}
-            <span
-              style={{
-                background: "linear-gradient(92deg, hsl(199 100% 72%), hsl(212 100% 82%))",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-              }}
-            >
-              Your Business.
-            </span>
-          </motion.h1>
-
-          {/* Subheadline with cycling type */}
+      {/* ── Content: two columns ── */}
+      <div className="relative z-10 w-full section-padding">
+        <div className="grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-12 lg:gap-16 items-center">
+          {/* Left — text */}
           <motion.div
-            variants={itemVariants}
-            className="max-w-2xl text-lg sm:text-xl text-white/65 leading-relaxed flex flex-col items-center gap-0.5 text-center"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="flex flex-col items-start gap-5 text-left"
           >
-            <span>Strive Builds Fast, Beautiful Websites For</span>
-            {/* Cycling word on its own centered row so it never mis-aligns on mobile */}
-            <span
-              className="overflow-hidden flex justify-center"
-              style={{ height: "1.5em" }}
-              aria-live="polite"
-              aria-atomic="true"
+            <motion.h1
+              id="hero-heading"
+              variants={itemVariants}
+              className="font-heading font-extrabold leading-[1.05] tracking-tight text-white"
+              style={{ fontSize: "clamp(2.4rem, 4.8vw, 4.75rem)" }}
             >
-              <AnimatePresence mode="wait">
-                <motion.span
-                  key={typeIndex}
-                  initial={{ opacity: 0, y: 14 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -14 }}
-                  transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-                  style={{
-                    background: "linear-gradient(90deg, hsl(199 100% 65%), hsl(212 90% 75%))",
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                    backgroundClip: "text",
-                    fontWeight: 600,
-                    display: "block",
-                  }}
-                >
-                  {businessTypes[typeIndex]}
-                </motion.span>
-              </AnimatePresence>
-            </span>
-            <span>Freeing You To Focus On What You Do Best.</span>
-          </motion.div>
-
-          {/* CTAs */}
-          <motion.div
-            variants={itemVariants}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-2 w-full"
-          >
-            {/* Primary — glowing cyan gradient */}
-            <a
-              href="#contact"
-              className="group relative inline-flex items-center gap-2.5 px-8 py-4 rounded-xl font-bold text-base text-white transition-all duration-200 active:scale-95 focus-visible:outline-2 focus-visible:outline-white overflow-hidden"
-              style={{
-                background: "linear-gradient(135deg, hsl(199 100% 44%) 0%, hsl(212 90% 40%) 100%)",
-                boxShadow:
-                  "0 0 0 1px hsl(199 100% 60% / 0.35) inset, 0 8px 32px hsl(199 100% 44% / 0.45), 0 2px 8px hsl(212 90% 40% / 0.3)",
-              }}
-            >
-              {/* Shimmer on hover */}
+              Websites As Ambitious As{" "}
               <span
-                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                 style={{
-                  background:
-                    "linear-gradient(135deg, hsl(199 100% 54%) 0%, hsl(212 90% 50%) 100%)",
+                  background: "linear-gradient(92deg, hsl(199 100% 72%), hsl(212 100% 82%))",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
                 }}
-                aria-hidden="true"
-              />
-              <span className="relative">Get a Free Quote</span>
-              <ArrowRight
-                size={18}
-                className="relative transition-transform duration-200 group-hover:translate-x-0.5"
-                aria-hidden="true"
-              />
-            </a>
+              >
+                Your Business.
+              </span>
+            </motion.h1>
 
-            {/* Secondary — glass */}
-            <a
-              href="#packages"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold text-base text-white/90 border border-white/20 bg-white/[0.07] backdrop-blur-sm hover:bg-white/[0.13] hover:border-white/30 active:scale-95 transition-all duration-200 focus-visible:outline-2 focus-visible:outline-white"
+            {/* Subheadline with cycling type */}
+            <motion.div
+              variants={itemVariants}
+              className="max-w-xl text-white/65 leading-relaxed flex flex-col items-start gap-0.5 text-left"
+              style={{ fontSize: "clamp(1rem, 1.3vw, 1.25rem)" }}
             >
-              View Packages
-            </a>
+              <span>Strive Builds Fast, Beautiful Websites For</span>
+              <span
+                className="overflow-hidden flex justify-start"
+                style={{ height: "1.5em" }}
+                aria-live="polite"
+                aria-atomic="true"
+              >
+                <AnimatePresence mode="wait">
+                  <motion.span
+                    key={typeIndex}
+                    initial={{ opacity: 0, y: 14 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -14 }}
+                    transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+                    style={{
+                      background: "linear-gradient(90deg, hsl(199 100% 65%), hsl(212 90% 75%))",
+                      WebkitBackgroundClip: "text",
+                      WebkitTextFillColor: "transparent",
+                      backgroundClip: "text",
+                      fontWeight: 600,
+                      display: "block",
+                    }}
+                  >
+                    {businessTypes[typeIndex]}
+                  </motion.span>
+                </AnimatePresence>
+              </span>
+              <span>Freeing You To Focus On What You Do Best.</span>
+            </motion.div>
+
+            {/* CTAs */}
+            <motion.div
+              variants={itemVariants}
+              className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mt-2 w-full"
+            >
+              <a
+                href="#contact"
+                className="group relative inline-flex items-center gap-2.5 px-8 py-4 rounded-xl font-bold text-base text-white transition-all duration-200 active:scale-95 focus-visible:outline-2 focus-visible:outline-white overflow-hidden"
+                style={{
+                  background: "linear-gradient(135deg, hsl(199 100% 44%) 0%, hsl(212 90% 40%) 100%)",
+                  boxShadow:
+                    "0 0 0 1px hsl(199 100% 60% / 0.35) inset, 0 8px 32px hsl(199 100% 44% / 0.45), 0 2px 8px hsl(212 90% 40% / 0.3)",
+                }}
+              >
+                <span
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  style={{
+                    background: "linear-gradient(135deg, hsl(199 100% 54%) 0%, hsl(212 90% 50%) 100%)",
+                  }}
+                  aria-hidden="true"
+                />
+                <span className="relative">Get a Free Quote</span>
+                <ArrowRight
+                  size={18}
+                  className="relative transition-transform duration-200 group-hover:translate-x-0.5"
+                  aria-hidden="true"
+                />
+              </a>
+
+              <a
+                href="#packages"
+                className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold text-base text-white/90 border border-white/20 bg-white/[0.07] backdrop-blur-sm hover:bg-white/[0.13] hover:border-white/30 active:scale-95 transition-all duration-200 focus-visible:outline-2 focus-visible:outline-white"
+              >
+                View Packages
+              </a>
+            </motion.div>
+
+            {/* Social proof */}
+            <motion.div variants={itemVariants} className="flex items-center gap-3 mt-1">
+              <div className="flex -space-x-2" aria-hidden="true">
+                {(["MT", "JR", "AK", "SC"] as const).map((initials, i) => (
+                  <div
+                    key={initials}
+                    className="w-8 h-8 rounded-full border-2 border-white/15 flex items-center justify-center text-xs font-bold text-white"
+                    style={{
+                      background: (["hsl(330 60% 55%)", "hsl(210 70% 50%)", "hsl(270 55% 55%)", "hsl(160 55% 45%)"])[i],
+                      zIndex: 4 - i,
+                    }}
+                  >
+                    {initials}
+                  </div>
+                ))}
+              </div>
+              <p className="text-white/50 text-sm">
+                <span className="text-white/90 font-semibold">50+</span> businesses launched across Canada
+              </p>
+            </motion.div>
           </motion.div>
 
-          {/* Social proof */}
-          <motion.div
-            variants={itemVariants}
-            className="flex items-center gap-3 mt-1"
-          >
-            <div className="flex -space-x-2" aria-hidden="true">
-              {(["MT", "JR", "AK", "SC"] as const).map((initials, i) => (
-                <div
-                  key={initials}
-                  className="w-8 h-8 rounded-full border-2 border-white/15 flex items-center justify-center text-xs font-bold text-white"
-                  style={{
-                    background: (["hsl(330 60% 55%)", "hsl(210 70% 50%)", "hsl(270 55% 55%)", "hsl(160 55% 45%)"])[i],
-                    zIndex: 4 - i,
-                  }}
-                >
-                  {initials}
-                </div>
-              ))}
-            </div>
-            <p className="text-white/50 text-sm">
-              <span className="text-white/90 font-semibold">50+</span> businesses launched across Canada
-            </p>
-          </motion.div>
-        </motion.div>
+          {/* Right — stats bento */}
+          <StatsBento />
+        </div>
       </div>
 
       {/* Scroll indicator */}

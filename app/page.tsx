@@ -6,7 +6,6 @@ import MobileCtaBar from "@/components/MobileCtaBar";
 
 // Lazy-load everything below the fold — splits the JS bundle so only
 // Navbar + Hero JS ships on initial load.
-const Stats = dynamic(() => import("@/components/Stats"));
 const Marquee = dynamic(() => import("@/components/Marquee"));
 const PainPoints = dynamic(() => import("@/components/PainPoints"));
 const Packages = dynamic(() => import("@/components/Packages"));
@@ -27,7 +26,6 @@ export default function Home() {
       <Navbar />
       <main id="main-content">
         <Hero />
-        <Stats />
         <Marquee />
         <PainPoints />
         <Packages />

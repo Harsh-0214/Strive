@@ -29,11 +29,6 @@ const faqs = [
     answer:
       "If you just need a portfolio or one-pager, Launch ($500) is it. Restaurants, salons, and anything with bookings or high traffic fit Growth ($1,500). Selling physical products online means Commerce ($2,000+). Not sure? Tell us about your business in the form and we'll recommend one.",
   },
-  {
-    question: "Can I upgrade my package later?",
-    answer:
-      "Yes. Start where it makes sense and upgrade anytime. We grow with you — your website can scale as your business does.",
-  },
 ];
 
 function AccordionItem({
@@ -127,26 +122,30 @@ export default function FAQ() {
   const ref = useRef<HTMLElement>(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
+  const mid = Math.ceil(faqs.length / 2);
+  const colA = faqs.slice(0, mid);
+  const colB = faqs.slice(mid);
+
   return (
     <section
       id="faq"
       ref={ref}
-      className="py-20 lg:py-28 bg-white"
+      className="py-14 lg:py-16 bg-white"
       aria-labelledby="faq-heading"
     >
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
-      <div className="max-w-3xl mx-auto section-padding">
+      <div className="w-full section-padding">
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.55, ease: [0.23, 1, 0.32, 1] }}
-          className="text-center mb-14"
+          transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
+          className="mb-8"
         >
           <p
-            className="text-xs font-semibold uppercase tracking-widest mb-4"
+            className="text-xs font-semibold uppercase tracking-widest mb-3"
             style={{ color: "#6B6B6B" }}
           >
             FAQs
@@ -154,22 +153,28 @@ export default function FAQ() {
           <h2
             id="faq-heading"
             className="font-heading font-extrabold tracking-tight"
-            style={{ fontSize: "clamp(2rem, 5vw, 3.25rem)", color: "#0A0A0A" }}
+            style={{ fontSize: "clamp(1.75rem, 3.5vw, 2.5rem)", color: "#0A0A0A" }}
           >
-            Got questions?
-            <br />
-            We&rsquo;ve got answers.
+            Got questions? We&rsquo;ve got answers.
           </h2>
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.55, delay: 0.12, ease: [0.23, 1, 0.32, 1] }}
+          transition={{ duration: 0.5, delay: 0.1, ease: [0.23, 1, 0.32, 1] }}
+          className="grid grid-cols-1 md:grid-cols-2 md:gap-x-12"
         >
-          {faqs.map((faq, i) => (
-            <AccordionItem key={faq.question} {...faq} index={i} />
-          ))}
+          <div>
+            {colA.map((faq, i) => (
+              <AccordionItem key={faq.question} {...faq} index={i} />
+            ))}
+          </div>
+          <div>
+            {colB.map((faq, i) => (
+              <AccordionItem key={faq.question} {...faq} index={mid + i} />
+            ))}
+          </div>
         </motion.div>
       </div>
     </section>
