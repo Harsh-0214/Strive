@@ -12,12 +12,12 @@ const faqs = [
   {
     question: "How long does it take to build my site?",
     answer:
-      "Starter sites take 1–2 weeks. Business sites 3–4 weeks. Premium e-commerce sites 6–8 weeks depending on complexity.",
+      "Launch sites take 1–2 weeks. Growth sites (restaurants, booking businesses) 3–4 weeks. Commerce sites 5–7 weeks depending on catalog size.",
   },
   {
     question: "What if I need changes after my site launches?",
     answer:
-      "Small changes are covered under Strive Care. Bigger updates are quoted separately — always transparently. No hidden fees, ever.",
+      "Small tweaks after launch are on us for the first 30 days. Bigger updates after that are quoted separately — always transparently. No hidden fees, ever.",
   },
   {
     question: "Do you work with businesses outside your city?",
@@ -25,9 +25,9 @@ const faqs = [
       "Absolutely. Strive works with small businesses across Canada and beyond. Everything is handled remotely and seamlessly.",
   },
   {
-    question: "What's included in Strive Care?",
+    question: "Which package is right for my business?",
     answer:
-      "Unlimited small content updates, monthly analytics reports, security maintenance, uptime monitoring, and a monthly check-in call. Everything to keep your site healthy and current.",
+      "If you just need a portfolio or one-pager, Launch ($500) is it. Restaurants, salons, and anything with bookings or high traffic fit Growth ($1,500). Selling physical products online means Commerce ($2,000+). Not sure? Tell us about your business in the form and we'll recommend one.",
   },
   {
     question: "Can I upgrade my package later?",

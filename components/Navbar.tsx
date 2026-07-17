@@ -4,47 +4,39 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const navLinks = [
-  { label: "Packages", href: "#packages" },
-  { label: "Strive Care", href: "#strive-care" },
-  { label: "How It Works", href: "#how-it-works" },
-  { label: "FAQ", href: "#faq" },
+  { label: "Our Work", href: "/work" },
+  { label: "Pricing", href: "/pricing" },
+  { label: "Team", href: "/team" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("");
   const drawerRef = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 80);
+    handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
-    const ids = navLinks.map((l) => l.href.slice(1));
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) setActiveSection(entry.target.id);
-        });
-      },
-      { rootMargin: "-40% 0px -40% 0px" }
-    );
-    ids.forEach((id) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
-    return () => observer.disconnect();
-  }, []);
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
 
   useEffect(() => {
-    document.body.style.overflow = menuOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
-  }, [menuOpen]);
+    setMenuOpen(false);
+  }, [pathname]);
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -57,23 +49,29 @@ export default function Navbar() {
     const last = focusable[focusable.length - 1];
     first?.focus();
     const trap = (e: KeyboardEvent) => {
-      if (e.key === "Escape") { setMenuOpen(false); return; }
+      if (e.key === "Escape") {
+        setMenuOpen(false);
+        return;
+      }
       if (e.key !== "Tab" || focusable.length === 0) return;
       if (e.shiftKey) {
-        if (document.activeElement === first) { e.preventDefault(); last?.focus(); }
+        if (document.activeElement === first) {
+          e.preventDefault();
+          last?.focus();
+        }
       } else {
-        if (document.activeElement === last) { e.preventDefault(); first?.focus(); }
+        if (document.activeElement === last) {
+          e.preventDefault();
+          first?.focus();
+        }
       }
     };
     document.addEventListener("keydown", trap);
     return () => document.removeEventListener("keydown", trap);
   }, [menuOpen]);
 
-  const handleNavClick = (href: string) => {
-    setMenuOpen(false);
-    const el = document.querySelector(href);
-    if (el) setTimeout(() => el.scrollIntoView({ behavior: "smooth" }), 50);
-  };
+  const isActive = (href: string) =>
+    href === "/" ? pathname === "/" : pathname.startsWith(href);
 
   return (
     <>
@@ -102,8 +100,8 @@ export default function Navbar() {
             }`}
           >
             {/* Logo */}
-            <a
-              href="#"
+            <Link
+              href="/"
               className="flex items-center gap-3 flex-shrink-0"
               aria-label="Strive — go to homepage"
             >
@@ -132,29 +130,29 @@ export default function Navbar() {
                   Web Design & Development
                 </span>
               </div>
-            </a>
+            </Link>
 
             {/* Desktop nav */}
             <ul className="hidden md:flex items-center gap-0.5" role="list">
               {navLinks.map((link) => {
-                const isActive = activeSection === link.href.slice(1);
+                const active = isActive(link.href);
                 return (
                   <li key={link.href}>
-                    <button
-                      onClick={() => handleNavClick(link.href)}
+                    <Link
+                      href={link.href}
                       className={`relative px-4 py-2 rounded-xl text-sm font-medium transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-cyan-400 ${
-                        isActive ? "text-white" : "text-white/50 hover:text-white/90"
+                        active ? "text-white" : "text-white/50 hover:text-white/90"
                       }`}
                     >
                       {link.label}
-                      {isActive && (
+                      {active && (
                         <motion.span
                           layoutId="nav-dot"
                           className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-cyan-400"
                           transition={{ type: "spring", duration: 0.35, bounce: 0.2 }}
                         />
                       )}
-                    </button>
+                    </Link>
                   </li>
                 );
               })}
@@ -162,16 +160,16 @@ export default function Navbar() {
 
             {/* Right controls */}
             <div className="flex items-center gap-2">
-              <button
-                onClick={() => handleNavClick("#contact")}
+              <Link
+                href="/contact"
                 className="hidden sm:inline-flex items-center px-4 py-2 rounded-xl text-sm font-semibold text-white transition-all duration-150 active:scale-[0.97] focus-visible:outline-2 focus-visible:outline-cyan-400"
                 style={{
                   background: "linear-gradient(135deg, #00B4D8 0%, #0096B4 100%)",
                   boxShadow: "0 0 16px rgba(0,180,216,0.35), inset 0 1px 0 rgba(255,255,255,0.15)",
                 }}
               >
-                Get Started
-              </button>
+                Get a Quote
+              </Link>
 
               <button
                 onClick={() => setMenuOpen(!menuOpen)}
@@ -245,25 +243,25 @@ export default function Navbar() {
             >
               <nav className="p-3 flex flex-col gap-1">
                 {navLinks.map((link) => (
-                  <button
+                  <Link
                     key={link.href}
-                    onClick={() => handleNavClick(link.href)}
+                    href={link.href}
                     className="text-left px-4 py-3 rounded-xl text-base font-medium text-white/60 hover:text-white hover:bg-white/[0.06] transition-all duration-150 focus-visible:outline-2 focus-visible:outline-cyan-400"
                   >
                     {link.label}
-                  </button>
+                  </Link>
                 ))}
                 <div className="h-px bg-white/[0.07] my-1" />
-                <button
-                  onClick={() => handleNavClick("#contact")}
+                <Link
+                  href="/contact"
                   className="px-4 py-3 rounded-xl text-base font-semibold text-white text-center transition-all duration-150 active:scale-[0.97] focus-visible:outline-2 focus-visible:outline-cyan-400"
                   style={{
                     background: "linear-gradient(135deg, #00B4D8 0%, #0096B4 100%)",
                     boxShadow: "0 0 20px rgba(0,180,216,0.25)",
                   }}
                 >
-                  Get Started
-                </button>
+                  Get a Quote
+                </Link>
               </nav>
             </motion.div>
           </>

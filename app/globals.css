@@ -23,13 +23,6 @@
     --card: 0 0% 100%;
     --card-foreground: 221 40% 8%;
 
-    /* ── Strive Care dark navy section ── */
-    --care-bg: 221 70% 6%;
-    --care-foreground: 214 30% 92%;
-    --care-muted: 218 16% 56%;
-    --care-card: 221 55% 10%;
-    --care-border: 221 40% 16%;
-
     /* ── Semantic ── */
     --destructive: 0 84% 58%;
     --destructive-foreground: 0 0% 100%;
@@ -67,12 +60,6 @@
     /* Cyan stays vivid in dark mode */
     --accent: 199 100% 56%;
     --accent-foreground: 221 45% 5%;
-
-    --care-bg: 221 50% 4%;
-    --care-card: 221 45% 7%;
-    --care-border: 221 35% 12%;
-    --care-foreground: 214 25% 92%;
-    --care-muted: 218 14% 54%;
 
     --destructive: 0 84% 65%;
     --success: 152 68% 52%;

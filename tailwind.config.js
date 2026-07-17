@@ -28,13 +28,6 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        care: {
-          bg: "hsl(var(--care-bg))",
-          foreground: "hsl(var(--care-foreground))",
-          muted: "hsl(var(--care-muted))",
-          card: "hsl(var(--care-card))",
-          border: "hsl(var(--care-border))",
-        },
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
           foreground: "hsl(var(--destructive-foreground))",

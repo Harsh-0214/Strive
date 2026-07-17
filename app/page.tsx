@@ -11,7 +11,6 @@ const Marquee = dynamic(() => import("@/components/Marquee"));
 const PainPoints = dynamic(() => import("@/components/PainPoints"));
 const Packages = dynamic(() => import("@/components/Packages"));
 const ComparisonTable = dynamic(() => import("@/components/ComparisonTable"));
-const StriveCare = dynamic(() => import("@/components/StriveCare"));
 const HowItWorks = dynamic(() => import("@/components/HowItWorks"));
 const Portfolio = dynamic(() => import("@/components/Portfolio"));
 const Testimonials = dynamic(() => import("@/components/Testimonials"));
@@ -33,7 +32,6 @@ export default function Home() {
         <PainPoints />
         <Packages />
         <ComparisonTable />
-        <StriveCare />
         <HowItWorks />
         <Portfolio />
         <Testimonials />
