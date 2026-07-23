@@ -19,7 +19,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://strivewebdesign.ca"),
+  metadataBase: new URL("https://striveweb.ca"),
   title: {
     default: "Strive: Websites As Ambitious As Your Business",
     template: "%s | Strive Web Design",
@@ -70,7 +70,7 @@ const organizationSchema = {
   name: "Strive Web Design",
   description:
     "Web design agency building custom websites for small businesses: landing pages, booking sites, and e-commerce stores.",
-  url: "https://strivewebdesign.ca",
+  url: "https://striveweb.ca",
   areaServed: "CA",
   founders: [
     { "@type": "Person", name: "Harsh Tamakuwala" },
