@@ -36,6 +36,13 @@ const initialForm: FormState = {
   message: "",
 };
 
+const PACKAGE_LABELS: Record<string, string> = {
+  launch: "Launch: $500 (landing / portfolio)",
+  growth: "Growth: $1,500 (booking & high-traffic)",
+  commerce: "Commerce: $2,000+ (e-commerce)",
+  unsure: "Not sure yet",
+};
+
 const initialErrors: FieldErrors = {
   firstName: null,
   lastName: null,
@@ -181,10 +188,19 @@ export default function ContactForm({ showHeading = true }: { showHeading?: bool
 
     setStatus("loading");
     try {
-      const res = await fetch("/api/contact", {
+      const res = await fetch("https://formsubmit.co/ajax/rahulmodhera555@gmail.com", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          name: `${form.firstName} ${form.lastName}`,
+          business: form.businessName,
+          email: form.email,
+          phone: form.phone || "Not provided",
+          package: PACKAGE_LABELS[form.packageInterest] ?? form.packageInterest,
+          message: form.message,
+          _subject: `New request: ${form.businessName}`,
+          _replyto: form.email,
+        }),
       });
 
       if (!res.ok) throw new Error("Request failed");
