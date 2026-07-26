@@ -188,7 +188,7 @@ export default function ContactForm({ showHeading = true }: { showHeading?: bool
 
     setStatus("loading");
     try {
-      const res = await fetch("https://formsubmit.co/ajax/rahulmodhera555@gmail.com", {
+      const res = await fetch("https://formsubmit.co/ajax/strivewebsitedesign@gmail.com", {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
