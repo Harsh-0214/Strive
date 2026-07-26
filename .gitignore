@@ -1,6 +1,7 @@
 node_modules/
 .next/
 .env*
+!.env.example
 *.log
 .claude/settings.local.json
 .claude/worktrees/

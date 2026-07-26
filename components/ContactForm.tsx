@@ -180,8 +180,18 @@ export default function ContactForm({ showHeading = true }: { showHeading?: bool
     }
 
     setStatus("loading");
-    await new Promise((r) => setTimeout(r, 1800));
-    setStatus("success");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+
+      if (!res.ok) throw new Error("Request failed");
+      setStatus("success");
+    } catch {
+      setStatus("error");
+    }
   };
 
   if (status === "success") {
@@ -464,6 +474,16 @@ export default function ContactForm({ showHeading = true }: { showHeading?: bool
                   "Send My Request"
                 )}
               </button>
+
+              {status === "error" && (
+                <p
+                  role="alert"
+                  className="flex items-center justify-center gap-1.5 text-destructive text-sm"
+                >
+                  <AlertCircle size={14} strokeWidth={2} aria-hidden="true" />
+                  Something went wrong sending your request. Please try again.
+                </p>
+              )}
 
               <p className="text-xs text-center text-muted-foreground">
                 We respond within 24 hours. No spam, ever.
